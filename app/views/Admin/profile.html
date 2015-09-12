@@ -1,8 +1,35 @@
 #{extends 'admin.html' /}
 
 #{set title:'Профиль' /}
+<head>
+
+    <script src="@{'/public/javascripts/bootstrap.file-input.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+</head>
 <body>
+
 <h1 align="center">${user.firstname} ${user.secondname} !</h1>
+
+
+*{<ul>}*
+*{#{list items:models.Picture.findAll(), as:'picture'}}*
+    *{<li>${picture.id} <img src="@{Admin.getPicture(picture.id)}" /></li>}*
+*{#{/list}}*
+*{</ul>}*
+
+<ul>
+#{list items:user.validPictures(), as:'pictureID'}
+    <img src="@{Admin.getPicture(pictureID)}" class="img-thumbnail" width="304" height="236"/></li>
+#{/list}
+</ul>
+#{form @Admin.uploadPicture(), enctype:'multipart/form-data'}
+<input type="file" name="picture.image" />
+<input type="submit" name="submit" value="Save" />
+#{/form}
+
+<script>
+$('input[type=file]').bootstrapFileInput();
+$('.file-inputs').bootstrapFileInput();
+</script>
 
 <form style="padding: 10%">
     <div class="panel panel-default">

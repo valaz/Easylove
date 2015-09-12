@@ -35,9 +35,23 @@
         <input type="text" class="form-control" id="sname" placeholder="Иванов" name="sname"
                required>
         <br/>
+        <label for="gender">Пол</label>
+        <div id="gender">
+            <div class="radio">
+                <label><input type="radio" name="gender" value="true">Мужчина</label>
+            </div>
+            <div class="radio">
+                <label><input type="radio" name="gender" value="false">Женщина</label>
+            </div>
+        </div>
+        <br/>
         <label for="bdate">День Рождения</label>
         <input type="text" class="form-control" data-provide="datepicker" id="bdate" placeholder="31/12/1997"
                name="bdate" autocomplete="off" required>
+        <br/>
+        <label for="bdate">День </label>
+        <input type="date" class="form-control" id="date" placeholder="31/12/1997"
+               name="date" autocomplete="off" required>
         <br/>
         <label for="city">Город</label>
         <input type="text" class="form-control" id="city" placeholder="Москва" name="city"
@@ -54,7 +68,7 @@
 
     <p>
 
-        *{<label for="code">Введите код с картинки: </label>}*
+    *{<label for="code">Введите код с картинки: </label>}*
         *{<br/>}*
     *{<p id="captchaWarning" style="color:#c00; display: none;">Вы ввели код неверно</p>}*
     *{<img id="captchaIMG" src="@{Application.captcha(randomID)}"/>}*

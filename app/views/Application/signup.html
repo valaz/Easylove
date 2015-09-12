@@ -1,0 +1,80 @@
+#{extends 'main.html' /}
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/css/bootstrap-datepicker.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/js/bootstrap-datepicker.js"></script>
+    <script>
+        $('.datepicker').datepicker()
+    </script>
+</head>
+#{set title:'Регистрация' /}
+
+<form id="letterForm" action="@{Application.addUser()}" method="POST" style="padding: 50px">
+    <div class="form-group">
+        <label for="email">Email адрес</label>
+        <input type="email" class="form-control" id="email" placeholder="example@domen.com" name="email"
+               required>
+        <br/>
+        <label for="nname">Логин</label>
+        <input type="text" class="form-control" id="nname" name="nname"
+               required>
+        <br/>
+        <label for="fname">Имя</label>
+        <input type="text" class="form-control" id="fname" placeholder="Иван" name="fname"
+               required>
+        <br/>
+        <label for="sname">Фамилия</label>
+        <input type="text" class="form-control" id="sname" placeholder="Иванов" name="sname"
+               required>
+        <br/>
+        <label for="bdate">День Рождения</label>
+        <input type="text" class="form-control" data-provide="datepicker" id="bdate" placeholder="31/12/1997"
+               name="bdate" autocomplete="off" required>
+        <br/>
+        <label for="city">Город</label>
+        <input type="text" class="form-control" id="city" placeholder="Москва" name="city"
+               required>
+        <br/>
+        <label for="password1">Пароль</label>
+        <input type="password" class="form-control" id="password1" name="password1" autocomplete="off"
+               required>
+        <br/>
+        <label for="password2">Пароль</label>
+        <input type="password" class="form-control" id="password2" name="password2" autocomplete="off"
+               required>
+    </div>
+
+    <p>
+
+        *{<label for="code">Введите код с картинки: </label>}*
+        *{<br/>}*
+    *{<p id="captchaWarning" style="color:#c00; display: none;">Вы ввели код неверно</p>}*
+    *{<img id="captchaIMG" src="@{Application.captcha(randomID)}"/>}*
+    *{<br/>}*
+    *{<input id="captchaCode"  type="text" name="code"size="18" value="" autocomplete="off" required/>}*
+    *{<input id="captchaID" type="hidden" name="randomID" value="${randomID}"/>}*
+    *{</p>}*
+
+    <div class="span7 text-center">
+        <input type="submit" class="btn btn-success btn-lg" value="Отправить"/>
+    </div>
+
+    <script>
+        $('#bdate').datepicker({
+            format: "dd/mm/yyyy",
+            endDate: "1/09/2003",
+            startView: 2,
+            clearBtn: true,
+            language: "ru",
+            autoclose: true
+        });
+    </script>
+</form>

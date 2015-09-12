@@ -1,0 +1,18 @@
+#{extends 'admin.html' /}
+
+
+
+#{set title:'Личный кабинет' /}
+<body>
+Welcome ${user}!
+<ul id="adminMenu">
+    <li class="${request.controller == 'Admin' ? 'selected' : ''}">
+        <a href="@{Admin.index()}">My posts</a>
+    </li>
+#{secure.check 'admin'}
+    <li class="${request.controller == 'Users' ? 'selected' : ''}">
+        <a href="@{Users.list()}">Users</a>
+    </li>
+#{/secure.check}
+</ul>
+</body>

@@ -1,0 +1,40 @@
+#{extends 'admin.html' /}
+
+#{set title:'Профиль' /}
+<body>
+<h1 align="center">${user.firstname} ${user.secondname} !</h1>
+
+<form style="padding: 10%">
+    <div class="panel panel-default">
+        <div class="panel-heading">Логин</div>
+        <div class="panel-body">
+             ${user.nickname}
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">Имя</div>
+        <div class="panel-body">
+        ${user.firstname}
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">Фамилия</div>
+        <div class="panel-body">
+        ${user.secondname}
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">Город</div>
+        <div class="panel-body">
+        ${user.city}
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">Дата рождения</div>
+        <div class="panel-body">
+        ${user.birthday}
+        </div>
+    </div>
+    <button class="btn btn-info btn-lg ">Изменить</button>
+</form>
+</body>

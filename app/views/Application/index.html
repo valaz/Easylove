@@ -1,0 +1,12 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+<form style="padding: 50px">
+<h1>Добро пожаловать</h1>
+<p class="lead">
+    <a href="@{Admin.index()}" class="btn btn-lg btn-success">Войти</a>
+    <p>
+    <a href="/signup" class="btn btn-lg btn-warning">Зарегестрироваться</a>
+    </p>
+</form>
+*{#{welcome /}}*

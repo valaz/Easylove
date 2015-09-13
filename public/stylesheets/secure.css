@@ -1,11 +1,11 @@
 @import url(main.css);
 html, body {
-    background: #F0F0F0;
+    background: #ffffff;
     font-family: 'Lucida grande', verdana, sans-serif;
 }
 
 #login {
-    width: 500px;
+    /*width: 500px;*/
     margin: 50px auto;
     text-align: center;
 }
@@ -51,7 +51,7 @@ html, body {
 }
 
 #remember-field input {
-    margin-left: 155px;
+    /*margin-left: 155px;*/
 }
 
 #remember-field {

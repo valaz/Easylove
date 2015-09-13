@@ -16,59 +16,91 @@
     </script>
 </head>
 #{set title:'Регистрация' /}
+<div class="container">
+    <div class="row">
+        <form id="letterForm" action="@{Application.addUser()}" method="POST" style="padding: 50px" class="col-md-offset-2">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-5">
+                        <label for="email">Email адрес</label>
+                        <input type="email" class="form-control" id="email" placeholder="example@domen.com" name="email"
+                               required>
+                    </div>
+                    <div class="col-md-5">
+                        <label for="nname">Логин</label>
+                        <input type="text" class="form-control" id="nname" name="nname"
+                               required>
+                    </div>
+                </div>
+                <br/>
 
-<form id="letterForm" action="@{Application.addUser()}" method="POST" style="padding: 50px">
-    <div class="form-group">
-        <label for="email">Email адрес</label>
-        <input type="email" class="form-control" id="email" placeholder="example@domen.com" name="email"
-               required>
-        <br/>
-        <label for="nname">Логин</label>
-        <input type="text" class="form-control" id="nname" name="nname"
-               required>
-        <br/>
-        <label for="fname">Имя</label>
-        <input type="text" class="form-control" id="fname" placeholder="Иван" name="fname"
-               required>
-        <br/>
-        <label for="sname">Фамилия</label>
-        <input type="text" class="form-control" id="sname" placeholder="Иванов" name="sname"
-               required>
-        <br/>
-        <label for="gender">Пол</label>
-        <div id="gender">
-            <div class="radio">
-                <label><input type="radio" name="gender" value="true">Мужчина</label>
+                <div class="row">
+                    <div class="col-md-5">
+                        <label for="fname">Имя</label>
+                        <input type="text" class="form-control" id="fname" placeholder="Иван" name="fname"
+                               required>
+                    </div>
+                    <div class="col-md-5">
+                        <label for="sname">Фамилия</label>
+                        <input type="text" class="form-control" id="sname" placeholder="Иванов" name="sname"
+                               required>
+                    </div>
+                </div>
+                <br/>
+
+                <div class="row">
+                    <div class="col-md-5">
+                        <label for="gender">Пол</label>
+
+                        <div id="gender" class="row">
+                            <div class="radio col-md-6" style="margin: 1% 0">
+                                <label><input type="radio" name="gender" value="true">Мужчина</label>
+                            </div>
+                            <div class="radio col-md-6" style="margin: 1% 0">
+                                <label><input type="radio" name="gender" value="false">Женщина</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <label for="bdate">День Рождения</label>
+                        <input type="text" class="form-control" data-provide="datepicker" id="bdate"
+                               placeholder="31/12/1997"
+                               name="bdate" autocomplete="off" required>
+                    </div>
+                </div>
+                <br/>
+
+                <div class="row">
+                    <div class="col-md-5">
+                        <label for="bdate">День </label>
+                        <input type="date" class="form-control" id="date" placeholder="31/12/1997"
+                               name="date" autocomplete="off" required>
+                    </div>
+                    <div class="col-md-5">
+                        <label for="city">Город</label>
+                        <input type="text" class="form-control" id="city" placeholder="Москва" name="city"
+                               required>
+                    </div>
+                </div>
+                <br/>
+
+                <div class="row">
+                    <div class="col-md-5">
+                        <label for="password1">Пароль</label>
+                        <input type="password" class="form-control" id="password1" name="password1" autocomplete="off"
+                               required>
+                    </div>
+                    <div class="col-md-5">
+                        <label for="password2">Повтор пароля</label>
+                        <input type="password" class="form-control" id="password2" name="password2" autocomplete="off"
+                               required>
+                    </div>
+                </div>
             </div>
-            <div class="radio">
-                <label><input type="radio" name="gender" value="false">Женщина</label>
-            </div>
-        </div>
-        <br/>
-        <label for="bdate">День Рождения</label>
-        <input type="text" class="form-control" data-provide="datepicker" id="bdate" placeholder="31/12/1997"
-               name="bdate" autocomplete="off" required>
-        <br/>
-        <label for="bdate">День </label>
-        <input type="date" class="form-control" id="date" placeholder="31/12/1997"
-               name="date" autocomplete="off" required>
-        <br/>
-        <label for="city">Город</label>
-        <input type="text" class="form-control" id="city" placeholder="Москва" name="city"
-               required>
-        <br/>
-        <label for="password1">Пароль</label>
-        <input type="password" class="form-control" id="password1" name="password1" autocomplete="off"
-               required>
-        <br/>
-        <label for="password2">Пароль</label>
-        <input type="password" class="form-control" id="password2" name="password2" autocomplete="off"
-               required>
-    </div>
 
-    <p>
+            <p>
 
-    *{<label for="code">Введите код с картинки: </label>}*
+            *{<label for="code">Введите код с картинки: </label>}*
         *{<br/>}*
     *{<p id="captchaWarning" style="color:#c00; display: none;">Вы ввели код неверно</p>}*
     *{<img id="captchaIMG" src="@{Application.captcha(randomID)}"/>}*
@@ -77,18 +109,21 @@
     *{<input id="captchaID" type="hidden" name="randomID" value="${randomID}"/>}*
     *{</p>}*
 
-    <div class="span7 text-center">
-        <input type="submit" class="btn btn-success btn-lg" value="Отправить"/>
-    </div>
+            <div class="span7 text-center row">
 
-    <script>
-        $('#bdate').datepicker({
-            format: "dd/mm/yyyy",
-            endDate: "1/09/2003",
-            startView: 2,
-            clearBtn: true,
-            language: "ru",
-            autoclose: true
-        });
-    </script>
-</form>
+                <input type="submit" class="btn btn-success btn-lg col-md-3" value="Отправить" style="margin-left: 56.5%"/>
+            </div>
+
+            <script>
+                $('#bdate').datepicker({
+                    format: "dd/mm/yyyy",
+                    endDate: "1/09/2003",
+                    startView: 2,
+                    clearBtn: true,
+                    language: "ru",
+                    autoclose: true
+                });
+            </script>
+        </form>
+    </div>
+</div>

@@ -11,10 +11,15 @@ import java.util.Date;
 public class Application extends Controller {
 
     public static void index() {
-        if(Security.isConnected()){
+        String username = Security.connected();
+        User user =  User.find("nickname", username).first();
+        if( user != null){
+            System.out.println("NOW CONNECTED: "+Security.connected());
             Admin.index();
+        }else{
+            session.clear();
+            render();
         }
-        render();
     }
 
     public static void signup() {
@@ -24,20 +29,28 @@ public class Application extends Controller {
         render();
     }
 
-    public static void addUser(String email, String nname, String fname, String sname, String gender, String bdate, String city, String password1, String password2 ){
+    public static void addUser(String email, String nname, String fname, String sname, String gender,String secondGender, String bdate, String city, String password1, String password2 ){
         System.out.println("User there");
+
+        boolean isMan = Boolean.valueOf(gender);
+        boolean wantsMan = Boolean.valueOf(secondGender);
 
         DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         Date birthday = new Date();
-        boolean isMan = Boolean.valueOf(gender);
         try {
             birthday = format.parse(bdate);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        User newUser = new User(email,nname,fname,sname,isMan,birthday,city,password1);
+
+        User newUser = new User(email,nname,fname,sname,isMan,wantsMan,birthday,city,password1);
         newUser.save();
-        index();
+        try {
+            Secure.authenticate(nname,password1,true);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+        Admin.index();
     }
 
 }

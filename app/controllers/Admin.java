@@ -1,6 +1,7 @@
 package controllers;
 
 import models.Picture;
+import models.Timerange;
 import models.User;
 import play.mvc.Before;
 import play.mvc.Controller;
@@ -12,10 +13,11 @@ public class Admin extends Controller {
     @Before
     static void setConnectedUser() {
         if(Security.isConnected()) {
-//            System.out.println("current User: " + Security.connected());
+            System.out.println("current User: " + Security.connected());
             User user = User.find("nickname", Security.connected()).first();
-
-            renderArgs.put("user", user.nickname);
+            if(user != null) {
+                renderArgs.put("user", user.nickname);
+            }
         }
     }
 
@@ -31,26 +33,49 @@ public class Admin extends Controller {
     }
 
     public static void schedule() {
+        if(Security.isConnected()) {
+            User user = User.find("nickname", Security.connected()).first();
+            render(user);
+        }
         render();
     }
 
     public static void uploadPicture(Picture picture) {
-        picture.save();
-        if(Security.isConnected()) {
+        if(picture.image != null) {
+            picture.save();
+            if (Security.isConnected()) {
 //            System.out.println("current User: " + Security.connected());
-            User user = User.find("nickname", Security.connected()).first();
-            long picID =  picture.id;
-            for(int i =0; i < user.pictures.length; i++){
-                if(user.pictures[i] == 0){
-                    user.pictures[i] = picID;
-                    break;
-                }
+                User user = User.find("nickname", Security.connected()).first();
+                long picID = picture.id;
+//                for (int i = 0; i < user.pictures.length; i++) {
+//                    if (user.pictures[i] == 0) {
+//                        user.pictures[i] = picID;
+//                        break;
+//                    }
+//                }
+                user.addPicture(picture);
+                user.save();
+                profile();
             }
-            user.save();
+        }else{
             profile();
         }
     }
 
+    public static void addTimeRange(String day){
+        System.out.println("111111111111111111111111111111111111111111111111111111111111111111111111111111");
+        System.out.println(day);
+        Timerange timerange = new Timerange(day);
+        System.out.println("222222222222222222222222222222222222222222222222222222222222222222222222222222");
+        System.out.println("TIMERANGE: " + timerange.toString());
+
+        timerange.save();
+        User user = User.find("nickname", Security.connected()).first();
+        user.addRange(timerange);
+        user.save();
+        schedule();
+
+    }
     public static void getPicture(long id) {
         Picture picture = Picture.findById(id);
         response.setContentTypeIfNotSet(picture.image.type());

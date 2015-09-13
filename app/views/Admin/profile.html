@@ -16,20 +16,31 @@
 *{#{/list}}*
 *{</ul>}*
 
-<ul>
-#{list items:user.validPictures(), as:'pictureID'}
-    <img src="@{Admin.getPicture(pictureID)}" class="img-thumbnail" width="304" height="236"/></li>
-#{/list}
-</ul>
+*{<ul>}*
+*{#{list items:user.validPictures(), as:'pictureID'}}*
+    *{<img src="@{Admin.getPicture(pictureID)}" class="img-thumbnail" }**{width="304" height="236"}**{ style="max-height: 400px; max-width: 400px"/></li>}*
+*{#{/list}}*
+*{</ul>}*
 #{form @Admin.uploadPicture(), enctype:'multipart/form-data'}
-<input type="file" name="picture.image" />
-<input type="submit" name="submit" value="Save" />
+<input id ="fileInput" type="file" name="picture.image" style="display: none" />
+<input id ="fileSubmit"  type="submit" name="submit" value="Save"  style="display: none" />
 #{/form}
 
-<script>
-$('input[type=file]').bootstrapFileInput();
-$('.file-inputs').bootstrapFileInput();
-</script>
+
+<ul>
+#{list items:user.pics, as:'picture'}
+    <img src="@{Admin.getPicture(picture.id)}" class="img-thumbnail" width="304" height="236" style="max-height: 400px; max-width: 400px"/></li>
+#{/list}
+</ul>
+
+<button class="btn btn-info btn-lg " onclick=" $('#fileInput').click()">Выбрать фото</button>
+
+<button class="btn btn-info btn-lg " onclick="$('#fileSubmit').click() ">Отправить фото</button>
+
+*{<script>}*
+*{$('input[type=file]').bootstrapFileInput();}*
+*{$('.file-inputs').bootstrapFileInput();}*
+*{</script>}*
 
 <form style="padding: 10%">
     <div class="panel panel-default">
@@ -60,6 +71,12 @@ $('.file-inputs').bootstrapFileInput();
         <div class="panel-heading">Дата рождения</div>
         <div class="panel-body">
         ${user.birthday}
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">О себе</div>
+        <div class="panel-body">
+        ${user.selfinfo}
         </div>
     </div>
     <button class="btn btn-info btn-lg ">Изменить</button>

@@ -17,25 +17,23 @@
 </head>
 #{set title:'Регистрация' /}
 
-<form id="letterForm" action="@{Application.addUser()}" method="POST" style="padding: 50px">
+<form id="signupForm" action="@{Application.addUser()}" method="POST" style="padding: 50px">
     <div class="form-group">
-        <label for="email">Email адрес</label>
+        <label for="email">Email адрес <span style="color: red; ">*</span></label>
         <input type="email" class="form-control" id="email" placeholder="example@domen.com" name="email"
                required>
         <br/>
-        <label for="nname">Логин</label>
+        <label for="nname">Логин <span style="color: red; ">*</span></label>
         <input type="text" class="form-control" id="nname" name="nname"
                required>
         <br/>
         <label for="fname">Имя</label>
-        <input type="text" class="form-control" id="fname" placeholder="Иван" name="fname"
-               required>
+        <input type="text" class="form-control" id="fname" placeholder="Иван" name="fname">
         <br/>
         <label for="sname">Фамилия</label>
-        <input type="text" class="form-control" id="sname" placeholder="Иванов" name="sname"
-               required>
+        <input type="text" class="form-control" id="sname" placeholder="Иванов" name="sname">
         <br/>
-        <label for="gender">Пол</label>
+        <label for="gender">Пол <span style="color: red; ">*</span></label>
         <div id="gender">
             <div class="radio">
                 <label><input type="radio" name="gender" value="true">Мужчина</label>
@@ -45,23 +43,29 @@
             </div>
         </div>
         <br/>
-        <label for="bdate">День Рождения</label>
+        <label for="gender">Нужный пол <span style="color: red; ">*</span></label>
+        <div id="secondGender">
+            <div class="radio">
+                <label><input type="radio" name="secondGender" value="true">Мужчина</label>
+            </div>
+            <div class="radio">
+                <label><input type="radio" name="secondGender" value="false">Женщина</label>
+            </div>
+        </div>
+        <br/>
+        <label for="bdate">День Рождения <span style="color: red; ">*</span></label>
         <input type="text" class="form-control" data-provide="datepicker" id="bdate" placeholder="31/12/1997"
                name="bdate" autocomplete="off" required>
         <br/>
-        <label for="bdate">День </label>
-        <input type="date" class="form-control" id="date" placeholder="31/12/1997"
-               name="date" autocomplete="off" required>
-        <br/>
-        <label for="city">Город</label>
+        <label for="city">Город <span style="color: red; ">*</span></label>
         <input type="text" class="form-control" id="city" placeholder="Москва" name="city"
                required>
         <br/>
-        <label for="password1">Пароль</label>
+        <label for="password1">Пароль <span style="color: red; ">*</span></label>
         <input type="password" class="form-control" id="password1" name="password1" autocomplete="off"
                required>
         <br/>
-        <label for="password2">Пароль</label>
+        <label for="password2">Пароль <span style="color: red; ">*</span></label>
         <input type="password" class="form-control" id="password2" name="password2" autocomplete="off"
                required>
     </div>

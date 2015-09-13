@@ -11,23 +11,27 @@
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/css/bootstrap-datepicker.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/js/bootstrap-datepicker.js"></script>
+    <script src="@{'/public/javascripts/bootstrap-formhelpers.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
     <script>
         $('.datepicker').datepicker()
     </script>
 </head>
 #{set title:'Регистрация' /}
+
 <div class="container">
+    <h1 class="row col-xs-offset-2 col-md-offset-4">Регистрация</h1>
+    <hr>
     <div class="row">
-        <form id="letterForm" action="@{Application.addUser()}" method="POST" style="padding: 50px" class="col-md-offset-2">
+        <form id="userForm" action="@{Application.addUser()}" method="POST" style="padding: 50px" class="col-md-offset-2">
             <div class="form-group">
                 <div class="row">
                     <div class="col-md-5">
-                        <label for="email">Email адрес</label>
-                        <input type="email" class="form-control" id="email" placeholder="example@domen.com" name="email"
+                        <label for="email">Email адрес <span style="color: red; ">*</span></label>
+                        <input type="email" class="form-control" id="email" name="email"
                                required>
                     </div>
                     <div class="col-md-5">
-                        <label for="nname">Логин</label>
+                        <label for="nname">Логин <span style="color: red; ">*</span></label>
                         <input type="text" class="form-control" id="nname" name="nname"
                                required>
                     </div>
@@ -36,13 +40,13 @@
 
                 <div class="row">
                     <div class="col-md-5">
-                        <label for="fname">Имя</label>
-                        <input type="text" class="form-control" id="fname" placeholder="Иван" name="fname"
+                        <label for="phone">Телефон <span style="color: red; ">*</span></label>
+                        <input type="text"  class="form-control bfh-phone" data-format="+7 (ddd) ddd-dddd" id="phone" name="phone"
                                required>
                     </div>
                     <div class="col-md-5">
-                        <label for="sname">Фамилия</label>
-                        <input type="text" class="form-control" id="sname" placeholder="Иванов" name="sname"
+                        <label for="fname">Имя</label>
+                        <input type="text" class="form-control" id="fname" name="fname"
                                required>
                     </div>
                 </div>
@@ -50,35 +54,55 @@
 
                 <div class="row">
                     <div class="col-md-5">
-                        <label for="gender">Пол</label>
-
+                        <label for="gender">Пол <span style="color: red; ">*</span></label>
                         <div id="gender" class="row">
                             <div class="radio col-md-6" style="margin: 1% 0">
-                                <label><input type="radio" name="gender" value="true">Мужчина</label>
+                                <label><input type="radio" name="gender" id="gender" value="true">Мужчина</label>
                             </div>
                             <div class="radio col-md-6" style="margin: 1% 0">
-                                <label><input type="radio" name="gender" value="false">Женщина</label>
+                                <label><input type="radio" name="gender" id="gender" value="false">Женщина</label>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-5">
-                        <label for="bdate">День Рождения</label>
-                        <input type="text" class="form-control" data-provide="datepicker" id="bdate"
-                               placeholder="31/12/1997"
-                               name="bdate" autocomplete="off" required>
+                        <label for="secondGender">Ищу <span style="color: red; ">*</span></label>
+                        <div id="secondGender" class="row">
+                            <div class="radio col-md-6" style="margin: 1% 0">
+                                <label><input type="radio" name="secondGender" id="secondGender" value="true">Мужчину</label>
+                            </div>
+                            <div class="radio col-md-6" style="margin: 1% 0">
+                                <label><input type="radio" name="secondGender" id="secondGender" value="false">Женщину</label>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <br/>
 
                 <div class="row">
+
                     <div class="col-md-5">
-                        <label for="bdate">День </label>
-                        <input type="date" class="form-control" id="date" placeholder="31/12/1997"
-                               name="date" autocomplete="off" required>
+                        <label for="bdate">Дата Рождения <span style="color: red; ">*</span></label>
+
+                        <div class="form-group" id="dateform">
+                            <div></div>
+                            <input type="hidden" name="bdate" id="bdate">
+                        </div>
                     </div>
+                    <script>
+                        $('#dateform div').datepicker({
+                            format: "dd/mm/yyyy",
+                            endDate: "1/09/2003",
+                            startView: 2,
+                            clearBtn: true,
+                            language: "ru",
+                            autoclose: false
+                        }).on('changeDate', function (e) {
+                            $('#bdate').val(e.format('dd/mm/yyyy'))
+                        });
+                    </script>
                     <div class="col-md-5">
-                        <label for="city">Город</label>
-                        <input type="text" class="form-control" id="city" placeholder="Москва" name="city"
+                        <label for="city">Город <span style="color: red; ">*</span></label>
+                        <input type="text" class="form-control" id="city" name="city"
                                required>
                     </div>
                 </div>
@@ -86,12 +110,12 @@
 
                 <div class="row">
                     <div class="col-md-5">
-                        <label for="password1">Пароль</label>
+                        <label for="password1">Пароль <span style="color: red; ">*</span></label>
                         <input type="password" class="form-control" id="password1" name="password1" autocomplete="off"
                                required>
                     </div>
                     <div class="col-md-5">
-                        <label for="password2">Повтор пароля</label>
+                        <label for="password2">Повтор пароля <span style="color: red; ">*</span></label>
                         <input type="password" class="form-control" id="password2" name="password2" autocomplete="off"
                                required>
                     </div>

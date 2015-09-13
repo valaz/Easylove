@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<h1 align="center">${user.firstname} ${user.secondname} !</h1>
+<h1 align="center">${user.nickname} !</h1>
 
 
 *{<ul>}*
@@ -33,16 +33,22 @@
 #{/list}
 </ul>
 
-<button class="btn btn-info btn-lg " onclick=" $('#fileInput').click()">Выбрать фото</button>
 
-<button class="btn btn-info btn-lg " onclick="$('#fileSubmit').click() ">Отправить фото</button>
 
 *{<script>}*
 *{$('input[type=file]').bootstrapFileInput();}*
 *{$('.file-inputs').bootstrapFileInput();}*
 *{</script>}*
 
-<form style="padding: 10%">
+<div class="row" >
+    <p class="col-md-1  col-xs-offset-4 col-md-offset-4">
+        <button class="btn btn-primary btn-lg " onclick=" $('#fileInput').click()">Выбрать фото</button>
+    </p>
+    <p class="col-md-1 col-xs-offset-2 col-md-offset-0">
+        <button class="btn btn-success btn-lg " onclick="$('#fileSubmit').click() ">Отправить фото</button>
+    </p>
+</div>
+<form style="padding: 2%">
     <div class="panel panel-default">
         <div class="panel-heading">Логин</div>
         <div class="panel-body">
@@ -56,9 +62,9 @@
         </div>
     </div>
     <div class="panel panel-default">
-        <div class="panel-heading">Фамилия</div>
+        <div class="panel-heading">Телефон</div>
         <div class="panel-body">
-        ${user.secondname}
+        ${user.phone}
         </div>
     </div>
     <div class="panel panel-default">
@@ -70,7 +76,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">Дата рождения</div>
         <div class="panel-body">
-        ${user.birthday}
+        ${user.getDate()}
         </div>
     </div>
     <div class="panel panel-default">

@@ -5,6 +5,8 @@ import play.db.jpa.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -15,8 +17,8 @@ import java.util.List;
 public class User extends Model {
     public String email;
     public String nickname;
+    public String phone;
     public String firstname;
-    public String secondname;
     public boolean isMan;
     public boolean wantsMan;
     public Date birthday;
@@ -35,11 +37,11 @@ public class User extends Model {
 
     public boolean isAdmin;
 
-    public User(String email,String nickname, String firstname, String secondname,boolean isMan, boolean wantsMan, Date birthday, String city, String password) {
+    public User(String email,String nickname, String phone,String firstname, boolean isMan, boolean wantsMan, Date birthday, String city, String password) {
         this.email = email;
         this.nickname = nickname;
+        this.phone = phone;
         this.firstname = firstname;
-        this.secondname = secondname;
         this.isMan  = isMan;
         this.wantsMan  = wantsMan;
         this.birthday = birthday;
@@ -59,6 +61,12 @@ public class User extends Model {
         return user != null && user.password.equals(password);
 
     }
+    public String getDate(){
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        String reportDate = df.format(birthday);
+        return reportDate;
+    }
+
 
     public void addPicture(Picture picture){
         pics.add(picture);
@@ -112,6 +120,6 @@ public class User extends Model {
     }
     @Override
     public String toString() {
-        return  firstname + " " + secondname;
+        return  nickname;
     }
 }

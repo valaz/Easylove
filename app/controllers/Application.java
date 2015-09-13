@@ -29,9 +29,17 @@ public class Application extends Controller {
         render();
     }
 
-    public static void addUser(String email, String nname, String fname, String sname, String gender,String secondGender, String bdate, String city, String password1, String password2 ){
+    public static void addUser(String email, String nname, String phone,  String fname,String gender,String secondGender, String bdate, String city, String password1, String password2 ){
         System.out.println("User there");
-
+        System.out.println("email: " + email);
+        System.out.println("nname: " + nname);
+        System.out.println("phone: " + phone);
+        System.out.println("fname: " + fname);
+        System.out.println("gender: " + gender);
+        System.out.println("secondGender: " + secondGender);
+        System.out.println("bdate: " + bdate);
+        System.out.println("city: " + city);
+        System.out.println("password1: " + password1);
         boolean isMan = Boolean.valueOf(gender);
         boolean wantsMan = Boolean.valueOf(secondGender);
 
@@ -43,7 +51,7 @@ public class Application extends Controller {
             e.printStackTrace();
         }
 
-        User newUser = new User(email,nname,fname,sname,isMan,wantsMan,birthday,city,password1);
+        User newUser = new User(email,nname,phone,fname,isMan,wantsMan,birthday,city,password1);
         newUser.save();
         try {
             Secure.authenticate(nname,password1,true);

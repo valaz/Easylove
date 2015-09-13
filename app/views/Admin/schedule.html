@@ -1,4 +1,70 @@
 #{extends 'admin.html' /}
-
+<head>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/css/bootstrap-datepicker.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/js/bootstrap-datepicker.js"></script>
+    <script>
+        $('.datepicker').datepicker()
+    </script>
+</head>
 
 #{set title:'Расписание' /}
+<body>
+<h1>Расписание </h1>
+<hr>
+
+<div style="padding: 40px">
+#{form @Admin.addTimeRange(), enctype:'multipart/form-data' }
+    <label for="sandbox-container">Выберите свободные дни: <span style="color: red; ">*</span></label>
+
+    <div class="form-group" id="datepickid">
+        <div></div>
+        <input type="hidden" name="day" id="day">
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+
+
+
+#{/form}
+</div>
+
+<ul>
+#{list items:user.ranges, as:'range'}
+    <li>${range.toString()}</li>
+#{/list}
+</ul>
+
+<script>
+    $('#datepickid div').datepicker({
+        format: "dd/mm/yyyy",
+        startDate: "today",
+        clearBtn: true,
+        language: "ru",
+        multidate: false,
+        multidateSeparator: "*",
+        keyboardNavigation: true,
+        forceParse: false,
+        todayHighlight: true,
+        orientation: "top left"
+    }).on('changeDate', function (e) {
+        $('#day').val(e.format('dd/mm/yyyy'))
+    });
+</script>
+
+*{<form style="padding: 40px">}*
+*{<label for="day">День<span style="color: red; ">*</span></label>}*
+*{<input type="date" class="form-control"id="day"}*
+*{name="day" autocomplete="off" required>}*
+*{<br/>}*
+*{<label for="startTime">Время начала<span style="color: red; ">*</span></label>}*
+*{<input type="time" class="form-control"id="startTime"}*
+*{name="startTime" autocomplete="off" required>}*
+*{<br/>}*
+*{<label for="endTime">Время конца<span style="color: red; ">*</span></label>}*
+*{<input type="time" class="form-control"id="endTime"}*
+*{name="endTime" autocomplete="off" required>}*
+*{<br/>}*
+
+*{<button class="btn btn-default">Добавить</button>}*
+*{</form>}*
+</body>

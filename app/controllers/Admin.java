@@ -76,6 +76,26 @@ public class Admin extends Controller {
         schedule();
 
     }
+    public static void deleteTimeRange(long dayID){
+        Timerange timerange = Timerange.findById(dayID);
+        if (Security.isConnected()) {
+            User user = User.find("nickname", Security.connected()).first();
+            user.deleteRange(timerange);
+            user.save();
+            timerange.delete();
+        }
+        schedule();
+    }
+    public static void deletePicture(long picID){
+        Picture picture = Picture.findById(picID);
+        if (Security.isConnected()) {
+            User user = User.find("nickname", Security.connected()).first();
+            user.deletePicture(picture);
+            user.save();
+//            picture._delete();
+        }
+        profile();
+    }
     public static void getPicture(long id) {
         Picture picture = Picture.findById(id);
         response.setContentTypeIfNotSet(picture.image.type());

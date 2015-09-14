@@ -31,6 +31,11 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li><a href="#">О нас</a></li>
+            #{secure.check 'admin'}
+                <li class="${request.controller == 'Users' ? 'selected' : ''}">
+                    <a href="@{Users.list()}"><span style="color: red; ">Пользователи</span></a>
+                </li>
+            #{/secure.check}
 
             </ul>
 

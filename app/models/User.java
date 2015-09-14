@@ -7,10 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 
 @Entity
@@ -37,13 +34,13 @@ public class User extends Model {
 
     public boolean isAdmin;
 
-    public User(String email,String nickname, String phone,String firstname, boolean isMan, boolean wantsMan, Date birthday, String city, String password) {
+    public User(String email, String nickname, String phone, String firstname, boolean isMan, boolean wantsMan, Date birthday, String city, String password) {
         this.email = email;
         this.nickname = nickname;
         this.phone = phone;
         this.firstname = firstname;
-        this.isMan  = isMan;
-        this.wantsMan  = wantsMan;
+        this.isMan = isMan;
+        this.wantsMan = wantsMan;
         this.birthday = birthday;
         this.city = city;
         this.password = password;
@@ -55,71 +52,55 @@ public class User extends Model {
         ranges = new ArrayList<Timerange>();
     }
 
-    public static boolean connect(String username, String password){
+    public static boolean connect(String username, String password) {
         System.out.println("CHECK CONNECT: " + username + " " + password);
-        User user =  User.find("nickname", username).first();
+        User user = User.find("nickname", username).first();
         return user != null && user.password.equals(password);
 
     }
-    public String getDate(){
+
+    public String getDate() {
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         String reportDate = df.format(birthday);
         return reportDate;
     }
 
 
-    public void addPicture(Picture picture){
+    public void addPicture(Picture picture) {
         pics.add(picture);
     }
 
-    public void addRange(Timerange timerange){
+    public void addRange(Timerange timerange) {
         ranges.add(timerange);
+        ranges = saveUnique(ranges);
         Collections.sort(ranges);
+
     }
-//    public long[] validPictures(){
-//        int len = 0;
-//        for(int j = 0; j < pictures.length; j++){
-//            if(pictures[j] != 0){
-//                len++;
-//            }
-//        }
-//        long res[] = new long[len];
-//        int i = 0;
-//        for(int j = 0; j < pictures.length; j++){
-//            if(pictures[j] != 0){
-//                res[i] = pictures[j];
-//                i++;
-//            }
-//        }
-//        return res;
-//    }
-//    public void addTimeRange(long timerangeID){
-//        deleteBadTimeranges();
-//        Arrays.sort(timeranges);
-//        if(timeranges[0] == 0){
-//            timeranges[0] = timerangeID;
-//            Arrays.sort(timeranges);
-//        }else{
-//            int curLen = timeranges.length;
-//            long[] newTimeranges = new long[curLen*2];
-//            System.arraycopy(timeranges,0,newTimeranges,0,curLen);
-//            timeranges = newTimeranges;
-//            addTimeRange(timerangeID);
-//        }
-//    }
-    public void deleteBadTimeranges(){
-//        Arrays.sort(timeranges);
-//        int i = timeranges.length - 1;
-//        while(i >= 0 || timeranges[i] != 0){
-//            Date curDay = ((Timerange)Timerange.findById(timeranges[i])).day;
-//            if(curDay.compareTo(new Date()) < 0){
-//                timeranges[i] = 0;
-//            }
-//            i--;
-//        }
+
+    public static List<Timerange> saveUnique(List<Timerange> ranges) {
+        Set<Timerange> hs = new HashSet<Timerange>();
+        hs.addAll(ranges);
+        System.out.println(hs);
+        List<Timerange> newRanges = new ArrayList<Timerange>();
+        newRanges.addAll(hs);
+        Collections.sort(newRanges);
+        return newRanges;
     }
+
     @Override
     public String toString() {
-        return  nickname;
+        return nickname;
+    }
+
+    public void deleteRange(Timerange timerange) {
+        int index = ranges.indexOf(timerange);
+        ranges.remove(index);
+        Collections.sort(ranges);
+
+    }
+
+    public void deletePicture(Picture picture) {
+        int index = pics.indexOf(picture);
+        pics.remove(index);
     }
 }

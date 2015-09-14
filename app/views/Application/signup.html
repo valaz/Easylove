@@ -19,7 +19,7 @@
 #{set title:'Регистрация' /}
 
 <div class="container">
-    <h1 class="row col-xs-offset-2 col-md-offset-4">Регистрация</h1>
+    <h1 class="row col-lg-offset-5  col-xs-offset-2">Регистрация</h1>
     <hr>
     <div class="row">
         <form id="userForm" action="@{Application.addUser()}" method="POST" style="padding: 50px" class="col-md-offset-2">
@@ -85,7 +85,7 @@
 
                         <div class="form-group" id="dateform">
                             <div></div>
-                            <input type="hidden" name="bdate" id="bdate">
+                            <input type="hidden" name="bdate" id="bdate" required>
                         </div>
                     </div>
                     <script>
@@ -133,7 +133,7 @@
     *{<input id="captchaID" type="hidden" name="randomID" value="${randomID}"/>}*
     *{</p>}*
 
-            <div class="span7 text-center row">
+            <div class="span7 text-center row" >
 
                 <input type="submit" class="btn btn-success btn-lg col-md-3" value="Отправить" style="margin-left: 56.5%"/>
             </div>

@@ -34,6 +34,16 @@ public class Timerange extends Model implements Comparable {
         System.out.println((new DateTime()).toString());
     }
 
+    @Override
+    public boolean equals(Object o) {
+        return  day.equals(((Timerange)o).day);
+    }
+
+    @Override
+    public int hashCode() {
+        int result =  day.hashCode();
+        return result;
+    }
 
     @Override
     public int compareTo(Object o) {

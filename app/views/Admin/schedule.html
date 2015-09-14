@@ -13,7 +13,7 @@
 
 
 <div class="container">
-    <h1 class="row col-xs-offset-2 col-md-offset-4">Расписание</h1>
+    <h1 class="row col-lg-offset-5  col-xs-offset-2">Расписание</h1>
     <hr>
 
 
@@ -31,7 +31,7 @@
                         <div></div>
                         <input type="hidden" name="day" id="day">
                     </div>
-                    <button type="submit" class="btn btn-success col-xs-offset-2 col-md-offset-2">Отправить</button>
+                    <button type="submit" class="btn btn-success col-lg-offset-2 col-xs-offset-3">Отправить</button>
 
                 #{/form}
                 </div>
@@ -40,8 +40,14 @@
                 <div class="col-md-5">
                     <ul class="list-group">
                     #{list items:user.ranges, as:'range'}
-                        <li class="list-group-item  list-group-item-warning"
-                            style="text-align: center">${range.toString()}</li>
+                        <form id="deleteDay" action="@{Admin.deleteTimeRange()}" method="POST">
+                            <li class="list-group-item  list-group-item-warning"
+                                style="text-align: center">${range.toString()}
+                                <input type="hidden" name="dayID" id="dayID" value="${range.id}">
+                                <button type="submit" class="btn btn-danger col-xs-offset-2 col-md-offset-2">Удалить
+                                </button>
+                            </li>
+                        </form>
                     #{/list}
                     </ul>
                 </div>
@@ -68,20 +74,4 @@
     });
 </script>
 
-*{<form style="padding: 40px">}*
-*{<label for="day">День<span style="color: red; ">*</span></label>}*
-*{<input type="date" class="form-control"id="day"}*
-*{name="day" autocomplete="off" required>}*
-*{<br/>}*
-*{<label for="startTime">Время начала<span style="color: red; ">*</span></label>}*
-*{<input type="time" class="form-control"id="startTime"}*
-*{name="startTime" autocomplete="off" required>}*
-*{<br/>}*
-*{<label for="endTime">Время конца<span style="color: red; ">*</span></label>}*
-*{<input type="time" class="form-control"id="endTime"}*
-*{name="endTime" autocomplete="off" required>}*
-*{<br/>}*
-
-*{<button class="btn btn-default">Добавить</button>}*
-*{</form>}*
 </body>

@@ -11,67 +11,75 @@
 #{set title:'Расписание' /}
 <body>
 
-
 <div class="container">
-    <h1 class="row col-lg-offset-5  col-xs-offset-2">Расписание</h1>
-    <hr>
-
-
-    <div id="meetings" style="padding: 50px" class="col-md-offset-2">
-
-        <div class="form-group">
-
-            <div class="row">
-
-                <div class="col-md-5">
-                #{form @Admin.addTimeRange(), enctype:'multipart/form-data' }
-                    <label for="sandbox-container">Выберите свободные дни: <span style="color: red; ">*</span></label>
-
-                    <div class="form-group" id="datepickid">
-                        <div></div>
-                        <input type="hidden" name="day" id="day">
-                    </div>
-                    <button type="submit" class="btn btn-success col-lg-offset-2 col-xs-offset-3">Отправить</button>
-
-                #{/form}
-                </div>
-                <br>
-
-                <div class="col-md-5">
-                    <ul class="list-group">
-                    #{list items:user.ranges, as:'range'}
-                        <form id="deleteDay" action="@{Admin.deleteTimeRange()}" method="POST">
-                            <li class="list-group-item  list-group-item-warning"
-                                style="text-align: center">${range.toString()}
-                                <input type="hidden" name="dayID" id="dayID" value="${range.id}">
-                                <button type="submit" class="btn btn-danger col-xs-offset-2 col-md-offset-2">Удалить
-                                </button>
-                            </li>
-                        </form>
-                    #{/list}
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+    <h2>Вы оценили друг друга</h2>
+    <ul class="list-group">
+        #{list items:user.relations, as:'relation'}
+                <li class="list-group-item">${relation.getAnother(user.id)}</li>
+        #{/list}
+</ul>
 </div>
 
+*{<div class="container">}*
+    *{<h1 class="row col-lg-offset-5  col-xs-offset-2">Расписание</h1>}*
+    *{<hr>}*
 
-<script>
-    $('#datepickid div').datepicker({
-        format: "dd/mm/yyyy",
-        startDate: "today",
-        clearBtn: true,
-        language: "ru",
-        multidate: false,
-        multidateSeparator: "*",
-        keyboardNavigation: true,
-        forceParse: false,
-        todayHighlight: true,
-        orientation: "top left"
-    }).on('changeDate', function (e) {
-        $('#day').val(e.format('dd/mm/yyyy'))
-    });
-</script>
+
+    *{<div id="meetings" style="padding: 50px" class="col-md-offset-2">}*
+
+        *{<div class="form-group">}*
+
+            *{<div class="row">}*
+
+                *{<div class="col-md-5">}*
+                *{#{form @Admin.addTimeRange(), enctype:'multipart/form-data' }}*
+                    *{<label for="sandbox-container">Выберите свободные дни: <span style="color: red; ">*</span></label>}*
+
+                    *{<div class="form-group" id="datepickid">}*
+                        *{<div></div>}*
+                        *{<input type="hidden" name="day" id="day">}*
+                    *{</div>}*
+                    *{<button type="submit" class="btn btn-success col-lg-offset-2 col-xs-offset-3">Отправить</button>}*
+
+                *{#{/form}}*
+                *{</div>}*
+                *{<br>}*
+
+                *{<div class="col-md-5">}*
+                    *{<ul class="list-group">}*
+                    *{#{list items:user.ranges, as:'range'}}*
+                        *{<form id="deleteDay" action="@{Admin.deleteTimeRange()}" method="POST">}*
+                            *{<li class="list-group-item  list-group-item-warning"}*
+                                *{style="text-align: center">${range.toString()}}*
+                                *{<input type="hidden" name="dayID" id="dayID" value="${range.id}">}*
+                                *{<button type="submit" class="btn btn-danger col-xs-offset-2 col-md-offset-2">Удалить}*
+                                *{</button>}*
+                            *{</li>}*
+                        *{</form>}*
+                    *{#{/list}}*
+                    *{</ul>}*
+                *{</div>}*
+            *{</div>}*
+        *{</div>}*
+    *{</div>}*
+*{</div>}*
+
+
+*{<script>}*
+    *{$('#datepickid div').datepicker({}*
+        *{format: "dd/mm/yyyy",}*
+        *{startDate: "today",}*
+        *{clearBtn: true,}*
+        *{language: "ru",}*
+        *{multidate: false,}*
+        *{multidateSeparator: "*",}*
+        *{keyboardNavigation: true,}*
+        *{forceParse: false,}*
+        *{todayHighlight: true,}*
+        *{orientation: "top left"}*
+    *{}).on('changeDate', function (e) {}*
+        *{$('#day').val(e.format('dd/mm/yyyy'))}*
+    *{});}*
+*{</script>}*
 
 </body>

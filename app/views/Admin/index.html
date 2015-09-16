@@ -3,13 +3,65 @@
 
 
 #{set title:'Личный кабинет' /}
-<body>
-Welcome ${user}!
+<body xmlns="http://www.w3.org/1999/html">
 *{<ul id="adminMenu">}*
 *{#{secure.check 'admin'}}*
-    *{<li class="${request.controller == 'Users' ? 'selected' : ''}">}*
-        *{<a href="@{Users.list()}">Users</a>}*
-    *{</li>}*
+*{<li class="${request.controller == 'Users' ? 'selected' : ''}">}*
+*{<a href="@{Users.list()}">Users</a>}*
+*{</li>}*
 *{#{/secure.check}}*
 *{</ul>}*
+
+<div class="container">
+    <h2>${partnerUser.firstname}
+        <small>Возраст: ${partnerUser.getAge()}</small>
+    </h2>
+    <hr>
+    <div class="row">
+        <div style="padding: 50px" class="col-md-offset-2">
+            <div class="form-group">
+                <ul class="thumbnails">
+                #{list items:partnerUser.pics, as:'picture'}
+                    <div>
+                        <div class="col-md-6">
+                            <img src="@{Admin.getPicture(picture.id)}" class="img-thumbnail" width="auto" height="auto"
+                                 style="max-height: 400px; max-width:col-md-5 "/></li>
+                            <input type="hidden" name="picID" id="picID" value="${picture.id}">
+
+                        </div>
+                    </div>
+                #{/list}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+
+<div class="container">
+    <div class="row">
+        <div style="padding: 50px" class="col-md-offset-2">
+            <div class="form-group">
+                <div class="row">
+                    <p>
+                        <form action="@{Admin.likeUser()}" class="col-md-5 " method="POST">
+                        <input type="hidden" value="${partnerUser.id}" name="userID"
+                               style="display: %"/>
+                        <button class="submit btn btn-success btn-lg "><span
+                                class="glyphicon glyphicon-heart" style="color: red; " aria-hidden="true"></span>
+                            Нравится
+                        </button>
+                    </form>
+                    </p>
+                    <p >
+                    <form action="@{Admin.index()}" class="col-md-5 " method="GET">
+                        <button class="submit btn btn-primary btn-lg " onclick="@{Application.index()}"> Дальше <span
+                                class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
+                    </form>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>

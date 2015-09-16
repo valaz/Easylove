@@ -6,7 +6,10 @@ import play.mvc.Controller;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 public class Application extends Controller {
 
@@ -61,4 +64,11 @@ public class Application extends Controller {
         Admin.index();
     }
 
+    public static List<String>  getCities(){
+        List<String> cities = new ArrayList<String>();
+        cities.add("Москва");
+        cities.add("Санкт-Петербург");
+        Collections.sort(cities);
+        return cities;
+    }
 }

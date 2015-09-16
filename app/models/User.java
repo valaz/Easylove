@@ -4,6 +4,8 @@ package models;
 import play.db.jpa.Model;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -30,6 +32,10 @@ public class User extends Model {
     public List<Picture> pics;
     @OneToMany
     public List<Timerange> ranges;
+    @ManyToMany
+    public List<User> liked;
+    @ManyToMany
+    public List<Relation> relations;
 
 
     public boolean isAdmin;
@@ -45,11 +51,11 @@ public class User extends Model {
         this.city = city;
         this.password = password;
         this.isAdmin = true;
-//        pictures = new long[5];
-//        timeranges = new long[10];
 
         pics = new ArrayList<Picture>();
         ranges = new ArrayList<Timerange>();
+        liked = new ArrayList<User>();
+        relations = new ArrayList<Relation>();
     }
 
     public static boolean connect(String username, String password) {
@@ -89,7 +95,7 @@ public class User extends Model {
 
     @Override
     public String toString() {
-        return nickname;
+        return nickname + ": " + firstname + ", " + getAge();
     }
 
     public void deleteRange(Timerange timerange) {
@@ -102,5 +108,35 @@ public class User extends Model {
     public void deletePicture(Picture picture) {
         int index = pics.indexOf(picture);
         pics.remove(index);
+    }
+
+    public int getAge() {
+        Calendar dob = Calendar.getInstance();
+        dob.setTime(birthday);
+        Calendar today = Calendar.getInstance();
+        int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
+        if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR))
+            age--;
+        return age;
+    }
+
+    public boolean doLike(User user) {
+        if (!liked.contains(user)) {
+            liked.add(user);
+            return true;
+        }
+        return false;
+    }
+
+    public static Relation CheckRelation(User user1, User user2) {
+        if (user1.liked.contains(user2) && user2.liked.contains(user1)) {
+            Relation relation = new Relation(user1, user2);
+            if( !user1.relations.contains(relation) ) {
+                user1.relations.add(relation);
+                user2.relations.add(relation);
+                return relation;
+            }
+        }
+        return null;
     }
 }

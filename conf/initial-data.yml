@@ -1,0 +1,39 @@
+User(azat):
+    nickname: v
+    firstname: "Azat"
+    isMan: true
+    wantsMan: false
+    city: Москва
+    password: v
+    birthday: 1993-01-20
+    isAdmin:  true
+
+User(jeka):
+    nickname: j
+    firstname: "Eugene"
+    isMan: true
+    wantsMan: false
+    city: Москва
+    password: j
+    birthday: 1992-10-20
+    isAdmin:  false
+
+User(kate):
+    nickname: k
+    firstname: "Kate"
+    isMan: false
+    wantsMan: true
+    city: Москва
+    password: k
+    birthday: 1995-05-13
+    isAdmin:  false
+
+User(anna):
+    nickname: a
+    firstname: "Anna"
+    isMan: false
+    wantsMan: true
+    city: Москва
+    password: a
+    birthday: 1985-05-26
+    isAdmin:  false

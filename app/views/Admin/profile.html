@@ -31,7 +31,7 @@
                 <ul class="thumbnails">
                 #{list items:user.pics, as:'picture'}
                     <form id="deleteDay" action="@{Admin.deletePicture()}" method="POST">
-                        <div class="col-md-5">
+                        <div class="col-md-6">
                             <img src="@{Admin.getPicture(picture.id)}" class="img-thumbnail" width="auto" height="auto"
                                  style="max-height: 400px; max-width:col-md-5 "/></li>
                             <input type="hidden" name="picID" id="picID" value="${picture.id}">
@@ -56,10 +56,10 @@
 
 <div class="row">
     <p class="col-md-1  col-lg-offset-5 col-xs-offset-3">
-        <button class="btn btn-primary btn-lg " onclick=" $('#fileInput').click()">Выбрать фото</button>
+        <button class="btn btn-primary btn-lg " onclick=" $('#fileInput').click()"> <span class="glyphicon glyphicon-picture" aria-hidden="true"></span> Выбрать фото</button>
     </p>
     <p class="col-md-1 col-lg-offset-1  col-xs-offset-3">
-        <button class="btn btn-success btn-lg " onclick="$('#fileSubmit').click() ">Отправить фото</button>
+        <button class="btn btn-success btn-lg " onclick="$('#fileSubmit').click() "><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Отправить фото</button>
     </p>
 </div>
 
@@ -68,7 +68,7 @@
     <div class="row">
         <div style="padding: 50px" class="col-md-offset-2">
             <div class="form-group">
-                <div class="row">
+                    <div class="row">
                     <div class="col-md-5">
                         <div class="panel panel-default">
                             <div class="panel-heading">Логин</div>

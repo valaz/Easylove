@@ -1,6 +1,6 @@
 User(azat):
     nickname: v
-    firstname: "Azat"
+    firstname: "Азат"
     isMan: true
     wantsMan: false
     city: Москва
@@ -10,7 +10,7 @@ User(azat):
 
 User(jeka):
     nickname: j
-    firstname: "Eugene"
+    firstname: "Евгений"
     isMan: true
     wantsMan: false
     city: Москва
@@ -20,7 +20,7 @@ User(jeka):
 
 User(kate):
     nickname: k
-    firstname: "Kate"
+    firstname: "Катя"
     isMan: false
     wantsMan: true
     city: Москва
@@ -30,7 +30,7 @@ User(kate):
 
 User(anna):
     nickname: a
-    firstname: "Anna"
+    firstname: "Аня"
     isMan: false
     wantsMan: true
     city: Москва

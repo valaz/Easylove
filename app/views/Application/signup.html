@@ -58,28 +58,42 @@
                 <div class="row">
                     <div class="col-md-5">
                         <label for="gender">Пол <span style="color: red; ">*</span></label>
-
-                        <div id="gender" class="row">
-                            <div class="radio col-md-6" style="margin: 1% 0">
-                                <label><input type="radio" name="gender" id="gender" value="true">Мужчина</label>
+                        <div id="gender" class="row col-lg-offset-1">
+                            <div class="btn-group" data-toggle="buttons">
+                                <label class="btn btn-default">
+                                    <label><input type="radio" name="gender" id="gender" value="true">Мужчина</label>
+                                </label>
+                                <label class="btn btn-default">
+                                    <label><input type="radio" name="gender" id="gender" value="false">Женщина</label>
+                                </label>
                             </div>
-                            <div class="radio col-md-6" style="margin: 1% 0">
-                                <label><input type="radio" name="gender" id="gender" value="false">Женщина</label>
-                            </div>
+                        *{<div class="radio col-md-6" style="margin: 1% 0">}*
+                        *{<label><input type="radio" name="gender" id="gender" value="true">Мужчина</label>}*
+                        *{</div>}*
+                        *{<div class="radio col-md-6" style="margin: 1% 0">}*
+                        *{<label><input type="radio" name="gender" id="gender" value="false">Женщина</label>}*
+                        *{</div>}*
                         </div>
                     </div>
                     <div class="col-md-5">
-                        <label for="secondGender">Ищу <span style="color: red; ">*</span></label>
+                        <label for="secondGender">Ищу<span style="color: red; ">*</span></label>
 
-                        <div id="secondGender" class="row">
-                            <div class="radio col-md-6" style="margin: 1% 0">
-                                <label><input type="radio" name="secondGender" id="secondGender"
-                                              value="true">Мужчину</label>
+                        <div id="secondGender" class="row col-lg-offset-1">
+                            <div class="btn-group" data-toggle="buttons">
+                                <label class="btn btn-default">
+                                    <label><input type="radio" name="secondGender" id="secondGender" value="true">Мужчину</label>
+                                </label>
+                                <label class="btn btn-default">
+                                    <label><input type="radio" name="secondGender" id="secondGender" value="false">Женщину</label>
+                                </label>
                             </div>
-                            <div class="radio col-md-6" style="margin: 1% 0">
-                                <label><input type="radio" name="secondGender" id="secondGender"
-                                              value="false">Женщину</label>
-                            </div>
+                        *{}*
+                        *{<div class="radio col-md-6" style="margin: 1% 0">}*
+                        *{<label><input type="radio" name="secondGender" id="secondGender" value="true">Мужчину</label>}*
+                        *{</div>}*
+                        *{<div class="radio col-md-6" style="margin: 1% 0">}*
+                        *{<label><input type="radio" name="secondGender" id="secondGender" value="false">Женщину</label>}*
+                        *{</div>}*
                         </div>
                     </div>
                 </div>

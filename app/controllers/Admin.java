@@ -4,13 +4,11 @@ import models.Picture;
 import models.Relation;
 import models.Timerange;
 import models.User;
-import play.db.jpa.JPABase;
 import play.mvc.Before;
 import play.mvc.Controller;
 import play.mvc.With;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -138,6 +136,18 @@ public class Admin extends Controller {
                 user.save();
             }
             index();
+        }
+    }
+
+    public static void changeRelation(long relationID, String place, String time, String date){
+        if (Security.isConnected()) {
+            User user = User.find("nickname", Security.connected()).first();
+//            System.out.println(relationID +" | " + place + " | " + time + " | " + date);
+            Relation relation = Relation.findById(relationID);
+            relation.change(user.id, place,time,date);
+
+            relation.save();
+            schedule();
         }
     }
 }

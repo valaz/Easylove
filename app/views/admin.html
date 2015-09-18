@@ -42,6 +42,9 @@
                         <li class="${request.controller == 'Relations' ? 'selected' : ''}">
                             <a href="@{Relations.list()}"><span style="color: red; ">Отношения</span></a>
                         </li>
+                        <li class="${request.controller == 'Relations' ? 'selected' : ''}">
+                            <a href="@{Pictures.list()}"><span style="color: red; ">Фотографии</span></a>
+                        </li>
                     </ul>
                 </li>
             #{/secure.check}
@@ -50,9 +53,9 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="@{Admin.profile()}"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Профиль</a></li>
-                <li><a href="@{Admin.schedule()}">Расписание</a></li>
-                <li><a href="#">Встречи</a></li>
-                <li><a href="@{Secure.logout()}">Выйти</a></li>
+                <li><a href="@{Admin.schedule()}"> <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Расписание</a></li>
+                <li><a href="#"> <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Встречи</a></li>
+                <li><a href="@{Secure.logout()}"> <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Выйти</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

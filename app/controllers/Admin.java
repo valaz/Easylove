@@ -72,9 +72,9 @@ public class Admin extends Controller {
 
     public static void uploadPicture(Picture picture) {
         if (picture.image != null) {
-            picture.save();
             if (Security.isConnected()) {
                 User user = User.find("nickname", Security.connected()).first();
+                picture.save();
                 user.addPicture(picture);
                 user.save();
                 profile();

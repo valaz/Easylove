@@ -10,7 +10,7 @@ GET     /signin                                Application.signin
 # Import CRUD routes
 # Administration
 GET    /admin/?                                  Admin.index
-*     /admin                                     module:crud
+*      /admin                                     module:crud
 *     /                                          module:secure
 
 # Ignore favicon requests

@@ -5,7 +5,6 @@ import play.db.jpa.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -74,8 +73,16 @@ public class User extends Model {
 
     public void addPicture(Picture picture) {
         pics.add(picture);
+        checkPics();
     }
 
+    public void checkPics(){
+        for (Picture pic : pics) {
+            if(pic.image == null){
+                pics.remove(pic);
+            }
+        }
+    }
     public void addRange(Timerange timerange) {
         ranges.add(timerange);
         ranges = saveUnique(ranges);
@@ -95,7 +102,7 @@ public class User extends Model {
 
     @Override
     public String toString() {
-        return nickname + ": " + firstname + ", " + getAge();
+        return this.id + ": "+ nickname + ": " + firstname + ", " + getAge();
     }
 
     public void deleteRange(Timerange timerange) {

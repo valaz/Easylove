@@ -8,7 +8,7 @@
     </script>
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             function changeType(divID) {
                 $(divID).hide();
             }
@@ -51,227 +51,232 @@
                     </div>
 
                     <hr>
-                    <form  action="@{Admin.changeRelation()}" method="POST">
+                    <form action="@{Admin.changeRelation()}" method="POST">
 
                         <input type="hidden" name="relationID" id="relationID" value="${relation.id}" required>
 
-                        <div class="col-md-5">
-                            <label for="fname">Место <span style="color: red; ">*</span></label>
-                            <select class="form-control" id="place" name="place"
-                                    required  ${relation.inputType(user.id)}>
-                                <option>${relation.place}</option>
-                                <option>Авиамоторная</option>
-                                <option>Автозаводская</option>
-                                <option>Академическая</option>
-                                <option>Александровский сад</option>
-                                <option>Алексеевская</option>
-                                <option>Алма-Атинская</option>
-                                <option>Алтуфьево</option>
-                                <option>Аннино</option>
-                                <option>Арбатская (Арбатско-Покровская линия)</option>
-                                <option>Арбатская (Филевская линия)</option>
-                                <option>Аэропорт</option>
-                                <option>Бабушкинская</option>
-                                <option>Багратионовская</option>
-                                <option>Баррикадная</option>
-                                <option>Бауманская</option>
-                                <option>Беговая</option>
-                                <option>Белорусская</option>
-                                <option>Беляево</option>
-                                <option>Бибирево</option>
-                                <option>Библиотека имени Ленина</option>
-                                <option>Битцевский парк</option>
-                                <option>Борисово</option>
-                                <option>Боровицкая</option>
-                                <option>Ботанический сад</option>
-                                <option>Братиславская</option>
-                                <option>Бульвар адмирала Ушакова</option>
-                                <option>Бульвар Дмитрия Донского</option>
-                                <option>Бульвар Рокоссовского</option>
-                                <option>Бунинская аллея</option>
-                                <option>Варшавская</option>
-                                <option>ВДНХ</option>
-                                <option>Владыкино</option>
-                                <option>Водный стадион</option>
-                                <option>Войковская</option>
-                                <option>Волгоградский проспект</option>
-                                <option>Волжская</option>
-                                <option>Волоколамская</option>
-                                <option>Воробьевы горы</option>
-                                <option>Выставочная</option>
-                                <option>Выхино</option>
-                                <option>Деловой центр</option>
-                                <option>Динамо</option>
-                                <option>Дмитровская</option>
-                                <option>Добрынинская</option>
-                                <option>Домодедовская</option>
-                                <option>Достоевская</option>
-                                <option>Дубровка</option>
-                                <option>Жулебино</option>
-                                <option>Зябликово</option>
-                                <option>Измайловская</option>
-                                <option>Калужская</option>
-                                <option>Кантемировская</option>
-                                <option>Каховская</option>
-                                <option>Каширская</option>
-                                <option>Киевская</option>
-                                <option>Китай-город</option>
-                                <option>Кожуховская</option>
-                                <option>Коломенская</option>
-                                <option>Комсомольская</option>
-                                <option>Коньково</option>
-                                <option>Красногвардейская</option>
-                                <option>Краснопресненская</option>
-                                <option>Красносельская</option>
-                                <option>Красные ворота</option>
-                                <option>Крестьянская застава</option>
-                                <option>Кропоткинская</option>
-                                <option>Крылатское</option>
-                                <option>Кузнецкий мост</option>
-                                <option>Кузьминки</option>
-                                <option>Кунцевская</option>
-                                <option>Курская</option>
-                                <option>Кутузовская</option>
-                                <option>Ленинский проспект</option>
-                                <option>Лермонтовский проспект</option>
-                                <option>Лесопарковая</option>
-                                <option>Лубянка</option>
-                                <option>Люблино</option>
-                                <option>Марксистская</option>
-                                <option>Марьина роща</option>
-                                <option>Марьино</option>
-                                <option>Маяковская</option>
-                                <option>Медведково</option>
-                                <option>Международная</option>
-                                <option>Менделеевская</option>
-                                <option>Митино</option>
-                                <option>Молодежная</option>
-                                <option>Монорельса Выставочный центр</option>
-                                <option>Монорельса Телецентр</option>
-                                <option>Монорельса Улица Академика Королева</option>
-                                <option>Монорельса Улица Милашенкова</option>
-                                <option>Монорельса Улица Сергея Эйзенштейна</option>
-                                <option>Монорельсовой дороги Тимирязевская</option>
-                                <option>Мякинино</option>
-                                <option>Нагатинская</option>
-                                <option>Нагорная</option>
-                                <option>Нахимовский проспект</option>
-                                <option>Новогиреево</option>
-                                <option>Новокосино</option>
-                                <option>Новокузнецкая</option>
-                                <option>Новослободская</option>
-                                <option>Новоясеневская</option>
-                                <option>Новые Черемушки</option>
-                                <option>Октябрьская</option>
-                                <option>Октябрьское поле</option>
-                                <option>Орехово</option>
-                                <option>Отрадное</option>
-                                <option>Охотныйряд</option>
-                                <option>Павелецкая</option>
-                                <option>Парк культуры</option>
-                                <option>Парк Победы</option>
-                                <option>Партизанская</option>
-                                <option>Первомайская</option>
-                                <option>Перово</option>
-                                <option>Петровско-Разумовская</option>
-                                <option>Печатники</option>
-                                <option>Пионерская</option>
-                                <option>Планерная</option>
-                                <option>Площадь Ильича</option>
-                                <option>Площадь Революции</option>
-                                <option>Полежаевская</option>
-                                <option>Полянка</option>
-                                <option>Пражская</option>
-                                <option>Преображенская площадь</option>
-                                <option>Пролетарская</option>
-                                <option>Проспект Вернадского</option>
-                                <option>Проспект Мира</option>
-                                <option>Профсоюзная</option>
-                                <option>Пушкинская</option>
-                                <option>Пятницкое шоссе</option>
-                                <option>Речной вокзал</option>
-                                <option>Рижская</option>
-                                <option>Римская</option>
-                                <option>Рязанский проспект</option>
-                                <option>Савеловская</option>
-                                <option>Свиблово</option>
-                                <option>Севастопольская</option>
-                                <option>Семеновская</option>
-                                <option>Серпуховская</option>
-                                <option>Славянский бульвар</option>
-                                <option>Смоленская (Арбатско-Покровская линия)</option>
-                                <option>Смоленская (Филевская линия)</option>
-                                <option>Сокол</option>
-                                <option>Сокольники</option>
-                                <option>Спартак</option>
-                                <option>Спортивная</option>
-                                <option>Сретенский бульвар</option>
-                                <option>Строгино</option>
-                                <option>Студенческая</option>
-                                <option>Сухаревская</option>
-                                <option>Сходненская</option>
-                                <option>Таганская</option>
-                                <option>Тверская</option>
-                                <option>Театральная</option>
-                                <option>Текстильщики</option>
-                                <option>Теплый стан</option>
-                                <option>Тимирязевская</option>
-                                <option>Третьяковская</option>
-                                <option>Тропарево</option>
-                                <option>Трубная</option>
-                                <option>Тульская</option>
-                                <option>Тургеневская</option>
-                                <option>Тушинская</option>
-                                <option>Улица Академика Янгеля</option>
-                                <option>Улица Горчакова</option>
-                                <option>Улица Скобелевская</option>
-                                <option>Улица Старокачаловская</option>
-                                <option>Улица 1905 года</option>
-                                <option>Университет</option>
-                                <option>Филевский парк</option>
-                                <option>Фили</option>
-                                <option>Фрунзенская</option>
-                                <option>Царицыно</option>
-                                <option>Цветной бульвар</option>
-                                <option>Черкизовская</option>
-                                <option>Чертановская</option>
-                                <option>Чеховская</option>
-                                <option>Чистые пруды</option>
-                                <option>Чкаловская</option>
-                                <option>Шаболовская</option>
-                                <option>Шипиловская</option>
-                                <option>Шоссе Энтузиастов</option>
-                                <option>Щелковская</option>
-                                <option>Щукинская</option>
-                                <option>Электрозаводская</option>
-                                <option>Юго-Западная</option>
-                                <option>Южная</option>
-                                <option>Ясенево</option>
-                            </select>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <label for="place">Место <span style="color: red; ">*</span></label>
+                                <select class="form-control" id="place" name="place"
+                                        required  ${relation.inputType(user.id)}>
+                                    <option>${relation.place}</option>
+                                    <option>Авиамоторная</option>
+                                    <option>Автозаводская</option>
+                                    <option>Академическая</option>
+                                    <option>Александровский сад</option>
+                                    <option>Алексеевская</option>
+                                    <option>Алма-Атинская</option>
+                                    <option>Алтуфьево</option>
+                                    <option>Аннино</option>
+                                    <option>Арбатская (Арбатско-Покровская линия)</option>
+                                    <option>Арбатская (Филевская линия)</option>
+                                    <option>Аэропорт</option>
+                                    <option>Бабушкинская</option>
+                                    <option>Багратионовская</option>
+                                    <option>Баррикадная</option>
+                                    <option>Бауманская</option>
+                                    <option>Беговая</option>
+                                    <option>Белорусская</option>
+                                    <option>Беляево</option>
+                                    <option>Бибирево</option>
+                                    <option>Библиотека имени Ленина</option>
+                                    <option>Битцевский парк</option>
+                                    <option>Борисово</option>
+                                    <option>Боровицкая</option>
+                                    <option>Ботанический сад</option>
+                                    <option>Братиславская</option>
+                                    <option>Бульвар адмирала Ушакова</option>
+                                    <option>Бульвар Дмитрия Донского</option>
+                                    <option>Бульвар Рокоссовского</option>
+                                    <option>Бунинская аллея</option>
+                                    <option>Варшавская</option>
+                                    <option>ВДНХ</option>
+                                    <option>Владыкино</option>
+                                    <option>Водный стадион</option>
+                                    <option>Войковская</option>
+                                    <option>Волгоградский проспект</option>
+                                    <option>Волжская</option>
+                                    <option>Волоколамская</option>
+                                    <option>Воробьевы горы</option>
+                                    <option>Выставочная</option>
+                                    <option>Выхино</option>
+                                    <option>Деловой центр</option>
+                                    <option>Динамо</option>
+                                    <option>Дмитровская</option>
+                                    <option>Добрынинская</option>
+                                    <option>Домодедовская</option>
+                                    <option>Достоевская</option>
+                                    <option>Дубровка</option>
+                                    <option>Жулебино</option>
+                                    <option>Зябликово</option>
+                                    <option>Измайловская</option>
+                                    <option>Калужская</option>
+                                    <option>Кантемировская</option>
+                                    <option>Каховская</option>
+                                    <option>Каширская</option>
+                                    <option>Киевская</option>
+                                    <option>Китай-город</option>
+                                    <option>Кожуховская</option>
+                                    <option>Коломенская</option>
+                                    <option>Комсомольская</option>
+                                    <option>Коньково</option>
+                                    <option>Красногвардейская</option>
+                                    <option>Краснопресненская</option>
+                                    <option>Красносельская</option>
+                                    <option>Красные ворота</option>
+                                    <option>Крестьянская застава</option>
+                                    <option>Кропоткинская</option>
+                                    <option>Крылатское</option>
+                                    <option>Кузнецкий мост</option>
+                                    <option>Кузьминки</option>
+                                    <option>Кунцевская</option>
+                                    <option>Курская</option>
+                                    <option>Кутузовская</option>
+                                    <option>Ленинский проспект</option>
+                                    <option>Лермонтовский проспект</option>
+                                    <option>Лесопарковая</option>
+                                    <option>Лубянка</option>
+                                    <option>Люблино</option>
+                                    <option>Марксистская</option>
+                                    <option>Марьина роща</option>
+                                    <option>Марьино</option>
+                                    <option>Маяковская</option>
+                                    <option>Медведково</option>
+                                    <option>Международная</option>
+                                    <option>Менделеевская</option>
+                                    <option>Митино</option>
+                                    <option>Молодежная</option>
+                                    <option>Монорельса Выставочный центр</option>
+                                    <option>Монорельса Телецентр</option>
+                                    <option>Монорельса Улица Академика Королева</option>
+                                    <option>Монорельса Улица Милашенкова</option>
+                                    <option>Монорельса Улица Сергея Эйзенштейна</option>
+                                    <option>Монорельсовой дороги Тимирязевская</option>
+                                    <option>Мякинино</option>
+                                    <option>Нагатинская</option>
+                                    <option>Нагорная</option>
+                                    <option>Нахимовский проспект</option>
+                                    <option>Новогиреево</option>
+                                    <option>Новокосино</option>
+                                    <option>Новокузнецкая</option>
+                                    <option>Новослободская</option>
+                                    <option>Новоясеневская</option>
+                                    <option>Новые Черемушки</option>
+                                    <option>Октябрьская</option>
+                                    <option>Октябрьское поле</option>
+                                    <option>Орехово</option>
+                                    <option>Отрадное</option>
+                                    <option>Охотныйряд</option>
+                                    <option>Павелецкая</option>
+                                    <option>Парк культуры</option>
+                                    <option>Парк Победы</option>
+                                    <option>Партизанская</option>
+                                    <option>Первомайская</option>
+                                    <option>Перово</option>
+                                    <option>Петровско-Разумовская</option>
+                                    <option>Печатники</option>
+                                    <option>Пионерская</option>
+                                    <option>Планерная</option>
+                                    <option>Площадь Ильича</option>
+                                    <option>Площадь Революции</option>
+                                    <option>Полежаевская</option>
+                                    <option>Полянка</option>
+                                    <option>Пражская</option>
+                                    <option>Преображенская площадь</option>
+                                    <option>Пролетарская</option>
+                                    <option>Проспект Вернадского</option>
+                                    <option>Проспект Мира</option>
+                                    <option>Профсоюзная</option>
+                                    <option>Пушкинская</option>
+                                    <option>Пятницкое шоссе</option>
+                                    <option>Речной вокзал</option>
+                                    <option>Рижская</option>
+                                    <option>Римская</option>
+                                    <option>Рязанский проспект</option>
+                                    <option>Савеловская</option>
+                                    <option>Свиблово</option>
+                                    <option>Севастопольская</option>
+                                    <option>Семеновская</option>
+                                    <option>Серпуховская</option>
+                                    <option>Славянский бульвар</option>
+                                    <option>Смоленская (Арбатско-Покровская линия)</option>
+                                    <option>Смоленская (Филевская линия)</option>
+                                    <option>Сокол</option>
+                                    <option>Сокольники</option>
+                                    <option>Спартак</option>
+                                    <option>Спортивная</option>
+                                    <option>Сретенский бульвар</option>
+                                    <option>Строгино</option>
+                                    <option>Студенческая</option>
+                                    <option>Сухаревская</option>
+                                    <option>Сходненская</option>
+                                    <option>Таганская</option>
+                                    <option>Тверская</option>
+                                    <option>Театральная</option>
+                                    <option>Текстильщики</option>
+                                    <option>Теплый стан</option>
+                                    <option>Тимирязевская</option>
+                                    <option>Третьяковская</option>
+                                    <option>Тропарево</option>
+                                    <option>Трубная</option>
+                                    <option>Тульская</option>
+                                    <option>Тургеневская</option>
+                                    <option>Тушинская</option>
+                                    <option>Улица Академика Янгеля</option>
+                                    <option>Улица Горчакова</option>
+                                    <option>Улица Скобелевская</option>
+                                    <option>Улица Старокачаловская</option>
+                                    <option>Улица 1905 года</option>
+                                    <option>Университет</option>
+                                    <option>Филевский парк</option>
+                                    <option>Фили</option>
+                                    <option>Фрунзенская</option>
+                                    <option>Царицыно</option>
+                                    <option>Цветной бульвар</option>
+                                    <option>Черкизовская</option>
+                                    <option>Чертановская</option>
+                                    <option>Чеховская</option>
+                                    <option>Чистые пруды</option>
+                                    <option>Чкаловская</option>
+                                    <option>Шаболовская</option>
+                                    <option>Шипиловская</option>
+                                    <option>Шоссе Энтузиастов</option>
+                                    <option>Щелковская</option>
+                                    <option>Щукинская</option>
+                                    <option>Электрозаводская</option>
+                                    <option>Юго-Западная</option>
+                                    <option>Южная</option>
+                                    <option>Ясенево</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-5">
+                                <label for="time">Время <span style="color: red; ">*</span></label>
+                                <input type="time" class="form-control" id="time" name="time" value="${relation.time}"
+                                       required ${relation.inputType(user.id)}>
+                            </div>
                         </div>
 
-                        <div class="col-md-5">
-                            <label for="fname">Время <span style="color: red; ">*</span></label>
-                            <input type="time" class="form-control" id="time" name="time" value="${relation.time}"
-                                   required ${relation.inputType(user.id)}>
-                        </div>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <label for="date">День<span style="color: red; ">*</span></label>
+                                <input type="date" class="form-control" id="date" name="date"
+                                       value="${relation.getStringDate()}"
+                                       required ${relation.inputType(user.id)}>
+                            </div>
 
-                        <div class="col-md-5">
-                            <label for="fname">День<span style="color: red; ">*</span></label>
-                            <input type="date" class="form-control" id="date" name="date" value="${relation.getStringDate()}"
-                                   required ${relation.inputType(user.id)}>
-                        </div>
-
-                        <div class="col-md-5">
-                            <br>
-
-                            <input type="submit" class="btn ${relation.btnClass(user.id)} col-md-12" value="${relation.btnMessage(user.id)}" ${relation.inputType(user.id)}
-                                    />
+                            <div class="col-md-5">
+                                <input type="submit" name="send" class="btn ${relation.btnClass(user.id)} col-md-12"
+                                       value="${relation.btnMessage(user.id)}" ${relation.inputType(user.id)}
+                                        style="margin-top: 2.5rem;"/>
+                            </div>
                         </div>
                     </form>
                     <div class="col-md-5">
                         <br>
-                        <input id="accept"  type="${relation.btnAcceptType(user.id)}" class="btn btn-success col-md-12" value="Принимаю условия"}
+                        <input id="accept" type="${relation.btnAcceptType(user.id)}" class="btn btn-success col-md-12"
+                               value="Принимаю условия" }
                                 />
                     </div>
                 </div>
@@ -281,7 +286,6 @@
     #{/list}
     </ul>
 </div>
-
 
 
 </body>

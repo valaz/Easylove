@@ -9,11 +9,12 @@
 
     <script>
         $(document).ready(function () {
-            function changeType(divID) {
-                $(divID).hide();
-            }
+            $('.carousel').carousel();
+            $('#carousel_profile div :first-child').addClass('active');
         });
-
+        function changeType(divID) {
+            $(divID).hide();
+        }
     </script>
 
 </head>
@@ -30,25 +31,26 @@
                 <div class="panel-heading">${relation.getAnother(user.id).firstname}
                     , ${relation.getAnother(user.id).getAge()}</div>
                 <div class="panel-body">
-                    <div class="row">
-                        <div style="padding: 50px" class="col-md-offset-2">
-                            <div class="form-group">
-                                <ul class="thumbnails">
-                                    #{list items:relation.getAnother(user.id).pics, as:'picture'}
-                                        <div>
-                                            <div class="col-md-6">
-                                                <img src="@{Admin.getPicture(picture.id)}" class="img-thumbnail"
-                                                     width="auto" height="auto"
-                                                     style="max-height: 400px; max-width:col-md-5 "/></li>
-                                                <input type="hidden" name="picID" id="picID" value="${picture.id}">
-
-                                            </div>
-                                        </div>
-                                    #{/list}
-                                </ul>
-                            </div>
+                    *{TODO уникальность id каруселей}*
+                    <div id="carousel_profile" class="carousel slide" data-ride="carousel" >
+                        <div class="carousel-inner" role="listbox" style="max-height: 40vh">
+                            #{list items:relation.getAnother(user.id).pics, as:'picture'}
+                                <div class="item">
+                                    <img src="@{Admin.getPicture(picture.id)}" style="width: 500%">
+                                </div>
+                            #{/list}
                         </div>
+                        <a class="left carousel-control" href="#carousel_profile" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#carousel_profile" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+
                     </div>
+
 
                     <hr>
                     <form action="@{Admin.changeRelation()}" method="POST">
@@ -269,7 +271,7 @@
                             <div class="col-md-5">
                                 <input type="submit" name="send" class="btn ${relation.btnClass(user.id)} col-md-12"
                                        value="${relation.btnMessage(user.id)}" ${relation.inputType(user.id)}
-                                        style="margin-top: 2.5rem;"/>
+                                       style="margin-top: 2.5rem;"/>
                             </div>
                         </div>
                     </form>

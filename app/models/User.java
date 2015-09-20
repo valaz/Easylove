@@ -146,4 +146,24 @@ public class User extends Model {
         }
         return null;
     }
+
+    public List<Relation> getRawRelations(){
+        List<Relation> rawRelations = new ArrayList<Relation>();
+        for (Relation relation : relations) {
+            if(!relation.ready){
+                rawRelations.add(relation);
+            }
+        }
+        return rawRelations;
+    }
+
+    public List<Relation> getReadyRelations(){
+        List<Relation> readyRelations = new ArrayList<Relation>();
+        for (Relation relation : relations) {
+            if(relation.ready){
+                readyRelations.add(relation);
+            }
+        }
+        return readyRelations;
+    }
 }

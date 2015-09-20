@@ -22,7 +22,7 @@ public class Admin extends Controller {
             User user = User.find("nickname", Security.connected()).first();
             if (user != null) {
                 renderArgs.put("user", user.nickname);
-            }else{
+            } else {
                 session.clear();
                 Application.index();
             }
@@ -30,8 +30,11 @@ public class Admin extends Controller {
     }
 
     public static void index() {
-        User partnerUser = getPartner();
-        render(partnerUser);
+        if (Security.isConnected()) {
+            User user = User.find("nickname", Security.connected()).first();
+            User partnerUser = getPartner();
+            render(partnerUser,user);
+        }
     }
 
     private static User getPartner() {
@@ -41,11 +44,11 @@ public class Admin extends Controller {
             List<User> users = User.findAll();
             List<User> goodUsers = new ArrayList<User>();
             for (User user : users) {
-                if (user.isMan == curUser.wantsMan && user.wantsMan == curUser.isMan && curUser.id != user.id){
+                if (user.isMan == curUser.wantsMan && user.wantsMan == curUser.isMan && curUser.id != user.id) {
                     goodUsers.add(user);
                 }
             }
-            if(goodUsers.size()>0) {
+            if (goodUsers.size() > 0) {
                 Random randomGenerator = new Random();
                 int index = randomGenerator.nextInt(goodUsers.size());
                 User randomGoodUser = goodUsers.get(index);
@@ -63,6 +66,14 @@ public class Admin extends Controller {
     }
 
     public static void schedule() {
+        if (Security.isConnected()) {
+            User user = User.find("nickname", Security.connected()).first();
+            render(user);
+        }
+        render();
+    }
+
+    public static void meetings() {
         if (Security.isConnected()) {
             User user = User.find("nickname", Security.connected()).first();
             render(user);
@@ -122,15 +133,15 @@ public class Admin extends Controller {
         renderBinary(picture.image.get());
     }
 
-    public static void likeUser(Long userID){
+    public static void likeUser(Long userID) {
         if (Security.isConnected()) {
             User user = User.find("nickname", Security.connected()).first();
             User likedUser = User.findById(userID);
-            if( user.doLike(likedUser)) {
+            if (user.doLike(likedUser)) {
                 user.save();
             }
             Relation relation = User.CheckRelation(likedUser, user);
-            if(relation != null){
+            if (relation != null) {
                 relation.save();
                 likedUser.save();
                 user.save();
@@ -139,15 +150,34 @@ public class Admin extends Controller {
         }
     }
 
-    public static void changeRelation(long relationID, String place, String time, String date){
+    public static void changeRelation(long relationID, String place, String time, String date) {
         if (Security.isConnected()) {
             User user = User.find("nickname", Security.connected()).first();
 //            System.out.println(relationID +" | " + place + " | " + time + " | " + date);
             Relation relation = Relation.findById(relationID);
-            relation.change(user.id, place,time,date);
+            relation.change(user.id, place, time, date);
 
             relation.save();
             schedule();
         }
+    }
+
+    public static void acceptRelation(long relationID) {
+        if (Security.isConnected()) {
+            User user = User.find("nickname", Security.connected()).first();
+//            System.out.println(relationID +" | " + place + " | " + time + " | " + date);
+            Relation relation = Relation.findById(relationID);
+            relation.accept();
+            relation.save();
+            schedule();
+        }
+    }
+
+    public static int getRelationCount() {
+        if (Security.isConnected()) {
+            User user = User.find("nickname", Security.connected()).first();
+            return user.getRawRelations().size();
+        }
+        return 0;
     }
 }

@@ -20,7 +20,7 @@ public class Relation extends Model {
     public String time;
     public String status1;
     public String status2;
-    public int lastSend;
+    public boolean ready;
 
     public Relation(User user1, User user2) {
         this.user1 = user1;
@@ -31,7 +31,7 @@ public class Relation extends Model {
         time = null;
         status1 = "ZERO";
         status2 = "ZERO";
-        lastSend = 0;
+        ready = false;
     }
 
     @Override
@@ -103,86 +103,85 @@ public class Relation extends Model {
         }
     }
 
+    public void accept(){
+        status1 = "DONE";
+        status2 = "DONE";
+        ready = true;
+    }
     public String inputType(Long userID){
-        int curNum = getCurNum(userID);
-        if(curNum == 1){
-            if(status1.equals("WAIT")){
-                return "disabled";
-            }else{
-                return "";
-            }
+        String curStatus = getStatus(userID);
+        if(curStatus.equals("WAIT") || curStatus.equals("DONE") ){
+            return "disabled";
         }else{
-            if(status2.equals("WAIT")){
-                return "disabled";
+            return "";
+        }
+    }
+
+
+    public String btnMessage(Long userID){
+        String curStatus = getStatus(userID);
+        if(curStatus.equals("WAIT")){
+            return "Ждите ответа";
+        }else{
+            if(curStatus.equals("ANSWER") ) {
+                return "Отправить ответ";
             }else{
-                return "";
+                if(curStatus.equals("DONE")){
+                    return "Встреча запланирована";
+                }else {
+                    return "Предложить условия";
+                }
+            }
+        }
+
+    }
+    public String btnClass(Long userID){
+        String curStatus = getStatus(userID);
+        if(curStatus.equals("WAIT")){
+            return "btn-info";
+        }else{
+            if(curStatus.equals("ANSWER") ) {
+                return "btn-warning";
+            }else{
+                if(curStatus.equals("DONE")){
+                    return "btn-success";
+                }else {
+                    return "btn-default";
+                }
             }
         }
     }
 
-    public String btnMessage(Long userID){
-        int curNum = getCurNum(userID);
-        if(curNum == 1){
-            if(status1.equals("WAIT")){
-                return "Ждите ответа";
-            }else{
-                if(status1.equals("ANSWER") ) {
-                    return "Отправить ответ";
-                }else{
-                    return "Предложить условия";
-                }
-            }
+    public String panelClass(Long userID){
+        String curStatus = getStatus(userID);
+        if(curStatus.equals("WAIT")){
+            return "panel-info";
         }else{
-            if(status2.equals("WAIT")){
-                return "Ждите ответа";
+            if(curStatus.equals("ANSWER") ) {
+                return "panel-warning";
             }else{
-                if(status2.equals("ANSWER") ) {
-                    return "Отправить ответ";
-                }else{
-                    return "Предложить условия";
-                }
-            }
-        }
-    }
-    public String btnClass(Long userID){
-        int curNum = getCurNum(userID);
-        if(curNum == 1){
-            if(status1.equals("WAIT")){
-                return "btn-info";
-            }else{
-                if(status1.equals("ANSWER") ) {
-                    return "btn-warning";
-                }else{
-                    return "btn-default";
-                }
-            }
-        }else{
-            if(status2.equals("WAIT")){
-                return "btn-info";
-            }else{
-                if(status2.equals("ANSWER") ) {
-                    return "btn-warning";
-                }else{
-                    return "btn-default";
+                if(curStatus.equals("DONE")){
+                    return "panel-success";
+                }else {
+                    return "panel-default";
                 }
             }
         }
     }
 
     public String btnAcceptType(Long userID){
-        int curNum = getCurNum(userID);
-        if(curNum == 1){
-            if(status1.equals("ANSWER")){
+        String curStatus = getStatus(userID);
+        if(curStatus.equals("ANSWER")){
                 return "submit";
             }else{
                 return "hidden";
             }
+    }
+    public String getStatus(Long userID){
+        if(userID == user1.id){
+            return status1;
         }else{
-            if(status2.equals("ANSWER")){
-                return "submit";
-            }else{
-                return "hidden";
-            }
+            return status2;
         }
     }
 }

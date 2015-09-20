@@ -35,7 +35,7 @@
         <div class="carousel-inner" role="listbox">
         #{list items:partnerUser.pics, as:'picture'}
             <div class="item">
-                <img src="@{Admin.getPicture(picture.id)}" style="width: 500%">
+                <img class="img-responsive center-block" src="@{Admin.getPicture(picture.id)}"  style="max-height: 500px;">
             </div>
         #{/list}
         </div>

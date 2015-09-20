@@ -37,11 +37,12 @@
     <h1 class="row col-lg-offset-5  col-xs-offset-3">Профиль</h1>
     <hr>
 
-    <div id="carousel_profile" class="carousel slide" data-ride="carousel">
+    <div id="carousel_profile" class="carousel slide" data-ride="carousel" >
         <div class="carousel-inner" role="listbox" >
         #{list items:user.pics, as:'picture'}
             <div class="item">
-                <img src="@{Admin.getPicture(picture.id)}" style="width: 500%">
+
+                <img  class="img-responsive center-block"  src="@{Admin.getPicture(picture.id)}" style="max-height: 500px;width: auto; height: auto;">
 
             <form id="deleteDay" action="@{Admin.deletePicture()}" method="POST">
                 <input type="hidden" name="picID" id="picID" value="${picture.id}">
@@ -69,13 +70,12 @@
 
     <hr>
 
-#{form @Admin.uploadPicture(), enctype:'multipart/form-data'}
-*{<form id="image_upload" action="@{Admin.uploadPicture()}" method="post" enctype="multipart/form-data">}*
+*{#{form @Admin.uploadPicture(), enctype:'multipart/form-data'}}*
+<form id="image_upload" action="@{Admin.uploadPicture()}" method="post" enctype="multipart/form-data">
     <input id="fileInput" type="file" name="picture.image" style="display: none"/>
     <input id="fileSubmit" type="submit" name="submit" value="Save" style="display: none"/>
-
-*{</form>}*
-#{/form}
+</form>
+*{#{/form}}*
     <script>
         function imageUpload(fileInputId, fileSubmitId) {
             var imageInputForm = $('#' + fileInputId);

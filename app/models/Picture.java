@@ -9,4 +9,5 @@ import javax.persistence.Entity;
 @Entity
 public class Picture extends Model {
     public Blob image;
+
 }

@@ -36,9 +36,9 @@
 <body>
 
 <div class="container">
-    <h2>Вы оценили друг друга</h2>
+    <h2>Ваши запланированные встречи</h2>
     <ul class="list-group">
-    #{list items:user.getRawRelations(), as:'relation'}
+    #{list items:user.getReadyRelations(), as:'relation'}
         <div class="col-md-12 col-lg-6">
             <div class="panel ${relation.panelClass(user.id)}">
                 <div class="panel-heading"><b>${relation.getAnother(user.id).firstname}</b>

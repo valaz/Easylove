@@ -3,14 +3,12 @@
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/css/bootstrap-datepicker.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/js/bootstrap-datepicker.js"></script>
-    <script>
-        $('.datepicker').datepicker()
-    </script>
 
     <script>
         $(document).ready(function () {
+            $('.datepicker').datepicker();
             $('.carousel').carousel();
-            $('#carousel_profile div :first-child').addClass('active');
+            $('.carousel div :first-child').addClass('active');
         });
         function changeType(divID) {
             $(divID).hide();
@@ -32,7 +30,7 @@
                     , ${relation.getAnother(user.id).getAge()}</div>
                 <div class="panel-body">
                     *{TODO уникальность id каруселей}*
-                    <div id="carousel_profile" class="carousel slide" data-ride="carousel" >
+                    <div id="carousel${relation.getAnother(user.id).id}" class="carousel slide" data-ride="carousel" >
                         <div class="carousel-inner" role="listbox" style="max-height: 40vh">
                             #{list items:relation.getAnother(user.id).pics, as:'picture'}
                                 <div class="item">
@@ -40,11 +38,11 @@
                                 </div>
                             #{/list}
                         </div>
-                        <a class="left carousel-control" href="#carousel_profile" role="button" data-slide="prev">
+                        <a class="left carousel-control" href="#carousel${relation.getAnother(user.id).id}" role="button" data-slide="prev">
                             <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                             <span class="sr-only">Previous</span>
                         </a>
-                        <a class="right carousel-control" href="#carousel_profile" role="button" data-slide="next">
+                        <a class="right carousel-control" href="#carousel${relation.getAnother(user.id).id}" role="button" data-slide="next">
                             <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                             <span class="sr-only">Next</span>
                         </a>

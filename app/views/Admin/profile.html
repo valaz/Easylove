@@ -7,7 +7,9 @@
     </script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $('.carousel').carousel();
+            $('.carousel').carousel({
+                interval: false
+            });
             $('#carousel_profile div :first-child').addClass('active');
         });
 
@@ -81,7 +83,6 @@
             imageInputForm.change(function () {
                 $('#' + fileSubmitId).click();
             });
-
         }
         ;
     </script>

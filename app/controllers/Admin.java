@@ -180,4 +180,21 @@ public class Admin extends Controller {
         }
         return 0;
     }
+
+
+    public static void deleteRelation(long relationID) {
+        System.out.println("cur del relation: " + relationID);
+        if (Security.isConnected()) {
+            Relation relation = Relation.findById(relationID);
+            System.out.println("Delete relation: " + relation.toString());
+            User user1 = relation.user1;
+            User user2 = relation.user2;
+            user1.relations.remove(relation);
+            user2.relations.remove(relation);
+            user1.save();
+            user2.save();
+            relation.delete();
+        }
+        schedule();
+    }
 }

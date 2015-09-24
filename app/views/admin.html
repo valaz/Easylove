@@ -42,8 +42,11 @@
                         <li class="${request.controller == 'Relations' ? 'selected' : ''}">
                             <a href="@{Relations.list()}"><span style="color: red; ">Отношения</span></a>
                         </li>
-                        <li class="${request.controller == 'Relations' ? 'selected' : ''}">
+                        <li class="${request.controller == 'Pictures' ? 'selected' : ''}">
                             <a href="@{Pictures.list()}"><span style="color: red; ">Фотографии</span></a>
+                        </li>
+                        <li class="${request.controller == 'Locations' ? 'selected' : ''}">
+                            <a href="@{Locations.list()}"><span style="color: red; ">Локации</span></a>
                         </li>
                     </ul>
                 </li>

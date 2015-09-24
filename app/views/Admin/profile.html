@@ -37,21 +37,22 @@
     <h1 class="row col-lg-offset-5  col-xs-offset-3">Профиль</h1>
     <hr>
 
-    <div id="carousel_profile" class="carousel slide" data-ride="carousel" >
-        <div class="carousel-inner" role="listbox" >
+    <div id="carousel_profile" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner" role="listbox">
         #{list items:user.pics, as:'picture'}
             <div class="item">
 
-                <img  class="img-responsive center-block"  src="@{Admin.getPicture(picture.id)}" style="max-height: 500px;width: auto; height: auto;">
+                <img class="img-responsive center-block" src="@{Admin.getPicture(picture.id)}"
+                     style="max-height: 500px;width: auto; height: auto;">
 
-            <form id="deleteDay" action="@{Admin.deletePicture()}" method="POST">
-                <input type="hidden" name="picID" id="picID" value="${picture.id}">
-                <a class="bottom carousel-control" href="#carousel_profile" role="button">
+                <form id="deleteDay" action="@{Admin.deletePicture()}" method="POST">
+                    <input type="hidden" name="picID" id="picID" value="${picture.id}">
+                    <a class="bottom carousel-control" href="#carousel_profile" role="button">
 
                     <span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"
                           onclick="$('#deleteDay').submit();"></span>
-                </a>
-            </form>
+                    </a>
+                </form>
             </div>
         #{/list}
         </div>
@@ -71,10 +72,10 @@
     <hr>
 
 *{#{form @Admin.uploadPicture(), enctype:'multipart/form-data'}}*
-<form id="image_upload" action="@{Admin.uploadPicture()}" method="post" enctype="multipart/form-data">
-    <input id="fileInput" type="file" name="picture.image" style="display: none"/>
-    <input id="fileSubmit" type="submit" name="submit" value="Save" style="display: none"/>
-</form>
+    <form id="image_upload" action="@{Admin.uploadPicture()}" method="post" enctype="multipart/form-data">
+        <input id="fileInput" type="file" name="picture.image" style="display: none"/>
+        <input id="fileSubmit" type="submit" name="submit" value="Save" style="display: none"/>
+    </form>
 *{#{/form}}*
     <script>
         function imageUpload(fileInputId, fileSubmitId) {
@@ -88,8 +89,9 @@
     </script>
 
 </div>
-<div class="row" >
-    <button class="btn btn-success btn-lg col-md-2 col-md-offset-5 col-xs-offset-3"  onclick="imageUpload('fileInput','fileSubmit');"> <span
+<div class="row">
+    <button class="btn btn-success btn-lg col-md-2 col-md-offset-5 col-xs-offset-3"
+            onclick="imageUpload('fileInput','fileSubmit');"> <span
             class="glyphicon glyphicon-save" aria-hidden="true"></span> Добавить фото
     </button>
 </div>
@@ -97,10 +99,10 @@
 
 <div class="container">
     <div class="row">
-        <div style="padding: 50px" class="col-md-offset-2">
+        <div style="padding: 50px" class="">
             <div class="form-group">
                 <div class="row">
-                    <div class="col-md-5">
+                    <div class="col-md-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">Логин</div>
                             <div class="panel-body">
@@ -108,7 +110,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">Имя</div>
                             <div class="panel-body">
@@ -119,15 +121,15 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-5">
+                    <div class="col-md-6">
                         <div class="panel panel-default">
-                            <div class="panel-heading">Телефон</div>
+                            <div class="panel-heading">Дата рождения</div>
                             <div class="panel-body">
-                            ${user.phone}
+                            ${user.getDate()}
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">Город</div>
                             <div class="panel-body">
@@ -136,26 +138,6 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="row">
-                    <div class="col-md-5">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">Дата рождения</div>
-                            <div class="panel-body">
-                            ${user.getDate()}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">О себе</div>
-                            <div class="panel-body">
-                            ${user.selfinfo}!
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>

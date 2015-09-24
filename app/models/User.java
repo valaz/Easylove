@@ -13,18 +13,13 @@ import java.util.*;
 
 @Entity
 public class User extends Model {
-    public String email;
     public String nickname;
-    public String phone;
     public String firstname;
     public boolean isMan;
     public boolean wantsMan;
     public Date birthday;
     public String city;
     public String password;
-    public String selfinfo;
-//    public long[]  pictures;
-//    public long[]  timeranges;
 
 
     @OneToMany
@@ -39,17 +34,15 @@ public class User extends Model {
 
     public boolean isAdmin;
 
-    public User(String email, String nickname, String phone, String firstname, boolean isMan, boolean wantsMan, Date birthday, String city, String password) {
-        this.email = email;
+    public User( String nickname, String firstname, boolean isMan, boolean wantsMan, Date birthday, String city, String password) {
         this.nickname = nickname;
-        this.phone = phone;
         this.firstname = firstname;
         this.isMan = isMan;
         this.wantsMan = wantsMan;
         this.birthday = birthday;
         this.city = city;
         this.password = password;
-        this.isAdmin = true;
+        this.isAdmin = false;
 
         pics = new ArrayList<Picture>();
         ranges = new ArrayList<Timerange>();

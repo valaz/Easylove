@@ -29,6 +29,15 @@
 
         }
     </script>
+    <style>
+        .alignleft {
+            float: left;
+        }
+
+        .alignright {
+            float: right;
+        }
+    </style>
 
 </head>
 
@@ -41,8 +50,23 @@
     #{list items:user.getRawRelations(), as:'relation'}
         <div class="col-md-12 col-lg-6">
             <div class="panel ${relation.panelClass(user.id)}">
-                <div class="panel-heading"><b>${relation.getAnother(user.id).firstname}</b>
-                    , ${relation.getAnother(user.id).getAge()}</div>
+                <div class="panel-heading">
+
+                    <p class="alignleft"><b>${relation.getAnother(user.id).firstname}</b>
+                        , ${relation.getAnother(user.id).getAge()}</p>
+
+                    <form id="deleteRelation${relation.id}" action="@{Admin.deleteRelation()}" method="POST">
+                        <input type="hidden" name="relationID" id="relationID" value="${relation.id}">
+                    <div class="alignright">
+                        <a class="btn" style="padding: 0px">
+                    <span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"
+                          onclick="$('#deleteRelation${relation.id}').submit();"></span>
+                        </a>
+                    </div>
+                    </form>
+
+                    <br>
+                </div>
                 <div class="panel-body">
                 *{TODO уникальность id каруселей}*
                     <div id="carousel${relation.getAnother(user.id).id}" class="carousel slide" data-ride="carousel">
@@ -76,7 +100,7 @@
                         <input type="hidden" name="relationID" id="relationID" value="${relation.id}" required>
 
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-sm-6">
                                 <label for="place">Место <span style="color: red; ">*</span></label>
                                 <select class="form-control" id="place" name="place"
                                         required  ${relation.inputType(user.id)}>
@@ -271,7 +295,7 @@
                                 </select>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-sm-6">
                                 <label for="time">Время <span style="color: red; ">*</span></label>
                                 <input type="time" class="form-control" id="time" name="time" value="${relation.time}"
                                        required ${relation.inputType(user.id)}>
@@ -279,14 +303,14 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-sm-6">
                                 <label for="date">День<span style="color: red; ">*</span></label>
                                 <input type="date" class="form-control" id="date" name="date"
                                        value="${relation.getStringDate()}"
                                        required ${relation.inputType(user.id)}>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-sm-6">
                                 <input type="submit" name="send"
                                        class="btn ${relation.btnClass(user.id)} col-md-12 col-xs-12"
                                        value="${relation.btnMessage(user.id)}" ${relation.inputType(user.id)}
@@ -297,8 +321,9 @@
                     <form action="@{Admin.acceptRelation()}" method="POST">
 
                         <input type="hidden" name="relationID" id="relationID" value="${relation.id}" required>
+
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-12 col-sm-12">
                                 <br>
                                 <input id="accept" type="${relation.btnAcceptType(user.id)}"
                                        class="btn btn-success col-md-12 col-xs-12"

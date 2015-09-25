@@ -47,16 +47,17 @@
                             success: function (correct) {
 //                                alert(correct);
                                 if (correct) {
-                                    alert(checkLogin() + ' | ' + checkPassword())
+
+                                    var g = $('input[name=gender]:checked', '#userForm').val();
+                                    var sg = $('input[name=secondGender]:checked', '#userForm').val();
+
+//                                    var g = document.getElementById("gender").value;
+//                                    var sg = document.getElementById("secondGender").value;
                                     if(!((checkLogin() == 'true') && checkPassword())){
                                         return false;
                                     }
-
 //                                    var g = $("#gender").val();
 //                                    var sg = $("#secondGender").val();
-
-                                    var g = document.getElementById("gender").value;
-                                    var sg = document.getElementById("secondGender").value;
                                     $.ajax({
                                     url: addUser({
                                         nname: data["nname"],
@@ -220,7 +221,7 @@
                     <script>
                         $('#dateform div').datepicker({
                             format: "dd/mm/yyyy",
-                            endDate: "1/09/2003",
+                            endDate: "1/09/1997",
                             startView: 2,
                             clearBtn: true,
                             language: "ru",
@@ -234,7 +235,7 @@
                         <select class="form-control" id="city" name="city"
                                 required>
                             #{list items:cities, as:'city'}
-                            <option>${city}</option>
+                            <option value="${city}">${city}</option>
                             #{/list}
                         </select>
                     *{<input type="text" class="form-control" id="city" name="city"}*
@@ -280,7 +281,7 @@
                 <script>
                     $('#bdate').datepicker({
                         format: "dd/mm/yyyy",
-                        endDate: "1/09/2003",
+                        endDate: "1/09/1997",
                         startView: 2,
                         clearBtn: true,
                         language: "ru",

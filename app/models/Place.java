@@ -12,8 +12,13 @@ public class Place extends Model {
     @ManyToOne
     public Location location;
 
+
     @Override
     public String toString() {
-        return this.id + " : " + name + " | " + location.name;
+        if(location != null) {
+            return this.id + " : " + name + " | " + location.name;
+        }else{
+            return this.id + " : " + name + " | ";
+        }
     }
 }

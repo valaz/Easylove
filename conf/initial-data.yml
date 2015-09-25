@@ -3,7 +3,7 @@ User(azat):
     firstname: "Азат"
     isMan: true
     wantsMan: false
-    city: Москва
+    city: msk
     password: v
     birthday: 1993-01-20
     isAdmin:  true
@@ -13,7 +13,7 @@ User(jeka):
     firstname: "Евгений"
     isMan: true
     wantsMan: false
-    city: Москва
+    city: msk
     password: j
     birthday: 1992-10-20
     isAdmin:  false
@@ -23,7 +23,7 @@ User(kate):
     firstname: "Катя"
     isMan: false
     wantsMan: true
-    city: Москва
+    city: msk
     password: k
     birthday: 1995-05-13
     isAdmin:  false
@@ -33,7 +33,7 @@ User(anna):
     firstname: "Аня"
     isMan: false
     wantsMan: true
-    city: Москва
+    city: msk
     password: a
     birthday: 1985-05-26
     isAdmin:  false

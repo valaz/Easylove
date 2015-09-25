@@ -33,7 +33,11 @@ public class Admin extends Controller {
         if (Security.isConnected()) {
             User user = User.find("nickname", Security.connected()).first();
             User partnerUser = getPartner();
-            render(partnerUser,user);
+            boolean partner = false;
+            if (partnerUser != null) {
+                partner = true;
+            }
+            render(partner, partnerUser, user);
         }
     }
 
@@ -44,7 +48,7 @@ public class Admin extends Controller {
             List<User> users = User.findAll();
             List<User> goodUsers = new ArrayList<User>();
             for (User user : users) {
-                if (user.isMan == curUser.wantsMan && user.wantsMan == curUser.isMan && curUser.id != user.id) {
+                if (user.isMan == curUser.wantsMan && user.wantsMan == curUser.isMan && curUser.id != user.id && user.city == curUser.city && !user.pics.isEmpty()) {
                     goodUsers.add(user);
                 }
             }

@@ -5,6 +5,7 @@ import play.db.jpa.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -18,7 +19,9 @@ public class User extends Model {
     public boolean isMan;
     public boolean wantsMan;
     public Date birthday;
-    public String city;
+    @ManyToOne
+    public Location city;
+
     public String password;
 
 
@@ -34,7 +37,7 @@ public class User extends Model {
 
     public boolean isAdmin;
 
-    public User( String nickname, String firstname, boolean isMan, boolean wantsMan, Date birthday, String city, String password) {
+    public User( String nickname, String firstname, boolean isMan, boolean wantsMan, Date birthday, Location city, String password) {
         this.nickname = nickname;
         this.firstname = firstname;
         this.isMan = isMan;

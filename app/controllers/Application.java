@@ -32,7 +32,6 @@ public class Application extends Controller {
     public static void signup() {
         String randomID = Codec.UUID();
         List<String> cities = getCities();
-        System.out.printf("go signup");
         render(randomID, cities);
     }
     public static void signin() {
@@ -58,8 +57,9 @@ public class Application extends Controller {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-        User newUser = new User(nname,fname,isMan,wantsMan,birthday,city,password1);
+        Location location = Location.find("name", city).first();;
+        System.out.println("Location in:" + location.name);
+        User newUser = new User(nname,fname,isMan,wantsMan,birthday,location,password1);
         newUser.save();
         try {
             Secure.authenticate(nname,password1,true);

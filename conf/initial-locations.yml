@@ -1,9 +1,384 @@
-Place(p1):
-    name: "м. Тульская"
+Place(msk1):
+    name:  м. Авиамоторная
+Place(msk2):
+    name:  м. Автозаводская
+Place(msk3):
+    name:  м. Академическая
+Place(msk4):
+    name:  м. Александровский сад
+Place(msk5):
+    name:  м. Алексеевская
+Place(msk6):
+    name:  м. Алма-Атинская
+Place(msk7):
+    name:  м. Алтуфьево
+Place(msk8):
+    name:  м. Аннино
+Place(msk9):
+    name:  м. Арбатская (Арбатско-Покровская линия)
+Place(msk10):
+    name:  м. Арбатская (Филевская линия)
+Place(msk11):
+    name:  м. Аэропорт
+Place(msk12):
+    name:  м. Бабушкинская
+Place(msk13):
+    name:  м. Багратионовская
+Place(msk14):
+    name:  м. Баррикадная
+Place(msk15):
+    name:  м. Бауманская
+Place(msk16):
+    name:  м. Беговая
+Place(msk17):
+    name:  м. Белорусская
+Place(msk18):
+    name:  м. Беляево
+Place(msk19):
+    name:  м. Бибирево
+Place(msk20):
+    name:  м. Библиотека имени Ленина
+Place(msk21):
+    name:  м. Битцевский парк
+Place(msk22):
+    name:  м. Борисово
+Place(msk23):
+    name:  м. Боровицкая
+Place(msk24):
+    name:  м. Ботанический сад
+Place(msk25):
+    name:  м. Братиславская
+Place(msk26):
+    name:  м. Бульвар адмирала Ушакова
+Place(msk27):
+    name:  м. Бульвар Дмитрия Донского
+Place(msk28):
+    name:  м. Бульвар Рокоссовского
+Place(msk29):
+    name:  м. Бунинская аллея
+Place(msk30):
+    name:  м. Варшавская
+Place(msk31):
+    name:  м. ВДНХ
+Place(msk32):
+    name:  м. Владыкино
+Place(msk33):
+    name:  м. Водный стадион
+Place(msk34):
+    name:  м. Войковская
+Place(msk35):
+    name:  м. Волгоградский проспект
+Place(msk36):
+    name:  м. Волжская
+Place(msk37):
+    name:  м. Волоколамская
+Place(msk38):
+    name:  м. Воробьевы горы
+Place(msk39):
+    name:  м. Выставочная
+Place(msk40):
+    name:  м. Выхино
+Place(msk41):
+    name:  м. Деловой центр
+Place(msk42):
+    name:  м. Динамо
+Place(msk43):
+    name:  м. Дмитровская
+Place(msk44):
+    name:  м. Добрынинская
+Place(msk45):
+    name:  м. Домодедовская
+Place(msk46):
+    name:  м. Достоевская
+Place(msk47):
+    name:  м. Дубровка
+Place(msk48):
+    name:  м. Жулебино
+Place(msk49):
+    name:  м. Зябликово
+Place(msk50):
+    name:  м. Измайловская
+Place(msk51):
+    name:  м. Калужская
+Place(msk52):
+    name:  м. Кантемировская
+Place(msk53):
+    name:  м. Каховская
+Place(msk54):
+    name:  м. Каширская
+Place(msk55):
+    name:  м. Киевская
+Place(msk56):
+    name:  м. Китай-город
+Place(msk57):
+    name:  м. Кожуховская
+Place(msk58):
+    name:  м. Коломенская
+Place(msk59):
+    name:  м. Комсомольская
+Place(msk60):
+    name:  м. Коньково
+Place(msk61):
+    name:  м. Красногвардейская
+Place(msk62):
+    name:  м. Краснопресненская
+Place(msk63):
+    name:  м. Красносельская
+Place(msk64):
+    name:  м. Красные ворота
+Place(msk65):
+    name:  м. Крестьянская застава
+Place(msk66):
+    name:  м. Кропоткинская
+Place(msk67):
+    name:  м. Крылатское
+Place(msk68):
+    name:  м. Кузнецкий мост
+Place(msk69):
+    name:  м. Кузьминки
+Place(msk70):
+    name:  м. Кунцевская
+Place(msk71):
+    name:  м. Курская
+Place(msk72):
+    name:  м. Кутузовская
+Place(msk73):
+    name:  м. Ленинский проспект
+Place(msk74):
+    name:  м. Лермонтовский проспект
+Place(msk75):
+    name:  м. Лесопарковая
+Place(msk76):
+    name:  м. Лубянка
+Place(msk77):
+    name:  м. Люблино
+Place(msk78):
+    name:  м. Марксистская
+Place(msk79):
+    name:  м. Марьина роща
+Place(msk80):
+    name:  м. Марьино
+Place(msk81):
+    name:  м. Маяковская
+Place(msk82):
+    name:  м. Медведково
+Place(msk83):
+    name:  м. Международная
+Place(msk84):
+    name:  м. Менделеевская
+Place(msk85):
+    name:  м. Митино
+Place(msk86):
+    name:  м. Молодежная
+Place(msk87):
+    name:  м. Монорельса Выставочный центр
+Place(msk88):
+    name:  м. Монорельса Телецентр
+Place(msk89):
+    name:  м. Монорельса Улица Академика Королева
+Place(msk90):
+    name:  м. Монорельса Улица Милашенкова
+Place(msk91):
+    name:  м. Монорельса Улица Сергея Эйзенштейна
+Place(msk92):
+    name:  м. Монорельсовой дороги Тимирязевская
+Place(msk93):
+    name:  м. Мякинино
+Place(msk94):
+    name:  м. Нагатинская
+Place(msk95):
+    name:  м. Нагорная
+Place(msk96):
+    name:  м. Нахимовский проспект
+Place(msk97):
+    name:  м. Новогиреево
+Place(msk98):
+    name:  м. Новокосино
+Place(msk99):
+    name:  м. Новокузнецкая
+Place(msk100):
+    name:  м. Новослободская
+Place(msk101):
+    name:  м. Новоясеневская
+Place(msk102):
+    name:  м. Новые Черемушки
+Place(msk103):
+    name:  м. Октябрьская
+Place(msk104):
+    name:  м. Октябрьское поле
+Place(msk105):
+    name:  м. Орехово
+Place(msk106):
+    name:  м. Отрадное
+Place(msk107):
+    name:  м. Охотныйряд
+Place(msk108):
+    name:  м. Павелецкая
+Place(msk109):
+    name:  м. Парк культуры
+Place(msk110):
+    name:  м. Парк Победы
+Place(msk111):
+    name:  м. Партизанская
+Place(msk112):
+    name:  м. Первомайская
+Place(msk113):
+    name:  м. Перово
+Place(msk114):
+    name:  м. Петровско-Разумовская
+Place(msk115):
+    name:  м. Печатники
+Place(msk116):
+    name:  м. Пионерская
+Place(msk117):
+    name:  м. Планерная
+Place(msk118):
+    name:  м. Площадь Ильича
+Place(msk119):
+    name:  м. Площадь Революции
+Place(msk120):
+    name:  м. Полежаевская
+Place(msk121):
+    name:  м. Полянка
+Place(msk122):
+    name:  м. Пражская
+Place(msk123):
+    name:  м. Преображенская площадь
+Place(msk124):
+    name:  м. Пролетарская
+Place(msk125):
+    name:  м. Проспект Вернадского
+Place(msk126):
+    name:  м. Проспект Мира
+Place(msk127):
+    name:  м. Профсоюзная
+Place(msk128):
+    name:  м. Пушкинская
+Place(msk129):
+    name:  м. Пятницкое шоссе
+Place(msk130):
+    name:  м. Речной вокзал
+Place(msk131):
+    name:  м. Рижская
+Place(msk132):
+    name:  м. Римская
+Place(msk133):
+    name:  м. Рязанский проспект
+Place(msk134):
+    name:  м. Савеловская
+Place(msk135):
+    name:  м. Свиблово
+Place(msk136):
+    name:  м. Севастопольская
+Place(msk137):
+    name:  м. Семеновская
+Place(msk138):
+    name:  м. Серпуховская
+Place(msk139):
+    name:  м. Славянский бульвар
+Place(msk140):
+    name:  м. Смоленская (Арбатско-Покровская линия)
+Place(msk141):
+    name:  м. Смоленская (Филевская линия)
+Place(msk142):
+    name:  м. Сокол
+Place(msk143):
+    name:  м. Сокольники
+Place(msk144):
+    name:  м. Спартак
+Place(msk145):
+    name:  м. Спортивная
+Place(msk146):
+    name:  м. Сретенский бульвар
+Place(msk147):
+    name:  м. Строгино
+Place(msk148):
+    name:  м. Студенческая
+Place(msk149):
+    name:  м. Сухаревская
+Place(msk150):
+    name:  м. Сходненская
+Place(msk151):
+    name:  м. Таганская
+Place(msk152):
+    name:  м. Тверская
+Place(msk153):
+    name:  м. Театральная
+Place(msk154):
+    name:  м. Текстильщики
+Place(msk155):
+    name:  м. Теплый стан
+Place(msk156):
+    name:  м. Тимирязевская
+Place(msk157):
+    name:  м. Третьяковская
+Place(msk158):
+    name:  м. Тропарево
+Place(msk159):
+    name:  м. Трубная
+Place(msk160):
+    name:  м. Тульская
+Place(msk161):
+    name:  м. Тургеневская
+Place(msk162):
+    name:  м. Тушинская
+Place(msk163):
+    name:  м. Улица Академика Янгеля
+Place(msk164):
+    name:  м. Улица Горчакова
+Place(msk165):
+    name:  м. Улица Скобелевская
+Place(msk166):
+    name:  м. Улица Старокачаловская
+Place(msk167):
+    name:  м. Улица 1905 года
+Place(msk168):
+    name:  м. Университет
+Place(msk169):
+    name:  м. Филевский парк
+Place(msk170):
+    name:  м. Фили
+Place(msk171):
+    name:  м. Фрунзенская
+Place(msk172):
+    name:  м. Царицыно
+Place(msk173):
+    name:  м. Цветной бульвар
+Place(msk174):
+    name:  м. Черкизовская
+Place(msk175):
+    name:  м. Чертановская
+Place(msk176):
+    name:  м. Чеховская
+Place(msk177):
+    name:  м. Чистые пруды
+Place(msk178):
+    name:  м. Чкаловская
+Place(msk179):
+    name:  м. Шаболовская
+Place(msk180):
+    name:  м. Шипиловская
+Place(msk181):
+    name:  м. Шоссе Энтузиастов
+Place(msk182):
+    name:  м. Щелковская
+Place(msk183):
+    name:  м. Щукинская
+Place(msk184):
+    name:  м. Электрозаводская
+Place(msk185):
+    name:  м. Юго-Западная
+Place(msk186):
+    name:  м. Южная
+Place(msk187):
+    name:  м. Ясенево
+
+
+
 
 Location(msk):
     name: "Москва"
-    places: [p1]
+    places: [msk1,msk2,msk3,msk4,msk5,msk6,msk7,msk8,msk9,msk10,msk11,msk12,msk13,msk14,msk15,msk16,msk17,msk18,msk19,msk20,msk21,msk22,msk23,msk24,msk25,msk26,msk27,msk28,msk29,msk30,msk31,msk32,msk33,msk34,msk35,msk36,msk37,msk38,msk39,msk40,msk41,msk42,msk43,msk44,msk45,msk46,msk47,msk48,msk49,msk50,msk51,msk52,msk53,msk54,msk55,msk56,msk57,msk58,msk59,msk60,msk61,msk62,msk63,msk64,msk65,msk66,msk67,msk68,msk69,msk70,msk71,msk72,msk73,msk74,msk75,msk76,msk77,msk78,msk79,msk80,msk81,msk82,msk83,msk84,msk85,msk86,msk87,msk88,msk89,msk90,msk91,msk92,msk93,msk94,msk95,msk96,msk97,msk98,msk99,msk100,msk101,msk102,msk103,msk104,msk105,msk106,msk107,msk108,msk109,msk110,msk111,msk112,msk113,msk114,msk115,msk116,msk117,msk118,msk119,msk120,msk121,msk122,msk123,msk124,msk125,msk126,msk127,msk128,msk129,msk130,msk131,msk132,msk133,msk134,msk135,msk136,msk137,msk138,msk139,msk140,msk141,msk142,msk143,msk144,msk145,msk146,msk147,msk148,msk149,msk150,msk151,msk152,msk153,msk154,msk155,msk156,msk157,msk158,msk159,msk160,msk161,msk162,msk163,msk164,msk165,msk166,msk167,msk168,msk169,msk170,msk171,msk172,msk173,msk174,msk175,msk176,msk177,msk178,msk179,msk180,msk181,msk182,msk183,msk184,msk185,msk186,msk187]
 
 Location(spb):
     name: "Санкт-Петербург"

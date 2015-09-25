@@ -11,10 +11,6 @@ import java.util.List;
 public class Bootstrap  extends Job {
     public void doJob() {
         // Check if the database is empty
-        if(User.count() == 0) {
-            System.out.println("init Users");
-            Fixtures.loadModels("initial-data.yml");
-        }
         if(Location.count() == 0){
             System.out.println("init Locations");
             Fixtures.loadModels("initial-locations.yml");
@@ -23,6 +19,10 @@ public class Bootstrap  extends Job {
             for (Location location : all) {
                 location.correctPlaces();
             }
+        }
+        if(User.count() == 0) {
+            System.out.println("init Users");
+            Fixtures.loadModels("initial-data.yml");
         }
     }
 }

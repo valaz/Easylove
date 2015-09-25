@@ -2,7 +2,6 @@ package controllers;
 
 import models.Picture;
 import models.Relation;
-import models.Timerange;
 import models.User;
 import play.mvc.Before;
 import play.mvc.Controller;
@@ -85,6 +84,33 @@ public class Admin extends Controller {
         render();
     }
 
+    @Check("admin")
+    public static void statistics() {
+        if (Security.isConnected()) {
+            User user = User.find("nickname", Security.connected()).first();
+            List<User> users = User.findAll();
+            List<Relation> relations = Relation.findAll();
+            int userCount = 0;
+            int userCountPhoto = 0;
+            int relationCount = 0;
+            int relationCountReady = 0;
+
+            userCount = users.size();
+            relationCount = relations.size();
+            for (User user1 : users) {
+                if(!user1.pics.isEmpty()){
+                    userCountPhoto += 1;
+                }
+            }
+            for (Relation relation : relations) {
+                if(relation.ready){
+                    relationCountReady += 1;
+                }
+            }
+            render(user, userCount,userCountPhoto,relationCount,relationCountReady);
+        }
+        render();
+    }
     public static void uploadPicture(Picture picture) {
         if (picture.image != null) {
             if (Security.isConnected()) {
@@ -97,27 +123,6 @@ public class Admin extends Controller {
         } else {
             profile();
         }
-    }
-
-    public static void addTimeRange(String day) {
-        Timerange timerange = new Timerange(day);
-        timerange.save();
-        User user = User.find("nickname", Security.connected()).first();
-        user.addRange(timerange);
-        user.save();
-        schedule();
-
-    }
-
-    public static void deleteTimeRange(long dayID) {
-        Timerange timerange = Timerange.findById(dayID);
-        if (Security.isConnected()) {
-            User user = User.find("nickname", Security.connected()).first();
-            user.deleteRange(timerange);
-            user.save();
-            timerange.delete();
-        }
-        schedule();
     }
 
     public static void deletePicture(long picID) {

@@ -27,8 +27,6 @@ public class User extends Model {
 
     @OneToMany
     public List<Picture> pics;
-    @OneToMany
-    public List<Timerange> ranges;
     @ManyToMany
     public List<User> liked;
     @ManyToMany
@@ -48,7 +46,6 @@ public class User extends Model {
         this.isAdmin = false;
 
         pics = new ArrayList<Picture>();
-        ranges = new ArrayList<Timerange>();
         liked = new ArrayList<User>();
         relations = new ArrayList<Relation>();
     }
@@ -79,12 +76,6 @@ public class User extends Model {
             }
         }
     }
-    public void addRange(Timerange timerange) {
-        ranges.add(timerange);
-        ranges = saveUnique(ranges);
-        Collections.sort(ranges);
-
-    }
 
     public static List<Timerange> saveUnique(List<Timerange> ranges) {
         Set<Timerange> hs = new HashSet<Timerange>();
@@ -101,12 +92,6 @@ public class User extends Model {
         return this.id + ": "+ nickname + ": " + firstname + ", " + getAge();
     }
 
-    public void deleteRange(Timerange timerange) {
-        int index = ranges.indexOf(timerange);
-        ranges.remove(index);
-        Collections.sort(ranges);
-
-    }
 
     public void deletePicture(Picture picture) {
         int index = pics.indexOf(picture);

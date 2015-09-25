@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+#{extends 'admin.html' /}
+
+<head>
+#{set title:'Статистика' /}
+    <style>
+        .alignleft {
+            float: left;
+        }
+
+        .alignright {
+            float: right;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="form-group">
+            <div class="row col-md-12">
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="well well-lg" style="background-color: #ffffff">
+                        <p class="alignleft"><b>Зарегистрировано пользователей:</b></p>
+                        <p class="alignright">${userCount}</p>
+                        <br>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="well well-lg" style="background-color: #ffffff">
+                        <p class="alignleft"><b>Пользователей с фотографией:</b></p>
+                        <p class="alignright">${userCountPhoto}</p>
+                        <br>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="well well-lg" style="background-color: #ffffff">
+                        <p class="alignleft"><b>Взимных симпатий:</b></p>
+                        <p class="alignright">${relationCount}</p>
+                        <br>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="well well-lg" style="background-color: #ffffff">
+                        <p class="alignleft"><b>Намеченных встреч:</b></p>
+                        <p class="alignright">${relationCountReady}</p>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>

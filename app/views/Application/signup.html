@@ -26,7 +26,7 @@
 
                 $(document).ready(function () {
                     $('#userForm'). submit(function (e) {
-                        alert("YES")
+//                        alert("YES");
                         var frm = $('#userForm');
                         e.preventDefault();
                         var data = {};
@@ -47,9 +47,17 @@
                             success: function (correct) {
 //                                alert(correct);
                                 if (correct) {
-                                    $.ajax({
-                                        var g = document.getElementById("gender").value;
+                                    alert(checkLogin() + ' | ' + checkPassword())
+                                    if(!((checkLogin() == 'true') && checkPassword())){
+                                        return false;
+                                    }
+
+//                                    var g = $("#gender").val();
+//                                    var sg = $("#secondGender").val();
+
+                                    var g = document.getElementById("gender").value;
                                     var sg = document.getElementById("secondGender").value;
+                                    $.ajax({
                                     url: addUser({
                                         nname: data["nname"],
                                         fname: data["fname"],
@@ -58,10 +66,12 @@
                                         bdate: data["bdate"],
                                         city: data["city"],
                                         password1: data["password1"]
-                                    });
+                                    })
+                                });
 
                                     frm.css('display', 'none');
                                     $("#afterSend").css('display', 'block');
+
                                 } else {
 //                                    alert('incorrect code');
                                     $.ajax({
@@ -111,22 +121,32 @@
         function checkLogin() {
             var checkLogin = #{jsAction @checkLogin( ':login') /}
             var login = document.getElementById("nname").value;
+            var res = false;
             $.ajax({
                 url: checkLogin({login: login}),
                 dataType: 'json',
                 success: function (consist) {
+//                    alert(consist)
                     var loginDiv = document.getElementById("loginValid");
+                    res = !consist;
                     if (!consist) {
                         $("#loginValid").removeClass(" has-error").addClass(" has-success");
                         $("#divCheckLogin").html("<p class=\"text-success\">Логин свободен</p>");
+                        $("#loginval").val("true");
+                        res = true;
+                        return true;
                     } else {
                         $("#loginValid").removeClass(" has-success").addClass(" has-error");
                         $("#divCheckLogin").html("<p class=\"text-danger\">Логин занят</p>");
+                        $("#loginval").val("false");
+                        res = false;
+                        return false;
                     }
-                    return !consist;
+//                    return !consist;
                 }
             });
-            return false;
+//            alert($("#loginval").val())
+            return $("#loginval").val();
         }
     </script>
 </head>
@@ -144,6 +164,7 @@
                         <label for="nname">Логин <span style="color: red; ">*</span></label>
                         <input type="text" class="form-control" id="nname" name="nname" onchange="checkLogin()"
                                required>
+                        <input type="hidden" name="loginval" id="loginval" required>
                         <div class="col-md-6 col-sm-6" id="divCheckLogin" name="divCheckLogin"></div>
                     </div>
                     <div class="col-md-6 col-sm-6">
@@ -212,11 +233,9 @@
                         <label for="city">Город <span style="color: red; ">*</span></label>
                         <select class="form-control" id="city" name="city"
                                 required>
-                        *{#{list items:Application.getCities(), as:'city'}}*
-                            <option>Москва</option>
-                            <option>Санкт-Петербург</option>
-
-                        *{#{/list}}*
+                            #{list items:cities, as:'city'}
+                            <option>${city}</option>
+                            #{/list}
                         </select>
                     *{<input type="text" class="form-control" id="city" name="city"}*
                     *{required>}*

@@ -1,0 +1,12 @@
+Place(p1):
+    name: "м. Тульская"
+
+Location(msk):
+    name: "Москва"
+    places: [p1]
+
+Location(spb):
+    name: "Санкт-Петербург"
+
+Location(kzn):
+    name: "Казань"

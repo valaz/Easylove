@@ -1,5 +1,6 @@
 package controllers;
 
+import models.Location;
 import models.User;
 import play.cache.Cache;
 import play.libs.Codec;
@@ -30,7 +31,9 @@ public class Application extends Controller {
 
     public static void signup() {
         String randomID = Codec.UUID();
-        render(randomID);
+        List<String> cities = getCities();
+        System.out.printf("go signup");
+        render(randomID, cities);
     }
     public static void signin() {
         render();
@@ -67,9 +70,11 @@ public class Application extends Controller {
     }
 
     public static List<String>  getCities(){
+        List<Location> locations = Location.findAll();
         List<String> cities = new ArrayList<String>();
-        cities.add("Москва");
-        cities.add("Санкт-Петербург");
+        for (Location location : locations) {
+            cities.add(location.name);
+        }
         Collections.sort(cities);
         return cities;
     }

@@ -47,7 +47,7 @@ public class Admin extends Controller {
             List<User> users = User.findAll();
             List<User> goodUsers = new ArrayList<User>();
             for (User user : users) {
-                if (user.isMan == curUser.wantsMan && user.wantsMan == curUser.isMan && curUser.id != user.id && user.city == curUser.city && !user.pics.isEmpty()) {
+                if (user.isMan == curUser.wantsMan && user.wantsMan == curUser.isMan && curUser.id != user.id && user.city == curUser.city && !user.pics.isEmpty() && !curUser.liked.contains(user)) {
                     goodUsers.add(user);
                 }
             }
@@ -199,7 +199,9 @@ public class Admin extends Controller {
             User user1 = relation.user1;
             User user2 = relation.user2;
             user1.relations.remove(relation);
+            user1.liked.remove(user2);
             user2.relations.remove(relation);
+            user2.liked.remove(user1);
             user1.save();
             user2.save();
             relation.delete();

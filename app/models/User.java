@@ -77,15 +77,6 @@ public class User extends Model {
         }
     }
 
-    public static List<Timerange> saveUnique(List<Timerange> ranges) {
-        Set<Timerange> hs = new HashSet<Timerange>();
-        hs.addAll(ranges);
-        System.out.println(hs);
-        List<Timerange> newRanges = new ArrayList<Timerange>();
-        newRanges.addAll(hs);
-        Collections.sort(newRanges);
-        return newRanges;
-    }
 
     @Override
     public String toString() {

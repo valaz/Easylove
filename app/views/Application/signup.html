@@ -8,11 +8,18 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/bootstrap-datepicker.css'}">
     <script src="@{'/public/javascripts/bootstrap-formhelpers.min.js'}" type="text/javascript"
             charset="${_response_encoding}"></script>
+    <script src="@{'/public/javascripts/bootstrap-datepicker.js'}" type="text/javascript"
+            charset="${_response_encoding}"></script>
+
+*{<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/js/bootstrap-datepicker.js"></script>}*
 
     <script>
-        $('.datepicker').datepicker()
+        $(document).ready(function () {
+            $('.datepicker').datepicker();
+        };
     </script>
 
 
@@ -23,7 +30,7 @@
         var addUser = #{jsAction @addUser(':nname', ':fname', ':gender', ':secondGender', ':bdate', ':city', ':password1') /}
 
                 $(document).ready(function () {
-                    $('#userForm'). submit(function (e) {
+                    $('#userForm').submit(function (e) {
 //                        alert("YES");
                         var frm = $('#userForm');
                         e.preventDefault();
@@ -51,22 +58,22 @@
 
 //                                    var g = document.getElementById("gender").value;
 //                                    var sg = document.getElementById("secondGender").value;
-                                    if(!((checkLogin() == 'true') && checkPassword())){
+                                    if (!((checkLogin() == 'true') && checkPassword())) {
                                         return false;
                                     }
 //                                    var g = $("#gender").val();
 //                                    var sg = $("#secondGender").val();
                                     $.ajax({
-                                    url: addUser({
-                                        nname: data["nname"],
-                                        fname: data["fname"],
-                                        gender: g,
-                                        secondGender: sg,
-                                        bdate: data["bdate"],
-                                        city: data["city"],
-                                        password1: data["password1"]
-                                    })
-                                });
+                                        url: addUser({
+                                            nname: data["nname"],
+                                            fname: data["fname"],
+                                            gender: g,
+                                            secondGender: sg,
+                                            bdate: data["bdate"],
+                                            city: data["city"],
+                                            password1: data["password1"]
+                                        })
+                                    });
 
                                     frm.css('display', 'none');
                                     $("#afterSend").css('display', 'block');
@@ -152,8 +159,8 @@
 #{set title:'Регистрация' /}
 
 <div class="container">
-    <h1 class="row col-lg-offset-5  col-xs-offset-2">Регистрация</h1>
-    <hr>
+    <h1 class="row" style="text-align: center">Регистрация</h1>
+    <HR>
     <div class="row">
         <form id="userForm" action="@{Application.addUser()}" method="POST" style="padding: 50px">
             <div class="form-group">
@@ -164,6 +171,7 @@
                         <input type="text" class="form-control" id="nname" name="nname" onchange="checkLogin()"
                                required>
                         <input type="hidden" name="loginval" id="loginval" required>
+
                         <div class="col-md-6 col-sm-6" id="divCheckLogin" name="divCheckLogin"></div>
                     </div>
                     <div class="col-md-6 col-sm-6">
@@ -180,16 +188,16 @@
 
                         <div id="gender" class="row   col-xs-12 ">
                             <div class="btn-group" data-toggle="buttons">
-                                <label class="btn btn-default">
+                                <label class="btn btn-default col-xs-6">
                                     <label><input type="radio" name="gender" id="gender" value="true">Мужчина</label>
                                 </label>
-                                <label class="btn btn-default">
+                                <label class="btn btn-default col-xs-6">
                                     <label><input type="radio" name="gender" id="gender" value="false">Женщина</label>
                                 </label>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-xs-12 col-sm-6">
+                    <div class="col-md-6 col-xs-12 col-sm-6 col-xs-12">
                         <label for="secondGender">Ищу<span style="color: red; ">*</span></label>
 
                         <div id="secondGender" class="row  col-xs-12">
@@ -206,89 +214,94 @@
                 </div>
                 <br/>
 
-                <div class="row">
+                <div class="row col-md-12 col-sm-12">
+                    <div class="row  col-md-5 col-sm-5">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <label for="bdate">Дата Рождения <span style="color: red; ">*</span></label>
 
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                        <label for="bdate">Дата Рождения <span style="color: red; ">*</span></label>
-
-                        <div class="form-group" id="dateform">
-                            <div></div>
-                            <input type="hidden" name="bdate" id="bdate" required>
+                            <div class="form-group" id="dateform">
+                                <div class="col-md-12 col-xs-12"></div>
+                                <input type="hidden" name="bdate" id="bdate" required>
+                            </div>
                         </div>
+                        <script>
+                            $('#dateform div').datepicker({
+                                language: "ru",
+                                format: "dd/mm/yyyy",
+                                endDate: "1/09/1998",
+                                startView: 2,
+                                clearBtn: true,
+                                autoclose: false
+                            }).on('changeDate', function (e) {
+                                $('#bdate').val(e.format('dd/mm/yyyy'))
+                            });
+                        </script>
                     </div>
-                    <script>
-                        $('#dateform div').datepicker({
-                            format: "dd/mm/yyyy",
-                            endDate: "1/09/1997",
-                            startView: 2,
-                            clearBtn: true,
-                            language: "ru",
-                            autoclose: false
-                        }).on('changeDate', function (e) {
-                            $('#bdate').val(e.format('dd/mm/yyyy'))
-                        });
-                    </script>
-                    <div class="col-md-6  col-sm-6">
-                        <label for="city">Город <span style="color: red; ">*</span></label>
-                        <select class="form-control" id="city" name="city"
-                                required>
+
+                    <div class="row col-md-7 col-sm-7">
+
+                        <div class="col-md-11 col-md-offset-3 col-sm-11 col-sm-offset-3">
+                            <label for="city">Город <span style="color: red; ">*</span></label>
+                            <select class="form-control" id="city" name="city"
+                                    required>
                             #{list items:cities, as:'city'}
-                            <option value="${city}">${city}</option>
+                                #{if city.equals("Москва")}
+                                    <option value="${city}" selected>${city}</option>
+                                #{/if}
+                                #{else}
+                                    <option value="${city}">${city}</option>
+                                #{/else}
                             #{/list}
-                        </select>
-                    *{<input type="text" class="form-control" id="city" name="city"}*
-                    *{required>}*
-                    </div>
+                            </select>
+                        </div>
 
-                    <div id="pas1div" class="col-md-6 col-sm-6">
-                        <label for="password1" style="margin-top: 2rem;">Пароль <span
-                                style="color: red; ">*</span></label>
-                        <input type="password" class="form-control" id="password1" name="password1" autocomplete="off"
-                               required>
-                    </div>
+                        <div id="pas1div" class="col-md-11 col-md-offset-3 col-sm-11 col-sm-offset-3">
+                            <label for="password1" style="margin-top: 2rem;">Пароль <span
+                                    style="color: red; ">*</span></label>
+                            <input type="password" class="form-control" id="password1" name="password1"
+                                   autocomplete="off"
+                                   required>
+                        </div>
 
-                    <div id="pas2div" class="col-md-6 col-sm-6">
-                        <label for="password2" style="margin-top: 2rem;">Повтор пароля <span
-                                style="color: red; ">*</span></label>
-                        <input type="password" class="form-control" id="password2" name="password2"
-                               autocomplete="off"  *{onChange="checkPassword()"}*
-                               required>
+                        <div id="pas2div" class="col-md-11 col-md-offset-3 col-sm-11 col-sm-offset-3">
+                            <label for="password2" style="margin-top: 2rem;">Повтор пароля <span
+                                    style="color: red; ">*</span></label>
+                            <input type="password" class="form-control" id="password2" name="password2"
+                                   required>
+                        </div>
+                        <div class="col-md-6 col-sm-6" id="divCheckPasswordMatch" name="divCheckPasswordMatch"></div>
                     </div>
-                    <div class="col-md-6 col-sm-6" id="divCheckPasswordMatch" name="divCheckPasswordMatch"></div>
                 </div>
 
-                <p>
 
-
-                    <label for="captchaCode">Введите код с картинки: </label>
-                    <br/>
-
-                <p id="captchaWarning" style="color:#c00; display: none;">Вы ввели код неверно</p>
-                <img id="captchaIMG" src="@{Application.captcha(randomID)}"/>
-                <br/>
-                <input id="captchaCode" type="text" name="code" size="18" value="" autocomplete="off" required/>
-                <input id="captchaID" type="hidden" name="randomID" value="${randomID}"/>
-                </p>
-
-                <div class="span7 text-center row">
-
-                    <input type="submit" class="btn btn-success btn-lg col-md-3" value="Отправить"
-                           style="margin-left: 56.5%"/>
+                <div class="row col-md-12 col-sm-12">
+                    <br>
+                    <br>
+                    <div class="col-md-3 col-sm-6">
+                        <label for="captchaCode">Введите код с картинки: </label>
+                        <p>
+                        <p id="captchaWarning" style="color:#c00; display: none;">Вы ввели код неверно</p>
+                        <img id="captchaIMG"  class="img-responsive center-block" src="@{Application.captcha(randomID)}"/>
+                        <p>
+                        <input id="captchaCode"  class="form-control" type="text" name="code" size="18" value="" autocomplete="off" required/>
+                        <input id="captchaID" type="hidden" name="randomID" value="${randomID}"/>
+                    </div>
+                    <div class="col-md-6 col-md-offset-3 col-sm-6 ">
+                        <br>
+                        <br>
+                        *{<div class="span7 text-center row">}*
+                            <input type="submit" class="btn btn-success btn-lg col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12 " value="Отправить"/>
+                        *{</div>}*
+                    </div>
                 </div>
 
-                <script>
-                    $('#bdate').datepicker({
-                        format: "dd/mm/yyyy",
-                        endDate: "1/09/1997",
-                        startView: 2,
-                        clearBtn: true,
-                        language: "ru",
-                        autoclose: true
-                    });
-                </script>
+
             </div>
         </form>
+
+
     </div>
+
 
     <div id="afterSend" class="span7 text-center" style="display: none">
         <h1>Вы успешно зарегистрированы</h1>

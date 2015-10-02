@@ -2,18 +2,20 @@
 
 <html>
     <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>#{get 'title' /}</title>
         <meta charset="${_response_encoding}">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/bootstrap.css'}">
-        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/bootstrap-datepicker.css'}">
+        *{<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/bootstrap-datepicker.css'}">}*
         #{get 'moreStyles' /}
         <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
         <script src="@{'/public/javascripts/jquery-2.1.4.js'}" type="text/javascript" charset="${_response_encoding}"></script>
         <script src="@{'/public/javascripts/bootstrap.js'}" type="text/javascript" charset="${_response_encoding}"></script>
-        <script src="@{'/public/javascripts/bootstrap-datepicker.js'}" type="text/javascript"
-                charset="${_response_encoding}"></script>
+        *{<script src="@{'/public/javascripts/bootstrap-datepicker.js'}" type="text/javascript"}*
+                *{charset="${_response_encoding}"></script>}*
         #{get 'moreScripts' /}
     </head>
     <body>
@@ -36,8 +38,8 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="#">О нас </a></li>
-                    <li><a href="#">Мы Вконтакте</a></li>
+                    <li><a href="@{Application.about()}">О нас </a></li>
+                    <li><a href="http://vk.com/easyloveofficial">Мы Вконтакте</a></li>
                 </ul>
                 <form class="navbar-form navbar-left" role="search">
                 </form>

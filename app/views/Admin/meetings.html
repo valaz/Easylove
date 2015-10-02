@@ -46,11 +46,11 @@
 
 <div class="container">
 #{if !user.getReadyRelations().isEmpty()}
-    <h2>Ваши запланированные встречи</h2>
+    <h2 class="row" style="text-align: center">Ваши запланированные встречи</h2>
     <hr>
 #{/if}
 #{else}
-    <h2>Нет запланированных встреч в данный момент</h2>
+    <h2 class="row" style="text-align: center">Нет запланированных встреч в данный момент</h2>
     <hr>
 #{/else}
     <ul class="list-group">

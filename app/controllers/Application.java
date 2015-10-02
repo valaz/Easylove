@@ -37,6 +37,17 @@ public class Application extends Controller {
     public static void signin() {
         render();
     }
+    public static void about() {
+        String username = Security.connected();
+        User user =  User.find("nickname", username).first();
+        if( user != null){
+            System.out.println("NOW CONNECTED: "+Security.connected());
+            render(user);
+        }else{
+            session.clear();
+            render();
+        }
+    }
 
     public static void addUser(String nname, String fname,String gender,String secondGender, String bdate, String city, String password1, String password2 ){
         System.out.println("User there");

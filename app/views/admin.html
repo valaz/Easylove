@@ -33,8 +33,8 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="#">О нас</a></li>
-                <li><a href="#">Мы Вконтакте</a></li>
+                <li><a href="@{Application.about()}">О нас</a></li>
+                <li><a href="http://vk.com/easyloveofficial">Мы Вконтакте</a></li>
             #{secure.check 'admin'}
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span style="color: red; ">Админ</span> <span class="caret"></span></a>

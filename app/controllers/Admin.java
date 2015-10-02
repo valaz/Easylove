@@ -193,9 +193,11 @@ public class Admin extends Controller {
 
     public static void deleteRelation(long relationID) {
         System.out.println("cur del relation: " + relationID);
+        boolean isReady = true;
         if (Security.isConnected()) {
             Relation relation = Relation.findById(relationID);
             System.out.println("Delete relation: " + relation.toString());
+            isReady = relation.ready;
             User user1 = relation.user1;
             User user2 = relation.user2;
             user1.relations.remove(relation);
@@ -206,6 +208,10 @@ public class Admin extends Controller {
             user2.save();
             relation.delete();
         }
-        schedule();
+        if(isReady){
+            meetings();
+        }else {
+            schedule();
+        }
     }
 }

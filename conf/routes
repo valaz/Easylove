@@ -5,11 +5,17 @@
 # Home page
 GET     /                                       Application.index
 GET     /signup                                 Application.signup
+GET     /about                                 Application.about
 GET     /signin                                Application.signin
 
 # Import CRUD routes
 # Administration
-GET    /admin/?                                  Admin.index
+GET    /go                                Admin.index
+GET    /profile                                 Admin.profile
+GET    /schedule                                 Admin.schedule
+GET    /meetings                                 Admin.meetings
+GET    /statistics                         Admin.statistics
+
 *      /admin                                     module:crud
 *     /                                          module:secure
 

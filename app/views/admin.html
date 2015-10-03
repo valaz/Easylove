@@ -27,14 +27,17 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="@{Admin.index()}"> <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Home</a>
+            <a class="navbar-brand" href="@{Admin.index()}">
+                <img src="public/images/brand.png" alt="Easy Love" style="height: 30px; margin: -5px">
+            </a>
+            *{<a class="navbar-brand" href="@{Admin.index()}"> <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Home</a>}*
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="@{Application.about()}">О нас</a></li>
-                <li><a href="http://vk.com/easyloveofficial">Мы Вконтакте</a></li>
+                <li><a href="@{Application.about()}"> <span class="glyphicon glyphicon-home" aria-hidden="true"></span>  О нас</a></li>
+                <li><a href="http://vk.com/easyloveofficial"><span class="glyphicon glyphicon-stats"></span>  Мы Вконтакте</a></li>
             #{secure.check 'admin'}
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span style="color: red; ">Админ</span> <span class="caret"></span></a>

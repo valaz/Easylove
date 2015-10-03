@@ -7,7 +7,9 @@
     <script>
         $(document).ready(function () {
             $('.datepicker').datepicker();
-            $('.carousel').carousel();
+            $('.carousel').carousel({
+                interval: false
+            });
             $('.carousel div :first-child').addClass('active');
         });
         function changeType(divID) {
@@ -28,6 +30,28 @@
             return imgRes.src;
 
         }
+        $(document).ready( function() {
+            var today = getToday();
+            $('#date').attr("min",today);
+        });
+        function getToday(){
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; //January is 0!
+            var yyyy = today.getFullYear();
+
+            if(dd<10) {
+                dd='0'+dd
+            }
+
+            if(mm<10) {
+                mm='0'+mm
+            }
+
+            today = yyyy + '-' + mm + '-' + dd;
+            return today;
+        }
+
     </script>
     <style>
         .alignleft {
@@ -66,7 +90,7 @@
                         <input type="hidden" name="relationID" id="relationID" value="${relation.id}">
 
                         <div class="alignright">
-                            <a class="btn" style="padding: 0px">
+                            <a class="btn" style="padding: 0px"  data-toggle="tooltip" data-placement="right" title="удалить связь">
                     <span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"
                           onclick="$('#deleteRelation${relation.id}').submit();"></span>
                             </a>
@@ -113,9 +137,14 @@
                                 <label for="place">Место <span style="color: red; ">*</span></label>
                                 <select class="form-control" id="place" name="place"
                                         required  ${relation.inputType(user.id)}>
-                                    <option>${relation.place}</option>
+                                    *{<option>${relation.place}</option>}*
                                     #{list items:user.city.places, as:'place'}
-                                        <option value="${place.name}">${place.name}</option>
+                                        #{if place.name.equals(relation.place)}
+                                            <option value="${place.name}" selected>${place.name}</option>
+                                        #{/if}
+                                        #{else}
+                                            <option value="${place.name}">${place.name}</option>
+                                        #{/else}
                                     #{/list}
                                 </select>
                             </div>
@@ -162,7 +191,6 @@
                 </div>
             </div>
         </div>
-    *{<li class="list-group-item">${relation.getAnother(user.id)}</li>}*
     #{/list}
     </ul>
 </div>

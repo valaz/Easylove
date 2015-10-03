@@ -64,7 +64,8 @@ public class Admin extends Controller {
     public static void profile() {
         if (Security.isConnected()) {
             User user = User.find("nickname", Security.connected()).first();
-            render(user);
+            List<String> cities = Application.getCities();
+            render(user, cities);
         }
     }
 

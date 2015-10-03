@@ -31,6 +31,7 @@
 
                 $(document).ready(function () {
                     $('#userForm').submit(function (e) {
+                        checkDate()
 //                        alert("YES");
                         var frm = $('#userForm');
                         e.preventDefault();
@@ -58,7 +59,7 @@
 
 //                                    var g = document.getElementById("gender").value;
 //                                    var sg = document.getElementById("secondGender").value;
-                                    if (!((checkLogin() == 'true') && checkPassword())) {
+                                    if (!( (checkLogin() == 'true') && checkPassword() && checkDate() )) {
                                         return false;
                                     }
 //                                    var g = $("#gender").val();
@@ -122,6 +123,21 @@
 
     <script>
         $(document).ready(function () {
+            $("#bdate").change(checkDate)
+        });
+        function checkDate() {
+            var date = $("#bdate").val();
+            if (date != '') {
+                $("#divCheckDate").html("<p class=\"text-success\">Дата рождения введена</p>");
+                return true;
+            } else {
+                $("#divCheckDate").html("<p class=\"text-danger\">Введите дату рождения</p>");
+                return false;
+            }
+        }
+    </script>
+    <script>
+        $(document).ready(function () {
             $("#nname").keyup(checkLogin);
         });
         function checkLogin() {
@@ -165,65 +181,80 @@
         <form id="userForm" action="@{Application.addUser()}" method="POST" style="padding: 50px">
             <div class="form-group">
 
-                <div class="row">
-                    <div id="loginValid" class="col-md-6 col-sm-6">
-                        <label for="nname">Логин <span style="color: red; ">*</span></label>
-                        <input type="text" class="form-control" id="nname" name="nname" onchange="checkLogin()"
-                               required>
-                        <input type="hidden" name="loginval" id="loginval" required>
+                <div class="row col-md-12  col-sm-12">
+                    <div class="row col-md-6  col-sm-6">
+                        <div id="loginValid" class="col-md-12 col-sm-12">
+                            <label for="nname">Логин <span style="color: red; ">*</span></label>
+                            <input type="text" class="form-control" id="nname" name="nname" onchange="checkLogin()"
+                                   required>
+                            <input type="hidden" name="loginval" id="loginval" required>
 
-                        <div class="col-md-6 col-sm-6" id="divCheckLogin" name="divCheckLogin"></div>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <label for="fname">Имя <span style="color: red; ">*</span></label>
-                        <input type="text" class="form-control" id="fname" name="fname"
-                               required>
-                    </div>
-                </div>
-                <br/>
-
-                <div class="row">
-                    <div class="col-md-6 col-xs-12 col-sm-6">
-                        <label for="gender">Пол <span style="color: red; ">*</span></label>
-
-                        <div id="gender" class="row   col-xs-12 ">
-                            <div class="btn-group" data-toggle="buttons">
-                                <label class="btn btn-default col-xs-6">
-                                    <label><input type="radio" name="gender" id="gender" value="true">Мужчина</label>
-                                </label>
-                                <label class="btn btn-default col-xs-6">
-                                    <label><input type="radio" name="gender" id="gender" value="false">Женщина</label>
-                                </label>
-                            </div>
+                            <div class="col-md-6 col-sm-6" id="divCheckLogin" name="divCheckLogin"></div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-xs-12 col-sm-6 col-xs-12">
-                        <label for="secondGender">Ищу<span style="color: red; ">*</span></label>
-
-                        <div id="secondGender" class="row  col-xs-12">
-                            <div class="btn-group" data-toggle="buttons">
-                                <label class="btn btn-default">
-                                    <label><input type="radio" name="secondGender" id="secondGender" value="true">Мужчину</label>
-                                </label>
-                                <label class="btn btn-default">
-                                    <label><input type="radio" name="secondGender" id="secondGender" value="false">Женщину</label>
-                                </label>
-                            </div>
+                    <div class="row col-md-6  col-sm-6">
+                        <div class="col-md-12 col-sm-12">
+                            <label for="fname">Имя <span style="color: red; ">*</span></label>
+                            <input type="text" class="form-control" id="fname" name="fname"
+                                   required>
                         </div>
                     </div>
                 </div>
-                <br/>
+                <br>
+
+                <div class="row col-md-12   col-sm-12">
+                    <div class="row col-md-6  col-sm-6">
+                        <div class="col-md-12 col-xs-12 col-sm-12">
+                            <label for="gender" style="margin-top: 2rem;">Пол <span
+                                    style="color: red; ">*</span></label>
+
+                            <div id="gender" class="row   col-xs-12 ">
+                                <div class="btn-group" data-toggle="buttons">
+                                    <label class="btn btn-default col-xs-6">
+                                        <label><input type="radio" name="gender" id="gender"
+                                                      value="true">Мужчина</label>
+                                    </label>
+                                    <label class="btn btn-default col-xs-6">
+                                        <label><input type="radio" name="gender" id="gender"
+                                                      value="false">Женщина</label>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row col-md-6   col-sm-6">
+                        <div class="col-md-12col-sm-12 col-xs-12">
+                            <label for="secondGender" style="margin-top: 2rem;">Ищу<span
+                                    style="color: red; ">*</span></label>
+
+                            <div id="secondGender" class="row  col-xs-12">
+                                <div class="btn-group" data-toggle="buttons">
+                                    <label class="btn btn-default">
+                                        <label><input type="radio" name="secondGender" id="secondGender" value="true">Мужчину</label>
+                                    </label>
+                                    <label class="btn btn-default">
+                                        <label><input type="radio" name="secondGender" id="secondGender" value="false">Женщину</label>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
 
                 <div class="row col-md-12 col-sm-12">
-                    <div class="row  col-md-5 col-sm-5">
+                    <div class="row  col-md-6 col-sm-6">
                         <div class="col-md-12 col-sm-12 col-xs-12">
-                            <label for="bdate">Дата Рождения <span style="color: red; ">*</span></label>
+                            <label for="bdate" style="margin-top: 2rem;">Дата Рождения <span
+                                    style="color: red; ">*</span></label>
 
                             <div class="form-group" id="dateform">
                                 <div class="col-md-12 col-xs-12"></div>
                                 <input type="hidden" name="bdate" id="bdate" required>
                             </div>
                         </div>
+                        <div class="col-md-6 col-sm-6" id="divCheckDate" name="divCheckDate"></div>
                         <script>
                             $('#dateform div').datepicker({
                                 language: "ru",
@@ -233,15 +264,16 @@
                                 clearBtn: true,
                                 autoclose: false
                             }).on('changeDate', function (e) {
-                                $('#bdate').val(e.format('dd/mm/yyyy'))
+                                $('#bdate').val(e.format('dd/mm/yyyy')).trigger('change');
                             });
                         </script>
                     </div>
 
-                    <div class="row col-md-7 col-sm-7">
+                    <div class="row col-md-6 col-sm-6">
 
-                        <div class="col-md-11 col-md-offset-3 col-sm-11 col-sm-offset-3">
-                            <label for="city">Город <span style="color: red; ">*</span></label>
+                        <div class="col-md-12 col-sm-12">
+                            <label for="city" style="margin-top: 2rem;">Город <span
+                                    style="color: red; ">*</span></label>
                             <select class="form-control" id="city" name="city"
                                     required>
                             #{list items:cities, as:'city'}
@@ -255,7 +287,7 @@
                             </select>
                         </div>
 
-                        <div id="pas1div" class="col-md-11 col-md-offset-3 col-sm-11 col-sm-offset-3">
+                        <div id="pas1div" class="col-md-12 col-sm-12">
                             <label for="password1" style="margin-top: 2rem;">Пароль <span
                                     style="color: red; ">*</span></label>
                             <input type="password" class="form-control" id="password1" name="password1"
@@ -263,35 +295,45 @@
                                    required>
                         </div>
 
-                        <div id="pas2div" class="col-md-11 col-md-offset-3 col-sm-11 col-sm-offset-3">
+                        <div id="pas2div" class="col-md-12 col-sm-12">
                             <label for="password2" style="margin-top: 2rem;">Повтор пароля <span
                                     style="color: red; ">*</span></label>
                             <input type="password" class="form-control" id="password2" name="password2"
                                    required>
+
+                            <div class="col-md-6 col-sm-6" id="divCheckPasswordMatch"
+                                 name="divCheckPasswordMatch"></div>
                         </div>
-                        <div class="col-md-6 col-sm-6" id="divCheckPasswordMatch" name="divCheckPasswordMatch"></div>
                     </div>
                 </div>
 
-
                 <div class="row col-md-12 col-sm-12">
-                    <br>
-                    <br>
-                    <div class="col-md-3 col-sm-6">
-                        <label for="captchaCode">Введите код с картинки: </label>
-                        <p>
-                        <p id="captchaWarning" style="color:#c00; display: none;">Вы ввели код неверно</p>
-                        <img id="captchaIMG"  class="img-responsive center-block" src="@{Application.captcha(randomID)}"/>
-                        <p>
-                        <input id="captchaCode"  class="form-control" type="text" name="code" size="18" value="" autocomplete="off" required/>
-                        <input id="captchaID" type="hidden" name="randomID" value="${randomID}"/>
+                    <div class="row col-md-6 col-sm-6">
+                        <div class="col-md-10 col-sm-10">
+                            <label for="captchaCode" style="margin-top: 2rem;">Введите код с картинки: </label>
+
+                            <p>
+
+                            <p id="captchaWarning" style="color:#c00; display: none;">Вы ввели код неверно</p>
+                            <img id="captchaIMG" class="img-responsive center-block"
+                                 src="@{Application.captcha(randomID)}"/>
+
+                            <p>
+                                <input id="captchaCode" class="form-control" type="text" name="code" size="18" value=""
+                                       autocomplete="off" required/>
+                                <input id="captchaID" type="hidden" name="randomID" value="${randomID}"/>
+                        </div>
+
                     </div>
-                    <div class="col-md-6 col-md-offset-3 col-sm-6 ">
-                        <br>
-                        <br>
+
+                    <div class="row col-md-6 col-sm-6">
+                        <div class="col-md-12  col-sm-12 " style="margin-top: 3rem;">
                         *{<div class="span7 text-center row">}*
-                            <input type="submit" class="btn btn-success btn-lg col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12 " value="Отправить"/>
+                            <input type="submit"
+                                   class="btn btn-success btn-lg col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12 "
+                                   value="Отправить"/>
                         *{</div>}*
+                        </div>
                     </div>
                 </div>
 

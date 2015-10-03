@@ -7,7 +7,9 @@
     <script>
         $(document).ready(function () {
             $('.datepicker').datepicker();
-            $('.carousel').carousel();
+            $('.carousel').carousel({
+                interval: false
+            });
             $('.carousel div :first-child').addClass('active');
         });
         function changeType(divID) {
@@ -67,7 +69,7 @@
 
                         <div class="alignright">
                             <a class="btn" style="padding: 0px">
-                    <span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"
+                    <span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"   data-toggle="tooltip" data-placement="right" title="отменить встречу"
                           onclick="$('#deleteRelation${relation.id}').submit();"></span>
                             </a>
                         </div>

@@ -60,6 +60,12 @@
                         <li class="${request.controller == 'Places' ? 'selected' : ''}">
                             <a href="@{Places.list()}"><span style="color: red; ">Места</span></a>
                         </li>
+                        <li class="${request.controller == 'Warnings' ? 'selected' : ''}">
+                            <a href="@{Warnings.list()}"><span style="color: red; ">Объявления</span></a>
+                        </li>
+                        <li class="${request.controller == 'Photos' ? 'selected' : ''}">
+                            <a href="@{Photos.list()}"><span style="color: red; ">Фотки 2</span></a>
+                        </li>
                     </ul>
                 </li>
             #{/secure.check}
@@ -75,6 +81,14 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
+
+#{list items:warnings, as:'warning'}
+<div class="alert alert-warning col-md-10 col-md-offset-1" role="alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <span class="sr-only">Warning:</span>
+    ${warning.text}
+</div>
+#{/list}
 
 
 

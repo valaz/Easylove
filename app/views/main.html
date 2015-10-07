@@ -49,6 +49,15 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
+
+    #{list items:warnings, as:'warning'}
+    <div class="alert alert-warning col-md-10 col-md-offset-1" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Warning:</span>
+    ${warning.text}
+    </div>
+    #{/list}
+
         #{doLayout /}
     </body>
 </html>

@@ -36,28 +36,27 @@
 <div class="container">
     <h1 class="row" style="text-align: center">Профиль</h1>
     <hr>
-    #{if !user.pics.isEmpty()}
+    #{if !user.photos.isEmpty()}
     <div id="carousel_profile" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner" role="listbox">
-        #{list items:user.pics, as:'picture'}
+        #{list items:user.photos, as:'photo'}
             <div class="item">
-
-                <img class="img-responsive center-block" src="@{Admin.getPicture(picture.id)}"
+                <img class="img-responsive center-block" *{src="@{Admin.getPicture(picture.id)}"}* src="@{Admin.show(photo.id)}"
                      style="max-height: 500px;width: auto; height: auto;">
 
-                <form id="deleteDay" action="@{Admin.deletePicture()}" method="POST">
-                    <input type="hidden" name="picID" id="picID" value="${picture.id}">
+                <form id="deletePhoto${photo.id}" action="@{Admin.deletePhoto()}" method="POST">
+                    <input type="hidden" name="photoID" id="photoID" value="${photo.id}">
                     <a class="bottom carousel-control" href="#carousel_profile" role="button">
 
                     <span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"
-                          onclick="$('#deleteDay').submit();"></span>
+                          onclick="$('#deletePhoto${photo.id}').submit();"></span>
                     </a>
                 </form>
             </div>
         #{/list}
         </div>
 
-        #{if user.pics.size() > 1}
+        #{if user.photos.size() > 1}
         <a class="left carousel-control" href="#carousel_profile" role="button" data-slide="prev">
             <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
@@ -79,11 +78,18 @@
     #{/else}
 
 *{#{form @Admin.uploadPicture(), enctype:'multipart/form-data'}}*
-    <form id="image_upload" action="@{Admin.uploadPicture()}" method="post" enctype="multipart/form-data">
-        <input id="fileInput" type="file" name="picture.image" style="display: none"/>
+    *{<form id="image_upload" action="@{Admin.uploadPicture()}" method="post" enctype="multipart/form-data">}*
+        *{<input id="fileInput" type="file" name="picture.image" style="display: none"/>}*
+        *{<input id="fileSubmit" type="submit" name="submit" value="Save" style="display: none"/>        }*
+    *{</form>}*
+*{#{/form}}*
+
+
+    <form id="image_upload" action="@{Admin.uploadPhoto()}" method="post" enctype="multipart/form-data">
+        <input id="fileInput" type="file" name="data" style="display: none"/>
         <input id="fileSubmit" type="submit" name="submit" value="Save" style="display: none"/>
     </form>
-*{#{/form}}*
+
     <script>
         function imageUpload(fileInputId, fileSubmitId) {
             var imageInputForm = $('#' + fileInputId);
@@ -150,5 +156,19 @@
     </div>
 </div>
 
+<hr>
+#{list items:images, as:'image'}
+<a href="@{show2(image.id)}">
+    <img border="0" src="@{Admin.show2(image.id)}"  />
+${image.fileName}
+</a>
+<br />
+#{/list}
+
+<br />
+#{form @Admin.uploadPhoto(), enctype:'multipart/form-data'}
+<input type="file" name="data"/>
+<input type="submit" name="submit" value="Aggiungi" />
+#{/form}
 
 </body>

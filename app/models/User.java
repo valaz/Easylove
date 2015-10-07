@@ -27,6 +27,8 @@ public class User extends Model {
 
     @OneToMany
     public List<Picture> pics;
+    @OneToMany
+    public List<Photo> photos;
     @ManyToMany
     public List<User> liked;
     @ManyToMany
@@ -46,6 +48,7 @@ public class User extends Model {
         this.isAdmin = false;
 
         pics = new ArrayList<Picture>();
+        photos = new ArrayList<Photo>();
         liked = new ArrayList<User>();
         relations = new ArrayList<Relation>();
     }
@@ -69,6 +72,12 @@ public class User extends Model {
         checkPics();
     }
 
+
+    public void addPhoto(Photo photo) {
+        photos.add(photo);
+        checkPics();
+    }
+
     public void checkPics(){
         for (Picture pic : pics) {
             if(pic.image == null){
@@ -87,6 +96,13 @@ public class User extends Model {
     public void deletePicture(Picture picture) {
         int index = pics.indexOf(picture);
         pics.remove(index);
+    }
+
+
+    public void deletePhoto(Photo photo) {
+        int index = photos.indexOf(photo);
+        System.out.println("index of photo: " + index);
+        photos.remove(index);
     }
 
     public int getAge() {
@@ -138,4 +154,6 @@ public class User extends Model {
         }
         return readyRelations;
     }
+
+
 }

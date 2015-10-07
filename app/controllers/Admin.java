@@ -1,12 +1,16 @@
 package controllers;
 
-import models.Picture;
-import models.Relation;
-import models.User;
+import models.*;
+import play.Logger;
+import play.data.Upload;
+import play.libs.Images;
 import play.mvc.Before;
 import play.mvc.Controller;
 import play.mvc.With;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -36,7 +40,8 @@ public class Admin extends Controller {
             if (partnerUser != null) {
                 partner = true;
             }
-            render(partner, partnerUser, user);
+            List<Warning> warnings = Warning.findAll();
+            render(partner, partnerUser, user, warnings);
         }
     }
 
@@ -62,31 +67,36 @@ public class Admin extends Controller {
     }
 
     public static void profile() {
+        List images = Photo.all().fetch();
         if (Security.isConnected()) {
             User user = User.find("nickname", Security.connected()).first();
             List<String> cities = Application.getCities();
-            render(user, cities);
+            List<Warning> warnings = Warning.findAll();
+            render(user, cities, warnings,images);
         }
     }
 
     public static void schedule() {
+        List<Warning> warnings = Warning.findAll();
         if (Security.isConnected()) {
             User user = User.find("nickname", Security.connected()).first();
-            render(user);
+            render(user, warnings);
         }
-        render();
+        render(warnings);
     }
 
     public static void meetings() {
+        List<Warning> warnings = Warning.findAll();
         if (Security.isConnected()) {
             User user = User.find("nickname", Security.connected()).first();
-            render(user);
+            render(user, warnings);
         }
-        render();
+        render(warnings);
     }
 
     @Check("admin")
     public static void statistics() {
+        List<Warning> warnings = Warning.findAll();
         if (Security.isConnected()) {
             User user = User.find("nickname", Security.connected()).first();
             List<User> users = User.findAll();
@@ -99,23 +109,42 @@ public class Admin extends Controller {
             userCount = users.size();
             relationCount = relations.size();
             for (User user1 : users) {
-                if(!user1.pics.isEmpty()){
+                if (!user1.pics.isEmpty()) {
                     userCountPhoto += 1;
                 }
             }
             for (Relation relation : relations) {
-                if(relation.ready){
+                if (relation.ready) {
                     relationCountReady += 1;
                 }
             }
-            render(user, userCount,userCountPhoto,relationCount,relationCountReady);
+            render(user, userCount, userCountPhoto, relationCount, relationCountReady, warnings);
         }
-        render();
+        render(warnings);
     }
+
     public static void uploadPicture(Picture picture) {
         if (picture.image != null) {
             if (Security.isConnected()) {
                 User user = User.find("nickname", Security.connected()).first();
+//                Blob img = picture.image;
+//                File imgFile = img.getFile();
+//                int imgFileLength = (int) imgFile.length();
+//                byte[] imgFileAsBytes = new byte[imgFileLength];
+//
+//                FileInputStream fileInputStream=null;
+//
+//                try {
+//                    fileInputStream = new FileInputStream(imgFile);
+//                    fileInputStream.read(imgFileAsBytes);
+//                    fileInputStream.close();
+//                    picture.photo = imgFileAsBytes;
+//                    System.out.println("Done");
+//                } catch (FileNotFoundException e) {
+//                    e.printStackTrace();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
                 picture.save();
                 user.addPicture(picture);
                 user.save();
@@ -126,12 +155,106 @@ public class Admin extends Controller {
         }
     }
 
+    public static void uploadPhoto(Upload data){
+
+        if (Security.isConnected()) {
+            User user = User.find("nickname", Security.connected()).first();
+
+            Photo photo = new Photo();
+            Logger.info(data.getContentType());
+            Logger.info(data.getFieldName());
+            Logger.info(data.getFileName());
+            photo.contentType = data.getContentType();
+            photo.fileName = data.getFileName();
+            photo.file = data.asBytes();
+            photo.save();
+            Logger.info("saving id=%s", photo.id);
+            user.addPhoto(photo);
+            user.save();
+            profile();
+        }
+    }
+
+    public static void show(Long id) {
+        Logger.info("loading id=%s", id);
+        Photo photo = Photo.findById(id);
+        if(photo == null){
+            Logger.info("Photo has not found=%s", id);
+        }else {
+            response.setContentTypeIfNotSet(photo.contentType);
+            renderBinary(new ByteArrayInputStream(photo.file), photo.file.length);
+        }
+    }
+    public static void show2(Long id){
+        Logger.info("loading id=%s", id);
+        Photo photo = Photo.findById(id);
+        if(photo == null){
+            Logger.info("Photo has not found=%s", id);
+        }else {
+            File photoFile = new File("vv");
+            FileOutputStream stream = null;
+            try {
+                stream = new FileOutputStream(photoFile);
+                stream.write(photo.file);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    stream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            File viewFile = new File("Foo.jpg"); // create random unique filename here
+            Images.resize(photoFile, viewFile, 500, -1);
+
+            BufferedImage in = null;
+            try {
+                in = ImageIO.read(photoFile);
+            } catch (IOException e) {
+
+            }
+
+            BufferedImage newImage = Photo.createThumbnail(in);
+
+            File outimg = new File("image.jpg");
+            try {
+                ImageIO.write(newImage, "jpg", outimg);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            response.setContentTypeIfNotSet(photo.contentType);
+//            renderBinary(new ByteArrayInputStream(photo.file), photo.file.length);
+            renderBinary(outimg);
+        }
+    }
+
     public static void deletePicture(long picID) {
         Picture picture = Picture.findById(picID);
         if (Security.isConnected()) {
             User user = User.find("nickname", Security.connected()).first();
             user.deletePicture(picture);
             user.save();
+//            picture.getFile().delete();
+//            picture._delete();
+        }
+        profile();
+    }
+
+
+    public static void deletePhoto(long photoID) {
+        System.out.println("photo ID: " + photoID);
+        Photo photo = Photo.findById(photoID);
+        if (Security.isConnected()) {
+            User user = User.find("nickname", Security.connected()).first();
+            user.deletePhoto(photo);
+            user.save();
+            photo.delete();
+//            picture.getFile().delete();
 //            picture._delete();
         }
         profile();
@@ -141,6 +264,7 @@ public class Admin extends Controller {
         Picture picture = Picture.findById(id);
         response.setContentTypeIfNotSet(picture.image.type());
         renderBinary(picture.image.get());
+
     }
 
     public static void likeUser(Long userID) {
@@ -209,9 +333,9 @@ public class Admin extends Controller {
             user2.save();
             relation.delete();
         }
-        if(isReady){
+        if (isReady) {
             meetings();
-        }else {
+        } else {
             schedule();
         }
     }

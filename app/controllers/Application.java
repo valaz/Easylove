@@ -2,6 +2,7 @@ package controllers;
 
 import models.Location;
 import models.User;
+import models.Warning;
 import play.cache.Cache;
 import play.libs.Codec;
 import play.libs.Images;
@@ -18,34 +19,37 @@ import java.util.List;
 public class Application extends Controller {
 
     public static void index() {
+        List<Warning> warnings = Warning.findAll();
         String username = Security.connected();
         User user =  User.find("nickname", username).first();
         if( user != null){
-            System.out.println("NOW CONNECTED: "+Security.connected());
+//            System.out.println("NOW CONNECTED: "+Security.connected());
             Admin.index();
         }else{
             session.clear();
-            render();
+            render(warnings);
         }
     }
 
     public static void signup() {
+        List<Warning> warnings = Warning.findAll();
         String randomID = Codec.UUID();
         List<String> cities = getCities();
-        render(randomID, cities);
+        render(randomID, cities,warnings);
     }
     public static void signin() {
         render();
     }
     public static void about() {
+        List<Warning> warnings = Warning.findAll();
         String username = Security.connected();
         User user =  User.find("nickname", username).first();
         if( user != null){
-            System.out.println("NOW CONNECTED: "+Security.connected());
-            render(user);
+//            System.out.println("NOW CONNECTED: "+Security.connected());
+            render(user,warnings);
         }else{
             session.clear();
-            render();
+            render(warnings);
         }
     }
 

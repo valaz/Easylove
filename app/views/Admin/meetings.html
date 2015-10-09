@@ -57,7 +57,7 @@
 #{/else}
     <ul class="list-group">
     #{list items:user.getReadyRelations(), as:'relation'}
-        <div class="col-md-12 col-lg-6">
+        <div class="col-sm-12 col-md-6 col-lg-6">
             <div class="panel ${relation.panelClass(user.id)}">
                 <div class="panel-heading">
 
@@ -81,17 +81,19 @@
                 *{TODO уникальность id каруселей}*
                     <div id="carousel${relation.getAnother(user.id).id}" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner" role="listbox" *{style="max-height: 40vh"}*>
-                            #{list items:relation.getAnother(user.id).pics, as:'picture'}
+                            #{list items:relation.getAnother(user.id).photos, as:'photo'}
                                 <div class="item">
                                 *{<div style="width: 1000px;    height: 1000px;    overflow: hidden;    margin: 10px;    position: relative;">}*
-                                    <img class="img-responsive center-block" src="@{Admin.getPicture(picture.id)}"
+                                    <a href="@{show(photo.id)}">
+                                    <img class="img-responsive center-block" src="@{Admin.showInsta(photo.id)}"
                                          style="max-height: 500px;">
+                                        </a>
                                 *{</div>}*
                                 </div>
                             #{/list}
                         </div>
 
-                        #{if relation.getAnother(user.id).pics.size() > 1}
+                        #{if relation.getAnother(user.id).photos.size() > 1}
                             <a class="left carousel-control" href="#carousel${relation.getAnother(user.id).id}"
                                role="button" data-slide="prev">
                                 <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>

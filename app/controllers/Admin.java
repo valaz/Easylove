@@ -52,7 +52,7 @@ public class Admin extends Controller {
             List<User> users = User.findAll();
             List<User> goodUsers = new ArrayList<User>();
             for (User user : users) {
-                if (user.isMan == curUser.wantsMan && user.wantsMan == curUser.isMan && curUser.id != user.id && user.city == curUser.city && !user.pics.isEmpty() && !curUser.liked.contains(user)) {
+                if (user.isMan == curUser.wantsMan && user.wantsMan == curUser.isMan && curUser.id != user.id && user.city == curUser.city && !user.photos.isEmpty() && !curUser.liked.contains(user)) {
                     goodUsers.add(user);
                 }
             }
@@ -185,6 +185,33 @@ public class Admin extends Controller {
             renderBinary(new ByteArrayInputStream(photo.file), photo.file.length);
         }
     }
+    public static void showInsta(Long id) {
+        Logger.info("loading id=%s", id);
+        Photo photo = Photo.findById(id);
+        if(photo == null){
+            Logger.info("Photo has not found=%s", id);
+        }else {
+            File photoFile = new File("vv");
+            FileOutputStream stream = null;
+            try {
+                stream = new FileOutputStream(photoFile);
+                stream.write(photo.file);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    stream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            response.setContentTypeIfNotSet(photo.contentType);
+            renderBinary(Photo.createView(photoFile,800));
+        }
+    }
+
     public static void show2(Long id){
         Logger.info("loading id=%s", id);
         Photo photo = Photo.findById(id);
@@ -229,9 +256,11 @@ public class Admin extends Controller {
 
             response.setContentTypeIfNotSet(photo.contentType);
 //            renderBinary(new ByteArrayInputStream(photo.file), photo.file.length);
-            renderBinary(outimg);
+            renderBinary(Photo.createView(photoFile,500));
         }
     }
+
+
 
     public static void deletePicture(long picID) {
         Picture picture = Picture.findById(picID);

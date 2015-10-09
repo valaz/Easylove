@@ -2,9 +2,7 @@
 
 #{set title:'Профиль' /}
 <head>
-    <script src="@{'/public/javascripts/bootstrap.file-input.js'}" type="text/javascript"
-            charset="${_response_encoding}">
-    </script>
+
     <script type="text/javascript">
         $(document).ready(function () {
             $('.carousel').carousel({
@@ -22,9 +20,10 @@
         }
     </style>
 
+
 </head>
 <body>
-
+<div class="se-pre-con"></div>
 
 *{<ul>}*
 *{#{list items:user.pics, as:'picture'}}*
@@ -36,54 +35,49 @@
 <div class="container">
     <h1 class="row" style="text-align: center">Профиль</h1>
     <hr>
-    #{if !user.photos.isEmpty()}
-    <div id="carousel_profile" class="carousel slide" data-ride="carousel">
+#{if !user.photos.isEmpty()}
+    <div class="row col-md-12">
+    <div id="carousel_profile" class="carousel slide col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2"
+         data-ride="carousel">
         <div class="carousel-inner" role="listbox">
-        #{list items:user.photos, as:'photo'}
-            <div class="item">
-                <img class="img-responsive center-block" *{src="@{Admin.getPicture(picture.id)}"}* src="@{Admin.show(photo.id)}"
-                     style="max-height: 500px;width: auto; height: auto;">
+            #{list items:user.photos, as:'photo'}
+                <div class="item">
+                    <a href="@{show(photo.id)}">
+                        <img class="img-responsive center-block" src="@{Admin.showInsta(photo.id)}"
+                             style="max-height: 500px;width: auto; height: auto;">
+                    </a>
 
-                <form id="deletePhoto${photo.id}" action="@{Admin.deletePhoto()}" method="POST">
-                    <input type="hidden" name="photoID" id="photoID" value="${photo.id}">
-                    <a class="bottom carousel-control" href="#carousel_profile" role="button">
+                    <form id="deletePhoto${photo.id}" action="@{Admin.deletePhoto()}" method="POST">
+                        <input type="hidden" name="photoID" id="photoID" value="${photo.id}">
+                        <a class="bottom carousel-control" href="#carousel_profile" role="button">
 
                     <span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"
                           onclick="$('#deletePhoto${photo.id}').submit();"></span>
-                    </a>
-                </form>
-            </div>
-        #{/list}
+                        </a>
+                    </form>
+                </div>
+            #{/list}
         </div>
-
         #{if user.photos.size() > 1}
-        <a class="left carousel-control" href="#carousel_profile" role="button" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#carousel_profile" role="button" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
+            <a class="left carousel-control" href="#carousel_profile" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#carousel_profile" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
         #{/if}
     </div>
-        <hr>
-    #{/if}
-    #{else}
-        <div class="alert alert-warning col-md-10 col-md-offset-1" role="alert">
-            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-            <span class="sr-only">Warning:</span>
-            На вашем профиле нет ни одной фотографии. Ваш профиль не будет предлагаться другим пользователям.
-        </div>
-    #{/else}
-
-*{#{form @Admin.uploadPicture(), enctype:'multipart/form-data'}}*
-    *{<form id="image_upload" action="@{Admin.uploadPicture()}" method="post" enctype="multipart/form-data">}*
-        *{<input id="fileInput" type="file" name="picture.image" style="display: none"/>}*
-        *{<input id="fileSubmit" type="submit" name="submit" value="Save" style="display: none"/>        }*
-    *{</form>}*
-*{#{/form}}*
-
+#{/if}
+#{else}
+    <div class="alert alert-warning col-md-10 col-md-offset-1" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Warning:</span>
+        На вашем профиле нет ни одной фотографии. Ваш профиль не будет предлагаться другим пользователям.
+    </div>
+#{/else}
 
     <form id="image_upload" action="@{Admin.uploadPhoto()}" method="post" enctype="multipart/form-data">
         <input id="fileInput" type="file" name="data" style="display: none"/>
@@ -102,73 +96,76 @@
     </script>
 
 </div>
-<div class="row">
-    <button class="btn btn-success btn-lg col-md-2 col-sm-4 col-xs-6 col-md-offset-5 col-sm-offset-4 col-xs-offset-3"
+
+<br>
+<hr>
+<div class="row" style="margin: 0">
+    <button class="btn btn-success btn-lg col-lg-2 col-md-4 col-sm-4 col-xs-6 col-lg-offset-5 col-md-offset-4 col-sm-offset-4 col-xs-offset-3"
             onclick="imageUpload('fileInput','fileSubmit');"> <span
             class="glyphicon glyphicon-picture" aria-hidden="true"></span> Добавить фото
     </button>
 </div>
-
+<br>
 
 <div class="container">
-    <div class="row">
-        <div style="padding: 50px" class="">
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-6 col-sm-6">
-                        <div class="panel panel-success">
-                            <div class="panel-heading"><b>Логин</b></div>
-                            <div class="panel-body">
-                            ${user.nickname}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <div class="panel panel-success">
-                            <div class="panel-heading"><b>Имя</b></div>
-                            <div class="panel-body">
-                            ${user.firstname}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6 col-sm-6">
-                        <div class="panel panel-success">
-                            <div class="panel-heading"><b>Дата рождения</b></div>
-                            <div class="panel-body">
-                            ${user.getDate()}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <div class="panel panel-success">
-                            <div class="panel-heading"><b>Город</b></div>
-                            <div class="panel-body">
-                            ${user.city.name}
-                            </div>
-                        </div>
+*{<div class="row col-md-12 col-xs-12" style="margin-right: 0px">}*
+    <div style="padding: 10px" class="">
+        <div class="form-group">
+        *{<div class="row">}*
+            <div class="col-md-6 col-sm-6">
+                <div class="panel panel-success">
+                    <div class="panel-heading"><b>Логин</b></div>
+                    <div class="panel-body">
+                    ${user.nickname}
                     </div>
                 </div>
             </div>
+            <div class="col-md-6 col-sm-6">
+                <div class="panel panel-success">
+                    <div class="panel-heading"><b>Имя</b></div>
+                    <div class="panel-body">
+                    ${user.firstname}
+                    </div>
+                </div>
+            </div>
+        *{</div>}*
+
+        *{<div class="row">}*
+            <div class="col-md-6 col-sm-6">
+                <div class="panel panel-success">
+                    <div class="panel-heading"><b>Дата рождения</b></div>
+                    <div class="panel-body">
+                    ${user.getDate()}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <div class="panel panel-success">
+                    <div class="panel-heading"><b>Город</b></div>
+                    <div class="panel-body">
+                    ${user.city.name}
+                    </div>
+                </div>
+            </div>
+        *{</div>}*
         </div>
     </div>
+*{</div>}*
 </div>
 
-<hr>
-#{list items:images, as:'image'}
-<a href="@{show2(image.id)}">
-    <img border="0" src="@{Admin.show2(image.id)}"  />
-${image.fileName}
-</a>
-<br />
-#{/list}
+*{<hr>}*
+*{#{list items:images, as:'image'}}*
+*{<a href="@{show(image.id)}">}*
+*{<img border="0" src="@{Admin.showInsta(image.id)}"  />}*
+*{${image.fileName}}*
+*{</a>}*
+*{<br />}*
+*{#{/list}}*
 
-<br />
-#{form @Admin.uploadPhoto(), enctype:'multipart/form-data'}
-<input type="file" name="data"/>
-<input type="submit" name="submit" value="Aggiungi" />
-#{/form}
+*{<br />}*
+*{#{form @Admin.uploadPhoto(), enctype:'multipart/form-data'}}*
+*{<input type="file" name="data"/>}*
+*{<input type="submit" name="submit" value="Aggiungi" />}*
+*{#{/form}}*
 
 </body>

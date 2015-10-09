@@ -22,39 +22,39 @@
 
 #{if partner}
 
-    <div class="row">
+    <div class="row col-md-12">
         <h2 class="col-md-4">${partnerUser.firstname}
             <small>Возраст: ${partnerUser.getAge()}</small>
         </h2>
-
-    *{<form action="@{Admin.index()}" class="col-md-2" style="margin: 2% auto" method="GET">}*
-    *{<button class="submit btn btn-primary btn-lg " onclick="@{Application.index()}"> Дальше <span}*
-    *{class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>}*
-    *{</form>}*
     </div>
     <hr>
-    <div id="carousel_profile" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner" role="listbox">
-            #{list items:partnerUser.pics, as:'picture'}
-                <div class="item">
-                    <img class="img-responsive center-block" src="@{Admin.getPicture(picture.id)}"
-                         style="max-height: 500px;">
-                </div>
-            #{/list}
-        </div>
 
-        #{if partnerUser.pics.size() > 1}
-            <a class="left carousel-control" href="#carousel_profile" role="button" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="right carousel-control" href="#carousel_profile" role="button" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        #{/if}
-        <form action="@{Admin.index()}" id="nextUser" method="GET">
-        *{<button class="submit btn btn-primary btn-lg " onclick="@{Application.index()}"></button>}*
+    <div class="row col-md-12">
+        <div id="carousel_profile" class="carousel slide col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2"
+             data-ride="carousel">
+            <div class="carousel-inner" role="listbox">
+                #{list items:partnerUser.photos, as:'photo'}
+                    <div class="item">
+                        <a href="@{show(photo.id)}">
+                            <img class="img-responsive center-block" src="@{Admin.showInsta(photo.id)}"
+                                 style="max-height: 500px;">
+                        </a>
+                    </div>
+                #{/list}
+            </div>
+
+            #{if partnerUser.photos.size() > 1}
+                <a class="left carousel-control" href="#carousel_profile" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#carousel_profile" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            #{/if}
+            <form action="@{Admin.index()}" id="nextUser" method="GET">
+            *{<button class="submit btn btn-primary btn-lg " onclick="@{Application.index()}"></button>}*
             *{<a class="carousel-control" href="#carousel_profile" role="button"
                style="right: auto;left: 43%;top: 0; color: green; opacity: 1">
             <span class="glyphicon glyphicon-arrow-right" style="font-size: 4rem;"
@@ -63,29 +63,34 @@
             </span>
 
             </a>}*
-        </form>
+            </form>
 
-        <form action="@{Admin.likeUser()}" id="likeUser" method="POST">
-            <input type="hidden" value="${partnerUser.id}" name="userID" style="display: none"/>
+            <form action="@{Admin.likeUser()}" id="likeUser" method="POST">
+                <input type="hidden" value="${partnerUser.id}" name="userID" style="display: none"/>
 
             *{<a class="carousel-control" href="#carousel_profile" role="button"
                style="right: auto;left: 43%;top: 80%; color: #f00;">
                 <span class="glyphicon glyphicon glyphicon-heart" onclick="$('#likeUser').submit();"
                       style="font-size: 3rem;" aria-hidden="true"></span>
             </a>}*
-        </form>
+            </form>
+        </div>
+
     </div>
-<br>
-    <div class="row">
+    <br>
+
+    <div class="row col-md-12">
+        <br>
+
         <div class="btn-group-lg" role="group">
             <button type="button"
-                    class="btn btn-info col-md-3 col-md-offset-2 col-sm-3 col-sm-offset-2 col-xs-4 col-xs-offset-1"
+                    class="btn btn-info col-md-2 col-md-offset-3 col-sm-3 col-sm-offset-2 col-xs-4 col-xs-offset-1"
                     onclick="$('#nextUser').submit();"><span
-                    class="glyphicon glyphicon-arrow-right"
+                    class="glyphicon glyphicon-remove"
                     style="font-size: 3rem;">
                     </span></button>
             <button type="button"
-                    class="btn btn-danger col-md-3 col-md-offset-2  col-sm-3 col-sm-offset-2 col-xs-4 col-xs-offset-2"
+                    class="btn btn-danger col-md-2 col-md-offset-2  col-sm-3 col-sm-offset-2 col-xs-4 col-xs-offset-2"
                     onclick="$('#likeUser').submit();"><span
                     class="glyphicon glyphicon glyphicon-heart"
                     style="font-size: 3rem;">

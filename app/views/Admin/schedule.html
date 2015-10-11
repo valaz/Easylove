@@ -8,27 +8,19 @@
         $(document).ready(function () {
             $('.datepicker').datepicker();
             $('.carousel').carousel({
-                interval: false
             });
             $('.carousel div :first-child').addClass('active');
+
+            var cw = $('.squareslide').width();
+            $('.squareslide').css({
+                'height': cw + 'px'
+            });
+            setInterval(function () {
+                fitSquare()
+            }, 10);
         });
         function changeType(divID) {
             $(divID).hide();
-        }
-        function getSrc(src0) {
-            var img0 = new Image();
-            img0.src = src0;
-
-            var imgRes = new Image();
-
-            var width = img0.naturalWidth;
-            var height = img0.naturalHeight;
-            var minDim = Math.min(width, height);
-            imgRes.style.width = minDim;
-            imgRes.style.height = minDim;
-
-            return imgRes.src;
-
         }
         $(document).ready(function () {
             var today = getToday();
@@ -51,7 +43,12 @@
             today = yyyy + '-' + mm + '-' + dd;
             return today;
         }
-
+        function fitSquare(){
+            var cw = $('.squareslide').width();
+            $('.squareslide').css({
+                'height': cw + 'px'
+            });
+        }
     </script>
     <style>
         .alignleft {
@@ -60,6 +57,9 @@
 
         .alignright {
             float: right;
+        }
+        .squareslide {
+            /*border: 1px solid blue;*/
         }
     </style>
 
@@ -101,14 +101,14 @@
                     <br>
                 </div>
                 <div class="panel-body">
-                    <div id="carousel${relation.getAnother(user.id).id}" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner" role="listbox" *{style="max-height: 40vh"}*>
+                    <div id="carousel${relation.getAnother(user.id).id}" class="carousel slide squareslide" data-ride="carousel" style="padding: 0;">
+                        <div class="carousel-inner" role="listbox" *{style="max-height: 40vh"}* >
                             #{list items:relation.getAnother(user.id).photos, as:'photo'}
                                 <div class="item">
                                 *{<div style="width: 1000px;    height: 1000px;    overflow: hidden;    margin: 10px;    position: relative;">}*
                                     <a href="@{show(photo.id)}">
-                                        <img class="img-responsive center-block" src="@{Admin.showInsta(photo.id)}"
-                                             style="max-height: 500px;">
+                                        <img class="img-responsive center-block squareslide" src="@{Admin.showInsta(photo.id)}"
+                                             style="height: auto; width: auto">
                                     </a>
                                 *{</div>}*
                                 </div>

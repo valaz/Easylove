@@ -84,6 +84,23 @@ public class Relation extends Model {
         if(date == null){
             return null;
         }else {
+//            System.out.println("date: " +  date);
+//            String res = "";
+//            String[] dd = date.split(".");
+//            System.out.println(Arrays.asList(dd));
+//            res += dd[2] + "-";
+//            if(dd[1].length() < 2){
+//                res += "0" + dd[1] + "-";
+//            }else{
+//                res += dd[1] + "-";
+//            }
+//
+//            if(dd[0].length() < 2){
+//                res += "0" + dd[0] + "-";
+//            }else{
+//                res += dd[0] + "-";
+//            }
+//            return res;
             return date.split(" ")[0];
         }
     }

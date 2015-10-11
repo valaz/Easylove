@@ -73,7 +73,12 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="@{Admin.profile()}"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Профиль</a></li>
+                <li><a href="@{Admin.profile()}"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    Профиль
+                    #{if user?.photos?.isEmpty()}
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" style="color: red"></span>
+                    #{/if}
+                </a></li>
                 <li><a href="@{Admin.schedule()}"> <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Расписание <span class="badge "> ${user?.getRawRelations()?.size()}</span></a></li>
                 <li><a href="@{Admin.meetings()}"> <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Встречи <span class="badge"> ${user?.getReadyRelations()?.size()}</span></a></li>
                 <li><a href="@{Secure.logout()}"> <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Выйти</a></li>

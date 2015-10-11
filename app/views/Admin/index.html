@@ -4,9 +4,28 @@
     $(document).ready(function () {
         $('.carousel').carousel();
         $('#carousel_profile div :first-child').addClass('active');
-    });
 
+
+        var cw = $('.squareslide').width();
+        $('.squareslide').css({
+            'height': cw + 'px'
+        });
+        setInterval(function () {
+            fitSquare()
+        }, 10);
+    });
+    function fitSquare(){
+        var cw = $('.squareslide').width();
+        $('.squareslide').css({
+            'height': cw + 'px'
+        });
+    }
 </script>
+<style>
+    .squareslide {
+        /*border: 1px solid blue;*/
+    }
+</style>
 
 #{set title:'Знакомства' /}
 <body xmlns="http://www.w3.org/1999/html">
@@ -27,17 +46,18 @@
             <small>Возраст: ${partnerUser.getAge()}</small>
         </h2>
     </div>
-    <hr>
 
     <div class="row col-md-12">
-        <div id="carousel_profile" class="carousel slide col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2"
+        <HR>
+        <div id="carousel_profile" class="carousel slide squareslide col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2"
+             style="padding: 0"
              data-ride="carousel">
             <div class="carousel-inner" role="listbox">
                 #{list items:partnerUser.photos, as:'photo'}
                     <div class="item">
                         <a href="@{show(photo.id)}">
-                            <img class="img-responsive center-block" src="@{Admin.showInsta(photo.id)}"
-                                 style="max-height: 500px;">
+                            <img class="img-responsive center-block squareslide" src="@{Admin.showInsta(photo.id)}"
+                                 style="height: auto; width: auto">
                         </a>
                     </div>
                 #{/list}

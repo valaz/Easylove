@@ -208,7 +208,7 @@ public class Admin extends Controller {
                 }
             }
             response.setContentTypeIfNotSet(photo.contentType);
-            renderBinary(Photo.createView(photoFile,800));
+            renderBinary(Photo.createView(photoFile,700));
         }
     }
 

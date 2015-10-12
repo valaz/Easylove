@@ -54,7 +54,6 @@ public class User extends Model {
     }
 
     public static boolean connect(String username, String password) {
-        System.out.println("CHECK CONNECT: " + username + " " + password);
         User user = User.find("nickname", username).first();
         return user != null && user.password.equals(password);
 
@@ -101,7 +100,6 @@ public class User extends Model {
 
     public void deletePhoto(Photo photo) {
         int index = photos.indexOf(photo);
-        System.out.println("index of photo: " + index);
         photos.remove(index);
     }
 

@@ -3,14 +3,12 @@ package controllers;
 import models.*;
 import play.Logger;
 import play.data.Upload;
-import play.libs.Images;
 import play.mvc.Before;
 import play.mvc.Controller;
 import play.mvc.With;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.*;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -18,6 +16,8 @@ import java.util.Random;
 
 @With(Secure.class)
 public class Admin extends Controller {
+    private static Object synObject = new Object();
+
     @Before
     static void setConnectedUser() {
         if (Security.isConnected()) {
@@ -109,7 +109,7 @@ public class Admin extends Controller {
             userCount = users.size();
             relationCount = relations.size();
             for (User user1 : users) {
-                if (!user1.pics.isEmpty()) {
+                if (!user1.photos.isEmpty()) {
                     userCountPhoto += 1;
                 }
             }
@@ -161,14 +161,11 @@ public class Admin extends Controller {
             User user = User.find("nickname", Security.connected()).first();
 
             Photo photo = new Photo();
-            Logger.info(data.getContentType());
-            Logger.info(data.getFieldName());
-            Logger.info(data.getFileName());
             photo.contentType = data.getContentType();
             photo.fileName = data.getFileName();
             photo.file = data.asBytes();
             photo.save();
-            Logger.info("saving id=%s", photo.id);
+            Logger.info("User %s added photo id=%s",user.nickname, photo.id);
             user.addPhoto(photo);
             user.save();
             profile();
@@ -176,7 +173,7 @@ public class Admin extends Controller {
     }
 
     public static void show(Long id) {
-        Logger.info("loading id=%s", id);
+        Logger.info("loading photo id=%s", id);
         Photo photo = Photo.findById(id);
         if(photo == null){
             Logger.info("Photo has not found=%s", id);
@@ -186,12 +183,12 @@ public class Admin extends Controller {
         }
     }
     public static void showInsta(Long id) {
-        Logger.info("loading id=%s", id);
+        Logger.info("loading photo insta id=%s", id);
         Photo photo = Photo.findById(id);
         if(photo == null){
             Logger.info("Photo has not found=%s", id);
         }else {
-            File photoFile = new File("vv");
+            File photoFile = new File("photoFile_" + String.valueOf(id));
             FileOutputStream stream = null;
             try {
                 stream = new FileOutputStream(photoFile);
@@ -207,60 +204,19 @@ public class Admin extends Controller {
                     e.printStackTrace();
                 }
             }
-            response.setContentTypeIfNotSet(photo.contentType);
-            renderBinary(Photo.createView(photoFile,700));
-        }
-    }
-
-    public static void show2(Long id){
-        Logger.info("loading id=%s", id);
-        Photo photo = Photo.findById(id);
-        if(photo == null){
-            Logger.info("Photo has not found=%s", id);
-        }else {
-            File photoFile = new File("vv");
-            FileOutputStream stream = null;
-            try {
-                stream = new FileOutputStream(photoFile);
-                stream.write(photo.file);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
+            synchronized (synObject) {
+                File viewFile = Photo.createView(photoFile, 700);
+                byte[] viewData = new byte[(int) viewFile.length()];
                 try {
-                    stream.close();
+                    viewData = Files.readAllBytes(viewFile.toPath());
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Logger.info("error while decoding viewFile to view Byte Array");
                 }
+                response.setContentTypeIfNotSet(photo.contentType);
+                renderBinary(new ByteArrayInputStream(viewData), viewData.length);
             }
-
-            File viewFile = new File("Foo.jpg"); // create random unique filename here
-            Images.resize(photoFile, viewFile, 500, -1);
-
-            BufferedImage in = null;
-            try {
-                in = ImageIO.read(photoFile);
-            } catch (IOException e) {
-
-            }
-
-            BufferedImage newImage = Photo.createThumbnail(in);
-
-            File outimg = new File("image.jpg");
-            try {
-                ImageIO.write(newImage, "jpg", outimg);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            response.setContentTypeIfNotSet(photo.contentType);
-//            renderBinary(new ByteArrayInputStream(photo.file), photo.file.length);
-            renderBinary(Photo.createView(photoFile,500));
         }
     }
-
-
 
     public static void deletePicture(long picID) {
         Picture picture = Picture.findById(picID);
@@ -268,18 +224,16 @@ public class Admin extends Controller {
             User user = User.find("nickname", Security.connected()).first();
             user.deletePicture(picture);
             user.save();
-//            picture.getFile().delete();
-//            picture._delete();
         }
         profile();
     }
 
 
     public static void deletePhoto(long photoID) {
-        System.out.println("photo ID: " + photoID);
         Photo photo = Photo.findById(photoID);
         if (Security.isConnected()) {
             User user = User.find("nickname", Security.connected()).first();
+            Logger.info("User %s deleted photo id=%s", user.nickname, photo.id);
             user.deletePhoto(photo);
             user.save();
             photo.delete();

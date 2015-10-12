@@ -3,6 +3,7 @@ package controllers;
 import models.Location;
 import models.User;
 import models.Warning;
+import play.Logger;
 import play.cache.Cache;
 import play.libs.Codec;
 import play.libs.Images;
@@ -23,7 +24,6 @@ public class Application extends Controller {
         String username = Security.connected();
         User user =  User.find("nickname", username).first();
         if( user != null){
-//            System.out.println("NOW CONNECTED: "+Security.connected());
             Admin.index();
         }else{
             session.clear();
@@ -45,7 +45,6 @@ public class Application extends Controller {
         String username = Security.connected();
         User user =  User.find("nickname", username).first();
         if( user != null){
-//            System.out.println("NOW CONNECTED: "+Security.connected());
             render(user,warnings);
         }else{
             session.clear();
@@ -54,14 +53,13 @@ public class Application extends Controller {
     }
 
     public static void addUser(String nname, String fname,String gender,String secondGender, String bdate, String city, String password1, String password2 ){
-        System.out.println("User there");
-        System.out.println("nname: " + nname);
-        System.out.println("fname: " + fname);
-        System.out.println("gender: " + gender);
-        System.out.println("secondGender: " + secondGender);
-        System.out.println("bdate: " + bdate);
-        System.out.println("city: " + city);
-        System.out.println("password1: " + password1);
+        Logger.info("User adding");
+        Logger.info("nname: %s", nname);
+        Logger.info("fname:  %s", fname);
+        Logger.info("gender: %s", gender);
+        Logger.info("secondGender:  %s", secondGender);
+        Logger.info("bdate:  %s", bdate);
+        Logger.info("city:  %s", city);
         boolean isMan = Boolean.valueOf(gender);
         boolean wantsMan = Boolean.valueOf(secondGender);
 
@@ -72,8 +70,7 @@ public class Application extends Controller {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        Location location = Location.find("name", city).first();;
-        System.out.println("Location in:" + location.name);
+        Location location = Location.find("name", city).first();
         User newUser = new User(nname,fname,isMan,wantsMan,birthday,location,password1);
         newUser.save();
         try {
@@ -114,14 +111,14 @@ public class Application extends Controller {
     }
 
     public static void newCaptcha() {
-        System.out.println("generating new captcha");
+        Logger.info("generating new captcha");
         String newRandomID = Codec.UUID();
         System.out.println(newRandomID);
         renderText(newRandomID);
     }
 
     public static boolean checkLogin(String login) {
-        System.out.println("check LOGIN: " + login);
+        Logger.info("check login usage: %s", login);
         User user =  User.find("nickname", login).first();
         return user != null;
     }
